@@ -2,6 +2,8 @@
 
 Arbeitsstand für den neuen gemeinsamen Internetauftritt der CDU in Vallendar, Niederwerth, Urbar und Weitersburg.
 
+**Öffentliche Vorschau:** https://mpusceddu.github.io/cdu-vallendar/
+
 ## Status
 
 Die Website befindet sich in der Entwurfs- und Abstimmungsphase. Sie ist noch nicht der offizielle Internetauftritt des Verbandes.
