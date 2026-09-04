@@ -8,9 +8,11 @@ Arbeitsstand für den neuen gemeinsamen Internetauftritt der CDU in Vallendar, N
 
 Die Website befindet sich in der Entwurfs- und Abstimmungsphase. Sie ist noch nicht der offizielle Internetauftritt des Verbandes.
 
+Das offizielle CDU-Gesamtlogo sowie die Schriften Inter und IBM Plex Serif stammen aus dem [CI-Portal der CDU Deutschlands](https://ci.cdu.de/). Die Schriftdateien werden lokal ausgeliefert; es findet kein Abruf bei Google Fonts statt. Die zugehörigen OFL-Lizenztexte liegen im Schriftordner.
+
 Vor der offiziellen Veröffentlichung werden insbesondere noch geprüft und ergänzt:
 
-- CDU-Corporate-Design und offizielle Logo-Dateien
+- abschließende Abstimmung des CDU-Corporate-Designs
 - verantwortliche Personen und Funktionen
 - gemeinsame Kontaktadresse
 - Impressum und Datenschutzerklärung
@@ -24,4 +26,3 @@ Die Seite ist bewusst als schlanke statische Website aus HTML und CSS aufgebaut.
 ## Lokale Vorschau
 
 `index.html` im Browser öffnen oder einen einfachen lokalen Webserver im Projektverzeichnis starten.
-
