@@ -159,8 +159,8 @@ section { scroll-margin-top: 84px; }
 .politics-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 34px; }
 .politics-links a { display: flex; justify-content: space-between; gap: 9px; align-items: center; padding: 18px; border: 1px solid var(--line); background: white; font-size: 13px; font-weight: 800; }
 .quote-panel { position: relative; padding: 58px 46px 46px; background: #e4edeb; }
-.quote-mark { position: absolute; top: 16px; color: var(--cdu-gold); font-family: 'IBM Plex Serif', Georgia, serif; font-size: 80px; line-height: 1; }
-.quote-panel blockquote { margin: 25px 0 28px; font-family: 'IBM Plex Serif', Georgia, serif; font-size: 31px; line-height: 1.28; color: var(--cdu-navy); }
+.quote-mark { display: block; height: 52px; color: var(--cdu-gold); font-family: 'IBM Plex Serif', Georgia, serif; font-size: 76px; line-height: 1; }
+.quote-panel blockquote { margin: 0 0 28px; font-family: 'IBM Plex Serif', Georgia, serif; font-size: 31px; line-height: 1.28; color: var(--cdu-navy); }
 .quote-panel p { margin: 0; color: var(--cdu-teal-dark); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 
 .people { padding-block: 74px; background: var(--cdu-teal-dark); color: white; }
