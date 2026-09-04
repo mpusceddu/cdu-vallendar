@@ -191,6 +191,20 @@ footer { padding-block: 34px; background: #051827; color: white; }
 .footer-brand strong { font-size: 14px; }
 .footer-inner > p { margin: 0 auto 0 0; color: #90a5ae; font-size: 12px; }
 .footer-inner nav { display: flex; gap: 22px; color: #b9c7cc; font-size: 12px; }
+.footer-inner nav a:hover, .footer-inner nav a:focus-visible, .footer-inner nav a[aria-current="page"] { color: white; text-decoration: underline; text-underline-offset: 4px; }
+
+.legal-hero { padding-block: 78px; background: var(--cdu-navy); color: white; }
+.legal-hero h1 { margin: 0; font-family: 'IBM Plex Serif', Georgia, serif; font-size: clamp(58px,8vw,96px); font-weight: 400; line-height: .95; letter-spacing: -.05em; }
+.legal-hero > .page-shell > p:last-child { max-width: 700px; margin: 24px 0 0; color: #c8d7dc; font-size: 18px; line-height: 1.6; }
+.legal-content { max-width: 900px; padding-block: 84px 104px; }
+.legal-content section { padding-block: 30px; border-bottom: 1px solid var(--line); }
+.legal-content section:first-child { padding-top: 0; }
+.legal-content h2 { margin: 0 0 16px; color: var(--cdu-navy); font-family: 'IBM Plex Serif', Georgia, serif; font-size: clamp(28px,4vw,38px); font-weight: 400; line-height: 1.15; }
+.legal-content p { margin: 0 0 14px; color: var(--muted); font-size: 16px; line-height: 1.75; }
+.legal-content p:last-child { margin-bottom: 0; }
+.legal-content strong { color: var(--cdu-navy); }
+.legal-content a { color: var(--cdu-teal-dark); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.legal-content .legal-updated { margin-top: 30px; color: #7a878d; font-size: 13px; }
 
 :focus-visible { outline: 3px solid var(--cdu-gold); outline-offset: 3px; }
 
@@ -236,6 +250,8 @@ footer { padding-block: 34px; background: #051827; color: white; }
   .people-inner .button { grid-column: auto; }
   .footer-inner { align-items: flex-start; flex-direction: column; gap: 18px; }
   .footer-inner > p { margin: 0; }
+  .legal-hero { padding-block: 58px; }
+  .legal-content { padding-block: 58px 76px; }
   .local-hero { padding-block: 58px 68px; }
   .breadcrumb { margin-bottom: 40px; }
   .local-hero-grid, .local-intro, .local-section-heading, .local-contact { grid-template-columns: 1fr; gap: 34px; }
