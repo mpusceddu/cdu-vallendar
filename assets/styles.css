@@ -248,6 +248,17 @@ footer { padding-block: 34px; background: #051827; color: white; }
 .motion-empty p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
 .policy-motions .source-note a { color: #75e1dc; }
 
+.team-board { padding-block: 96px 110px; }
+.board-leadership { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; margin-bottom: 14px; }
+.board-members { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+.board-members .team-card { min-height: 190px; }
+.board-role { display: inline-flex; align-self: flex-start; margin-bottom: 4px; color: var(--cdu-teal-dark); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.faction-leadership { padding-block: 100px 110px; background: var(--cdu-navy); color: white; }
+.faction-leadership h2 { color: white; }
+.faction-leadership .local-section-heading > p { color: #b8c7cd; }
+.role-explainer { margin-top: 28px; padding: 24px 28px; border-left: 4px solid var(--cdu-gold); background: rgba(255,255,255,.08); color: #c7d6da; font-size: 14px; line-height: 1.65; }
+.role-explainer strong { color: white; }
+
 :focus-visible { outline: 3px solid var(--cdu-gold); outline-offset: 3px; }
 
 @media (max-width: 980px) {
@@ -262,6 +273,7 @@ footer { padding-block: 34px; background: #051827; color: white; }
   .local-hero-grid { gap: 42px; }
   .team-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .policy-topic-grid, .motion-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .board-members { grid-template-columns: repeat(3,minmax(0,1fr)); }
   .policy-topic-grid article:nth-child(3n+2), .policy-topic-grid article:nth-child(3n+3) { padding-left: 0; border-left: 0; }
   .policy-topic-grid article:nth-child(even) { padding-left: 28px; border-left: 1px solid var(--line); }
 }
@@ -301,7 +313,7 @@ footer { padding-block: 34px; background: #051827; color: white; }
   .council-grid { grid-template-columns: 1fr; }
   .council-card-featured { grid-column: auto; }
   .council-card { min-height: 280px; padding: 28px; }
-  .policy-topics, .policy-motions { padding-block: 72px 80px; }
+  .policy-topics, .policy-motions, .team-board, .faction-leadership { padding-block: 72px 80px; }
   .policy-topic-grid, .motion-grid { grid-template-columns: 1fr; }
   .policy-topic-grid article, .policy-topic-grid article:nth-child(even) { padding: 28px 0; border-left: 0; }
   .motion-card { min-height: 330px; }
@@ -310,6 +322,7 @@ footer { padding-block: 34px; background: #051827; color: white; }
   .local-hero-grid, .local-intro, .local-section-heading, .local-contact { grid-template-columns: 1fr; gap: 34px; }
   .local-intro, .local-section { padding-block: 72px; }
   .team-grid, .topic-list { grid-template-columns: 1fr; }
+  .board-leadership, .board-members { grid-template-columns: 1fr; }
   .niederwerth-grid .civic-note { grid-column: auto; }
   .team-card { min-height: 190px; }
 }
