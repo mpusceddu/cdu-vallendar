@@ -1,27 +1,129 @@
 # CDU Verbandsgemeinde Vallendar
 
-Arbeitsstand für den neuen gemeinsamen Internetauftritt der CDU in Vallendar, Niederwerth, Urbar und Weitersburg.
+Gemeinsamer Internetauftritt der CDU in Vallendar, Niederwerth, Urbar und Weitersburg.
 
-**Öffentliche Vorschau:** https://mpusceddu.github.io/cdu-vallendar/
+**Öffentliche Entwicklungsfassung:** https://mpusceddu.github.io/cdu-vallendar/
 
-## Status
+## Projektstand
 
-Die Website befindet sich in der Entwurfs- und Abstimmungsphase. Sie ist noch nicht der offizielle Internetauftritt des Verbandes.
+Die Website bildet den CDU-Gemeindeverband, den Vorstand, die Fraktionen und die unterschiedlichen politischen Situationen in den fünf Räten ab. Impressum und Datenschutz sind vorhanden.
 
-Das offizielle CDU-Gesamtlogo sowie die Schriften Inter und IBM Plex Serif stammen aus dem [CI-Portal der CDU Deutschlands](https://ci.cdu.de/). Die Schriftdateien werden lokal ausgeliefert; es findet kein Abruf bei Google Fonts statt. Die zugehörigen OFL-Lizenztexte liegen im Schriftordner.
+Vor dem offiziellen Start bleiben insbesondere diese Punkte offen:
 
-Vor der offiziellen Veröffentlichung werden insbesondere noch geprüft und ergänzt:
-
-- abschließende Abstimmung des CDU-Corporate-Designs
-- verantwortliche Personen und Funktionen
-- gemeinsame Kontaktadresse
-- Bildrechte und lokale Fotos
 - endgültige Domain
+- Funktions-E-Mail-Adressen
+- freigegebene Porträt- und Ortsfotos
+- abschließende inhaltliche Abnahme
 
-## Technik
+## Seitenübersicht
 
-Die Seite ist bewusst als schlanke statische Website aus HTML und CSS aufgebaut. Sie kann direkt über GitHub Pages veröffentlicht und später ohne Abhängigkeit von einem bestimmten Baukastensystem übergeben werden.
+| Bereich | Datei |
+| --- | --- |
+| Startseite | `index.html` |
+| Themen und Anträge | `politik/index.html` |
+| Vorstand und VG-Fraktionsführung | `team/index.html` |
+| Räte und Fraktionen | `raete/index.html` |
+| VG-Fraktion | `vg/index.html` |
+| Stadt Vallendar | `vallendar/index.html` |
+| Niederwerth | `niederwerth/index.html` |
+| Urbar | `urbar/index.html` |
+| Weitersburg | `weitersburg/index.html` |
+| Impressum | `impressum/index.html` |
+| Datenschutz | `datenschutz/index.html` |
+| Fehlerseite | `404.html` |
+
+Die gemeinsame Gestaltung liegt in `assets/styles.css`. Die Filterfunktion der Antragsübersicht liegt in `assets/politik.js`. Bilder und Logos werden unter `assets/images/` abgelegt.
+
+## Inhalte pflegen
+
+### Meldung oder Startseitenthema ändern
+
+Die drei Karten im Abschnitt `#aktuelles` stehen direkt in `index.html`. Pro Karte werden Rubrik, Überschrift, Kurztext und Link gepflegt.
+
+Vor der Veröffentlichung prüfen:
+
+- Ist die Aussage aktuell und politisch abgestimmt?
+- Führt der Link auf eine vorhandene Seite oder belastbare Quelle?
+- Sind Namen, Daten und Zahlen belegt?
+- Wurden keine internen oder personenbezogenen Angaben versehentlich veröffentlicht?
+
+### Antrag ergänzen
+
+Neue Anträge werden in `politik/index.html` innerhalb von `.motion-grid` als weitere Karte ergänzt.
+
+Das Attribut `data-council` bestimmt den Filter:
+
+- `vg` für den Verbandsgemeinderat
+- `vallendar` für den Stadtrat Vallendar
+- `urbar` für den Ortsgemeinderat Urbar
+- `niederwerth` für den Ortsgemeinderat Niederwerth
+- `weitersburg` für den Ortsgemeinderat Weitersburg
+
+Zu jedem Vorgang gehören Rat, Datum, verständlicher Titel, kurze Einordnung und ein Link zur öffentlichen Originalquelle. Die Startzahl in `[data-result-count]` muss anschließend auf die Gesamtzahl der Karten angepasst werden.
+
+### Person oder Funktion ändern
+
+Vorstandsmitglieder werden in `team/index.html` gepflegt. Mitglieder der jeweiligen Ratsfraktionen stehen auf der passenden Rats- oder Ortsseite.
+
+Wichtig: **Parteimitgliedschaft, Fraktionszugehörigkeit und kommunales Amt sind unterschiedliche Angaben.** Änderungen deshalb nicht automatisch auf andere Seiten übertragen. Eine parteilose Person kann weiterhin Mitglied einer CDU-Fraktion sein.
+
+Bei einer Änderung immer prüfen:
+
+1. Ist die Person noch Parteimitglied?
+2. Gehört sie weiterhin einer Fraktion an?
+3. Besteht das Ratsmandat oder kommunale Amt fort?
+4. Wird dieselbe Person auf einer weiteren Seite genannt?
+
+### Vorstand wechseln
+
+Bei einer Vorstandswahl sind mindestens folgende Stellen zu kontrollieren:
+
+- `team/index.html`
+- örtliche Seiten, sofern dort Vorstandsmitglieder aus dem jeweiligen Ort erscheinen
+- Impressum, wenn sich die gesetzliche Vertretung oder redaktionelle Verantwortung ändert
+- Beschreibung im GitHub-Profil
+
+Die veröffentlichte Mitteilung zur Vorstandswahl sollte als Quelle erhalten bleiben oder durch eine neuere offizielle Quelle ersetzt werden.
+
+### Fotos ergänzen
+
+Nur freigegebene Dateien mit geklärten Bildrechten verwenden. Dateinamen klein, eindeutig und ohne Leerzeichen schreiben, beispielsweise `marco-pusceddu.jpg`. Große Originale vor der Veröffentlichung fürs Web verkleinern.
+
+Der Alternativtext beschreibt knapp, wer oder was auf dem Bild zu sehen ist. Formulierungen wie „Bild“ oder „Foto von“ sind nicht nötig.
+
+## Veröffentlichung
+
+Die Website wird aus dem Branch `main` über GitHub Pages veröffentlicht. Änderungen sollten mit einer verständlichen Commit-Nachricht dokumentiert werden.
+
+Nach jeder Veröffentlichung:
+
+1. GitHub-Pages-Build abwarten.
+2. Geänderte Seite mit einem neuen Abfragewert öffnen, zum Beispiel `?v=20260904-1`.
+3. Links, Mobilansicht und Zwischenbreiten prüfen.
+4. Kontrollieren, dass die Seite nicht horizontal über den Bildschirm hinausragt.
+5. Bei Personen, Rechtstexten und Kontaktdaten die Live-Fassung nochmals lesen.
 
 ## Lokale Vorschau
 
-`index.html` im Browser öffnen oder einen einfachen lokalen Webserver im Projektverzeichnis starten.
+Im Projektverzeichnis einen einfachen lokalen Webserver starten:
+
+```bash
+python3 -m http.server 8000
+```
+
+Danach im Browser `http://localhost:8000/` öffnen. Das direkte Öffnen einzelner HTML-Dateien ist möglich, bildet relative Verlinkungen aber nicht immer zuverlässig ab.
+
+## Technische Leitlinien
+
+- statisches HTML, CSS und JavaScript ohne Baukastensystem
+- keine Analyse- oder Trackingdienste
+- keine Cookies durch die Website selbst
+- Schriftarten werden lokal ausgeliefert
+- externe Inhalte werden verlinkt und nicht ungefragt eingebettet
+- Änderungen sollen auch ohne den ursprünglichen Entwickler nachvollziehbar bleiben
+
+Das CDU-Gesamtlogo sowie die Schriften Inter und IBM Plex Serif stammen aus dem [CI-Portal der CDU Deutschlands](https://ci.cdu.de/). Die zugehörigen Lizenztexte liegen unter `assets/fonts/`.
+
+## Hinweis zur eigenen Domain
+
+Die Links in `404.html` verwenden derzeit den GitHub-Pages-Projektpfad `/cdu-vallendar/`. Beim Umzug auf eine eigene Domain müssen diese Links auf `/` beziehungsweise die endgültigen Pfade angepasst werden.
