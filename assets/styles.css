@@ -158,7 +158,9 @@ footer { padding-block: 34px; background: #051827; color: white; }
 
 @media (max-width: 720px) {
   .page-shell, .header-inner { width: min(100% - 30px,1180px); }
-  .header-inner { min-height: 74px; }
+  .header-inner { min-height: 74px; gap: 14px; }
+  .brand { min-width: 0; gap: 10px; }
+  .brand-copy { min-width: 0; }
   .brand-copy span { display: none; }
   .brand-logo { width: 84px; }
   .brand-copy strong { max-width: 155px; font-size: 13px; }
@@ -183,6 +185,10 @@ footer { padding-block: 34px; background: #051827; color: white; }
   .people-inner .button { grid-column: auto; }
   .footer-inner { align-items: flex-start; flex-direction: column; gap: 18px; }
   .footer-inner > p { margin: 0; }
+}
+
+@media (max-width: 420px) {
+  .brand-copy { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
