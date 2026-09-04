@@ -116,7 +116,7 @@ section { scroll-margin-top: 84px; }
 
 .local-page { background: #f6f4ef; }
 .local-hero { position: relative; overflow: hidden; padding-block: 82px 88px; background: var(--cdu-navy); color: white; }
-.local-hero::after { content: '03'; position: absolute; right: max(4vw,24px); bottom: -45px; color: rgba(255,255,255,.045); font-family: 'IBM Plex Serif', Georgia, serif; font-size: clamp(180px,28vw,390px); line-height: 1; }
+.local-hero::after { content: attr(data-number); position: absolute; right: max(4vw,24px); bottom: -45px; color: rgba(255,255,255,.045); font-family: 'IBM Plex Serif', Georgia, serif; font-size: clamp(180px,28vw,390px); line-height: 1; }
 .breadcrumb { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 58px; color: #a9bcc4; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .breadcrumb a:hover { color: white; }
 .local-hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,1.25fr) minmax(280px,.75fr); gap: 80px; align-items: end; }
@@ -139,6 +139,11 @@ section { scroll-margin-top: 84px; }
 .team-initials { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #e2efed; color: var(--cdu-teal-dark); font-weight: 800; }
 .team-card h3 { margin: 28px 0 6px; color: var(--cdu-navy); font-family: 'IBM Plex Serif', Georgia, serif; font-size: 25px; font-weight: 400; }
 .team-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.team-card-note { border-top-color: var(--cdu-gold); }
+.team-card-note p { font-size: 15px; line-height: 1.65; }
+.civic-note { padding: 28px 30px; border-left: 4px solid var(--cdu-gold); background: #e4edeb; color: var(--cdu-navy); font-size: 16px; line-height: 1.65; }
+.civic-note strong { display: block; margin-bottom: 8px; font-family: 'IBM Plex Serif', Georgia, serif; font-size: 25px; font-weight: 400; }
+.niederwerth-grid .civic-note { grid-column: span 2; }
 .topic-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
 .local-topic { min-width: 0; padding: 32px; border: 1px solid var(--line); background: white; }
 .local-topic span { color: var(--cdu-teal-dark); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
@@ -236,6 +241,7 @@ footer { padding-block: 34px; background: #051827; color: white; }
   .local-hero-grid, .local-intro, .local-section-heading, .local-contact { grid-template-columns: 1fr; gap: 34px; }
   .local-intro, .local-section { padding-block: 72px; }
   .team-grid, .topic-list { grid-template-columns: 1fr; }
+  .niederwerth-grid .civic-note { grid-column: auto; }
   .team-card { min-height: 190px; }
 }
 
