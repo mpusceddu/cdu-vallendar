@@ -15,7 +15,6 @@ Vor der offiziellen Veröffentlichung werden insbesondere noch geprüft und erg�
 - abschließende Abstimmung des CDU-Corporate-Designs
 - verantwortliche Personen und Funktionen
 - gemeinsame Kontaktadresse
-- Impressum und Datenschutzerklärung
 - Bildrechte und lokale Fotos
 - endgültige Domain
 
