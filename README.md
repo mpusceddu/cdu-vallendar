@@ -1,4 +1,4 @@
-# CDU Verbandsgemeinde Vallendar
+# CDU in der Verbandsgemeinde Vallendar
 
 Gemeinsamer Internetauftritt der CDU in Vallendar, Niederwerth, Urbar und Weitersburg.
 
@@ -13,6 +13,7 @@ Vor dem offiziellen Start bleiben insbesondere diese Punkte offen:
 - endgültige Domain
 - Funktions-E-Mail-Adressen
 - freigegebene Porträt- und Ortsfotos
+- echte Meldungen und Termine
 - abschließende inhaltliche Abnahme
 
 ## Seitenübersicht
@@ -32,7 +33,7 @@ Vor dem offiziellen Start bleiben insbesondere diese Punkte offen:
 | Datenschutz | `datenschutz/index.html` |
 | Fehlerseite | `404.html` |
 
-Die gemeinsame Gestaltung liegt in `assets/styles.css`. Die Filterfunktion der Antragsübersicht liegt in `assets/politik.js`. Bilder und Logos werden unter `assets/images/` abgelegt.
+Die gemeinsame Gestaltung liegt in `assets/styles.css`. Das Verhalten des mobilen Menüs liegt in `assets/site.js`, die Filterfunktion der Antragsübersicht in `assets/politik.js`. Bilder und Logos werden unter `assets/images/` abgelegt.
 
 ## Inhalte pflegen
 
@@ -59,7 +60,15 @@ Das Attribut `data-council` bestimmt den Filter:
 - `niederwerth` für den Ortsgemeinderat Niederwerth
 - `weitersburg` für den Ortsgemeinderat Weitersburg
 
-Zu jedem Vorgang gehören Rat, Datum, verständlicher Titel, kurze Einordnung und ein Link zur öffentlichen Originalquelle. Die Startzahl in `[data-result-count]` muss anschließend auf die Gesamtzahl der Karten angepasst werden.
+Zu jedem Vorgang gehören Rat, Datum, verständlicher Titel, kurze Einordnung und ein Link zur öffentlichen Originalquelle. Wenn vorhanden, sollten zusätzlich Beratungsstand, Ergebnis und der öffentliche Beschluss verlinkt werden. Filter und Trefferzahl werden automatisch aus den Karten erzeugt; eine Zahl muss nicht von Hand geändert werden.
+
+Ein bestimmter Rat kann direkt verlinkt werden, beispielsweise:
+
+- `politik/?rat=vg#antraege`
+- `politik/?rat=vallendar#antraege`
+- `politik/?rat=urbar#antraege`
+- `politik/?rat=niederwerth#antraege`
+- `politik/?rat=weitersburg#antraege`
 
 ### Person oder Funktion ändern
 
@@ -127,3 +136,13 @@ Das CDU-Gesamtlogo sowie die Schriften Inter und IBM Plex Serif stammen aus dem 
 ## Hinweis zur eigenen Domain
 
 Die Links in `404.html` verwenden derzeit den GitHub-Pages-Projektpfad `/cdu-vallendar/`. Beim Umzug auf eine eigene Domain müssen diese Links auf `/` beziehungsweise die endgültigen Pfade angepasst werden.
+
+Für die bisherigen örtlichen Auftritte ist folgende Zielstruktur vorbereitet:
+
+| Bisherige Domain | Späteres Ziel |
+| --- | --- |
+| `vallendar-cdu.de` | `/vallendar/` |
+| `cdu-urbar.de` | `/urbar/` |
+| `cduweitersburg.de` | `/weitersburg/` |
+
+Die alten Seiten werden im neuen Auftritt nicht mehr als Quellen verlinkt. Die eigentlichen Weiterleitungen müssen später beim jeweiligen Domainanbieter eingerichtet werden. Das geschieht erst zusammen mit der endgültigen Domain und nach Freigabe des gemeinsamen Auftritts.
