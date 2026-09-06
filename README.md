@@ -76,6 +76,8 @@ Vorstandsmitglieder werden in `team/index.html` gepflegt. Mitglieder der jeweili
 
 Wichtig: **Parteimitgliedschaft, Fraktionszugehörigkeit und kommunales Amt sind unterschiedliche Angaben.** Änderungen deshalb nicht automatisch auf andere Seiten übertragen. Eine parteilose Person kann weiterhin Mitglied einer CDU-Fraktion sein.
 
+Auf den Personenkarten werden reguläre Ratsmitglieder nur mit ihrem Mandat und gegebenenfalls mit dem Zusatz „Parteilos“ bezeichnet. Fraktionsvorsitz und Stellvertretung bleiben als Funktionen sichtbar.
+
 Bei einer Änderung immer prüfen:
 
 1. Ist die Person noch Parteimitglied?
