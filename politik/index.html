@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#071f33">
   <link rel="preload" href="../assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="../assets/styles.css?v=13">
+  <link rel="stylesheet" href="../assets/styles.css?v=16">
   <script src="../assets/site.js?v=1" defer></script>
-  <script src="../assets/politik.js?v=2" defer></script>
+  <script src="../assets/politik.js?v=3" defer></script>
 </head>
 <body class="policy-page">
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
@@ -24,7 +24,7 @@
   <main id="inhalt">
     <section class="local-hero" data-number="02"><div class="page-shell">
       <nav class="breadcrumb" aria-label="Brotkrümelnavigation"><a href="../">Startseite</a><span aria-hidden="true">›</span><span>Themen und Anträge</span></nav>
-      <div class="local-hero-grid"><div><p class="eyebrow light">Unsere Politik</p><h1>Themen.<br>Anträge.</h1><p class="local-lead">Wofür wir stehen und was wir in den Räten konkret anstoßen. Verständlich gegliedert und mit Quellen zur kommunalen Beratung.</p></div><aside class="local-facts"><strong>Zwei klare Bereiche</strong><p>Unter Themen finden Sie unsere politischen Schwerpunkte. Die Anträge lassen sich nach den fünf Räten filtern.</p></aside></div>
+      <div class="local-hero-grid"><div><p class="eyebrow light">Unsere Politik</p><h1>Themen.<br>Anträge.</h1><p class="local-lead">Wofür wir stehen und was wir in den Räten konkret anstoßen. Mit verständlichen Einordnungen, Beratungsständen und öffentlichen Quellen.</p></div><aside class="local-facts"><strong>Arbeit wird sichtbar</strong><p>Von der ersten Initiative bis zum Beschluss: Die Übersicht zeigt, welche Themen wir auf die Tagesordnung bringen und wie damit umgegangen wurde.</p></aside></div>
     </div>
     </section>
 
@@ -41,7 +41,7 @@
     </section>
 
     <section class="policy-motions" id="antraege"><div class="page-shell">
-      <div class="local-section-heading"><div><p class="eyebrow light">Aus den Räten</p><h2>Anträge filtern.</h2></div><p>Wählen Sie die kommunale Ebene. Angezeigt werden nur Vorgänge, die einer Quelle eindeutig zugeordnet werden können.</p></div>
+      <div class="local-section-heading"><div><p class="eyebrow light">Aus den Räten</p><h2>Politische Arbeit im Überblick.</h2></div><p>Wählen Sie die kommunale Ebene. Der angegebene Stand unterscheidet zwischen Beschluss, Verweisung, Mitteilung, Rückzug und ausgearbeiteter Initiative.</p></div>
       <div class="motion-filters" role="group" aria-label="Anträge nach Rat filtern">
         <button type="button" data-filter="all" aria-pressed="true">Alle</button>
         <button type="button" data-filter="vg" aria-pressed="false">VG-Rat</button>
@@ -51,6 +51,13 @@
         <button type="button" data-filter="weitersburg" aria-pressed="false">Weitersburg</button>
       </div>
       <p class="motion-result" data-result-count role="status" aria-live="polite" aria-atomic="true">Belegte Vorgänge werden angezeigt.</p>
+      <div class="motion-legend" aria-label="Erläuterung der Bearbeitungsstände">
+        <span><span class="motion-status motion-status-approved">Beschlossen</span> vom Rat entschieden</span>
+        <span><span class="motion-status motion-status-referred">Verwiesen</span> weitere Beratung</span>
+        <span><span class="motion-status motion-status-info">Mitteilung</span> ohne eigenen Beschluss</span>
+        <span><span class="motion-status motion-status-withdrawn">Vertagt / zurückgezogen</span> nicht weiter beraten</span>
+        <span><span class="motion-status motion-status-draft">Ausgearbeitet</span> öffentliche Quelle folgt</span>
+      </div>
       <div class="motion-grid">
         <!--
           Pflegehinweis für weitere Anträge:
@@ -60,29 +67,277 @@
           werden automatisch aus den vorhandenen Karten aktualisiert.
         -->
         <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2026-07-13">13.07.2026</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Sondervermögen mit Augenmaß einsetzen</h3>
+          <p>Vor einer festen Verteilung sollen Förderbedingungen, Investitionsbedarfe der VG und Projekte der vier Orte transparent gegenübergestellt werden.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2026-07-08">08.07.2026</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Digitales Bürgerkonto prüfen</h3>
+          <p>Ein Konzept soll klären, wie Bescheide und Verwaltungsdokumente künftig sicher, digital und bürgerfreundlich bereitgestellt werden können.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-11-30">30.11.2025</time></div>
+          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
+          <h3>Geschäftsordnung modernisieren</h3>
+          <p>Klare Fristen, digitale Ratsarbeit und nachvollziehbare Unterlagen sollen die Arbeit des Verbandsgemeinderates verlässlicher machen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40210">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-11-30">30.11.2025</time></div>
+          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
+          <h3>Hauptsatzung zeitgemäß gestalten</h3>
+          <p>Bekanntmachungen, Zuständigkeiten und organisatorische Regeln sollen verständlicher, digitaler und rechtssicher ausgestaltet werden.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40210">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-11-29">29.11.2025</time></div>
+          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
+          <h3>Verbandsgemeinde strukturell weiterentwickeln</h3>
+          <p>Für die Jahre 2026 bis 2029 sollen Organisation, Zusammenarbeit und strategische Steuerung der Verbandsgemeinde weiterentwickelt werden.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40209">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-11-28">28.11.2025</time></div>
+          <span class="motion-status motion-status-referred">Beraten</span>
+          <h3>Haushalt 2026 gezielt nachschärfen</h3>
+          <p>Ein Paket konkreter Änderungsanträge stellte hohe oder noch nicht belastbar geplante Ansätze auf den Prüfstand und sollte unnötige Kreditaufnahme vermeiden.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40097">Haushaltsberatung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-10-13">13.10.2025</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Gemeinnützige Vereine von Gebühren entlasten</h3>
+          <p>Für vorübergehende Schankerlaubnisse soll bei nachgewiesener Gemeinnützigkeit die Gebühr automatisch entfallen und das Verfahren einfacher werden.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-09-23">23.09.2025</time></div>
+          <span class="motion-status motion-status-approved">Geändert beschlossen</span>
+          <h3>Brauchtum und Kreisnarrentreffen unterstützen</h3>
+          <p>Für das Kreisnarrentreffen 2026 sollten Haushaltsmittel bereitgestellt und das ehrenamtliche Engagement der Karnevalsvereine unterstützt werden.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40000">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-08-28">28.08.2025</time></div>
+          <span class="motion-status motion-status-approved">Mehrheitlich beschlossen</span>
+          <h3>Fördermittel systematisch nutzen</h3>
+          <p>Eine Fördermittelstrategie soll Programme früh erkennen, Projekte geordnet vorbereiten und die vier Orte bei Zukunftsinvestitionen besser unterstützen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39697">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-06-09">09.06.2025</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Anträge direkt über SessionNet einreichen</h3>
+          <p>Geprüft werden sollen eine digitale Einreichung, eine geschützte Übersicht und eine Statusanzeige für Anträge und Anfragen der Ratsmitglieder.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-04-08">08.04.2025</time></div>
+          <span class="motion-status motion-status-approved">Geändert beschlossen</span>
+          <h3>Faire Vereinbarung mit der DLRG</h3>
+          <p>Der Nutzungsvertrag für das Freizeitbad wurde um einen Sondertarif und die Verrechnung ehrenamtlicher Rettungsschwimmerdienste ergänzt.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39200">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-04">April 2025</time></div>
+          <span class="motion-status motion-status-approved">Umgesetzt</span>
+          <h3>Sondersitzung zum Freizeitbad beantragt</h3>
+          <p>Wegen des Beginns der Freibadsaison wurde gemeinsam eine kurzfristige Ratssitzung zur DLRG-Vereinbarung und zu offenen Anträgen verlangt.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/si0057.php?__ksinr=9262">Sondersitzung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-04-04">04.04.2025</time></div>
+          <span class="motion-status motion-status-info">Als Mitteilung behandelt</span>
+          <h3>Anwohnerparken geordnet prüfen</h3>
+          <p>Die Verwaltung sollte ein tragfähiges Konzept für Bewohnerparken erarbeiten. Der Vorstoß erhielt keinen eigenen Beratungspunkt und wurde unter Mitteilungen verlesen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39313">Mitteilung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-03-31">31.03.2025</time></div>
+          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
+          <h3>Haus- und Badeordnung modernisieren</h3>
+          <p>Klare Regeln zu Sicherheit, Persönlichkeitsschutz, digitaler Transparenz und den Befugnissen des Badepersonals sollten das Freizeitbad verlässlich schützen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39685">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-03-31">31.03.2025</time></div>
+          <span class="motion-status motion-status-withdrawn">Vertagt · später Mitteilung</span>
+          <h3>Finanzielle Lage offenlegen</h3>
+          <p>Der Antrag verlangte eine belastbare Darstellung der kommunalen Finanzen und der Belastungen durch übertragene Aufgaben. Die Beratung wurde vertagt und später als Mitteilung geführt.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39681">Beratung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-03-31">31.03.2025</time></div>
+          <span class="motion-status motion-status-info">Als Mitteilung behandelt</span>
+          <h3>Kreisumlage transparent machen</h3>
+          <p>Berechnung, Entwicklung und konkrete Auswirkungen der Kreisumlage sollten für Rat und Öffentlichkeit nachvollziehbar dargestellt werden.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39313">Mitteilung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025">2025</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Rechtsmittel zur Schlüsselzuweisung prüfen</h3>
+          <p>Die finanziellen Auswirkungen des Zuweisungsbescheids sollten bewertet und ein rechtliches Vorgehen zur Sicherung kommunaler Interessen vorbereitet werden.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-01-20">20.01.2025</time></div>
+          <span class="motion-status motion-status-info">Als Mitteilung behandelt</span>
+          <h3>Schulträgerausschuss zeitnah einberufen</h3>
+          <p>Offene Fragen zu Schulen und Ganztagsbetreuung sollten nicht weiter warten. Der Antrag wurde zusammen mit einem älteren CDU-Antrag unter Mitteilungen behandelt.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39094">Mitteilung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
           <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2024-11-14">14.11.2024</time></div>
+          <span class="motion-status motion-status-referred">Verwiesen · später informiert</span>
           <h3>Öffentliche Ausschreibungen im Bürgerportal</h3>
           <p>Die CDU-Fraktion beantragte, alle öffentlichen Ausschreibungen der Verbandsgemeinde im SessionNet beziehungsweise Gremieninfoportal bereitzustellen.</p>
-          <a href="https://buergerinfo.vg-vallendar.de/getfile.php?id=101069&amp;type=do">Öffentliche Tagesordnung und Quelle <span aria-hidden="true">→</span></a>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39310">Beratung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="vg">
+          <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2024-10-12">12.10.2024</time></div>
+          <span class="motion-status motion-status-withdrawn">Zurückgezogen</span>
+          <h3>Arbeitskreis Schulen und Ganztagsbetreuung</h3>
+          <p>Ein gemeinsamer Arbeitskreis sollte die Schulentwicklung und den Rechtsanspruch auf Ganztagsbetreuung frühzeitig vorbereiten. Nach der Verweisung wurde der Antrag später zurückgezogen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39999">Beratung im Bürgerportal <span aria-hidden="true">→</span></a>
         </article>
         <article class="motion-card" data-council="vallendar">
           <div class="motion-meta"><span>Stadtrat Vallendar</span><time datetime="2025-09-30">30.09.2025</time></div>
+          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
           <h3>Nördliche Rheinstraße planvoll entwickeln</h3>
           <p>Mit dem Antrag zur Veränderungssperre sollte die Änderung des bestehenden Bebauungsplans vorbereitet und die weitere Entwicklung rechtlich gesichert werden.</p>
-          <a href="https://buergerinfo.vg-vallendar.de/vo0050.php?__kvonr=20415&amp;voselect=9182">Vorlage Stadt/2025/0116 <span aria-hidden="true">→</span></a>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39992">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
         </article>
         <article class="motion-card" data-council="vallendar">
           <div class="motion-meta"><span>Stadtrat Vallendar</span><time datetime="2025-03-19">19.03.2025</time></div>
+          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
           <h3>Zweitwohnungssteuer neu beraten</h3>
           <p>Der CDU-Antrag führte zu einer Beratung über den künftigen Steuersatz und eine mögliche Anpassung der städtischen Satzung.</p>
-          <a href="https://buergerinfo.vg-vallendar.de/vo0050.php?__kvonr=20267">Vorlage Stadt/2025/0068 <span aria-hidden="true">→</span></a>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39584">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-06-24">24.06.2026</time></div>
+          <span class="motion-status motion-status-approved">Mehrheitlich beschlossen</span>
+          <h3>Friedhofsgebühren maßvoll anpassen</h3>
+          <p>Die CDU setzte sich für eine nachvollziehbare, sozial vertretbare Anpassung statt einer rein rechnerischen Vollkostendeckung ein. Der Rat beschloss anschließend eine neue Gebührensatzung.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40831">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-06-03">03.06.2026</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Dorfentwicklung langfristig planen</h3>
+          <p>Ein integriertes Konzept mit Bürgerbeteiligung soll Wohnen, Verkehr, Klima, Infrastruktur und Finanzen für die kommenden zehn bis fünfzehn Jahre zusammenführen.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-05-20">20.05.2026</time></div>
+          <span class="motion-status motion-status-referred">Einstimmig verwiesen</span>
+          <h3>Gästebeitrag für Übernachtungen prüfen</h3>
+          <p>Der Rat soll klären, ob ein Gästebeitrag rechtlich und wirtschaftlich sinnvoll ist und wie mögliche Einnahmen der touristischen Infrastruktur zugutekommen können.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40841">Beratung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-05-18">18.05.2026</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Wirtschaftsstandort Urbar stärken</h3>
+          <p>Ein befristetes Ansiedlungsmodell soll neue Unternehmenssitze gewinnen, bestehende Betriebe sichern und die Gewerbesteuerbasis langfristig verbreitern.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-01-23">23.01.2026</time></div>
+          <span class="motion-status motion-status-info">Als Mitteilung behandelt</span>
+          <h3>Offizieller WhatsApp-Kanal für Urbar</h3>
+          <p>Amtliche Hinweise und aktuelle Informationen der Ortsgemeinde sollten über einen eigenen, datensparsamen WhatsApp-Kanal leichter erreichbar werden.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40572">Mitteilung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-01-23">23.01.2026</time></div>
+          <span class="motion-status motion-status-info">Als Mitteilung behandelt</span>
+          <h3>Zentrale E-Mail-Adresse für den Gemeinderat</h3>
+          <p>Eine zentrale Adresse soll Anliegen nachvollziehbar an alle Ratsmitglieder weiterleiten und den Zugang zum Gemeinderat vereinfachen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40572">Mitteilung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-01-20">20.01.2026</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Bauhof sicher und wirtschaftlich ausstatten</h3>
+          <p>Arbeits- und Verkehrssicherheit müssen gewährleistet sein. Zugleich sollen Kooperation, Miete und andere Alternativen vor teuren Neuanschaffungen geprüft werden.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-01-06">06.01.2026</time></div>
+          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
+          <h3>Alle Wartungs- und Dienstleistungsverträge prüfen</h3>
+          <p>Eine vollständige Übersicht soll Kosten, Laufzeiten, Kündigungsfristen und Einsparpotenziale der laufenden Verträge transparent machen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=40280">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-12-01">01.12.2025</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Geschäftsordnung der Ortsgemeinde modernisieren</h3>
+          <p>Verbindliche Sitzungsrhythmen, digitale Unterlagen, klare Fristen und stärkere Rechte des Rates sollen die kommunale Arbeit verbessern.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-12-01">01.12.2025</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Hauptsatzung der Ortsgemeinde modernisieren</h3>
+          <p>Digitale Bekanntmachungen, zeitgemäße Zuständigkeiten und nachvollziehbare Wertgrenzen sollen die Satzung an die heutige Gemeindearbeit anpassen.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-12-01">01.12.2025</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Laufende Kredite und Einheitskasse prüfen</h3>
+          <p>Umschuldungs-, Entschuldungs- und Strukturpotenziale sollen sichtbar werden und die finanziellen Wirkungen der Einheitskasse nachvollziehbar machen.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025">Haushalt 2026</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Qualifizierte Protokollführung sichern</h3>
+          <p>Eine feste Protokollführung soll die Verwaltung entlasten und zeitnahe, vollständige sowie rechtssichere Niederschriften gewährleisten.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025">Haushalt 2026</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Schankanlage im Bürgerhaus wieder nutzen</h3>
+          <p>Mit geeigneter Ausstattung, geschulten Personen und einem Wartungsplan soll die vorhandene Anlage wirtschaftlich und hygienisch sicher betrieben werden.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-05-21">21.05.2025</time></div>
+          <span class="motion-status motion-status-referred">Einstimmig verwiesen</span>
+          <h3>Sportgeräte künftig selbst fachgerecht prüfen</h3>
+          <p>Ein Gemeindemitarbeiter soll als befähigte Person geschult werden, damit wiederkehrende Prüfungen sicher, verlässlich und wirtschaftlich erfolgen können.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39400">Beratung im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-03-31">31.03.2025</time></div>
+          <span class="motion-status motion-status-approved">Geändert beschlossen</span>
+          <h3>Kommunale Finanzen und Konnexität</h3>
+          <p>Die Belastungen durch übertragene Aufgaben sollten aufgearbeitet werden. Der Rat beschloss später eine geänderte Fassung und die Zusammenstellung weiterer Informationen.</p>
+          <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39627">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="motion-card" data-council="urbar">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2024">2024</time></div>
+          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+          <h3>Verkehr in Urbar sicherer ordnen</h3>
+          <p>Ein Maßnahmenpaket sollte Gefahrenstellen, ruhenden Verkehr und sichere Wege gemeinsam betrachten und konkrete Verbesserungen vorbereiten.</p>
+          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
         </article>
       </div>
       <div class="motion-empty" data-empty-state role="status" aria-live="polite" aria-atomic="true" hidden>
         <strong data-empty-title>Noch keine belegten Einträge</strong>
         <p data-empty-copy>Für diesen Rat sind auf der neuen Seite noch keine abschließend geprüften CDU-Anträge veröffentlicht.</p>
       </div>
-      <p class="source-note">Die Liste wird schrittweise aus öffentlichen Ratsunterlagen ergänzt. Maßgeblich bleiben die Originalunterlagen im <a href="https://buergerinfo.vg-vallendar.de/">Bürgerinformationssystem</a>.</p>
+      <p class="source-note">Die Übersicht verbindet öffentliche Ratsunterlagen mit ausgearbeiteten Initiativen aus der Fraktionsarbeit. „Beschlossen“, „Verwiesen“ und „Mitteilung“ beruhen auf dem jeweiligen öffentlichen Beratungsstand. Bei als „Ausgearbeitet“ gekennzeichneten Einträgen wird die öffentliche Originalquelle nach abschließender Prüfung ergänzt. Maßgeblich bleiben die Unterlagen im <a href="https://buergerinfo.vg-vallendar.de/">Bürgerinformationssystem</a>.</p>
     </div></section>
   </main>
 

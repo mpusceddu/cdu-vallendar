@@ -52,8 +52,8 @@ function updateFilterUrl(filter) {
 
 function formatResultCount(count) {
   return count === 1
-    ? '1 belegter Vorgang wird angezeigt.'
-    : `${count} belegte Vorgänge werden angezeigt.`;
+    ? '1 Eintrag wird angezeigt.'
+    : `${count} Einträge werden angezeigt.`;
 }
 
 function applyFilter(filter, { updateUrl = false } = {}) {
@@ -74,8 +74,8 @@ function applyFilter(filter, { updateUrl = false } = {}) {
 
   if (visible === 0) {
     const message = emptyMessages[activeFilter] || {
-      title: 'Noch keine belegten Einträge',
-      copy: 'Für diesen Rat sind auf der neuen Seite noch keine abschließend geprüften CDU-Anträge veröffentlicht.'
+      title: 'Noch keine Einträge',
+      copy: 'Für diesen Rat sind derzeit keine CDU-Anträge oder ausgearbeiteten Initiativen veröffentlicht.'
     };
     emptyTitle.textContent = message.title;
     emptyCopy.textContent = message.copy;
