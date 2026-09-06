@@ -377,6 +377,11 @@ footer { padding-block: 34px; background: #051827; color: white; }
 
 :focus-visible { outline: 3px solid var(--cdu-gold); outline-offset: 2px; box-shadow: 0 0 0 5px var(--cdu-navy); }
 
+@media (max-width: 1180px) {
+  .proposal-page .main-nav, .proposal-page .header-cta { display: none; }
+  .proposal-page .mobile-menu { display: block; }
+}
+
 @media (min-width: 981px) {
   .place-card h3 { font-size: clamp(35px,3.6vw,38px); }
   .place-niederwerth h3, .place-weitersburg h3 { font-size: clamp(27px,2.75vw,37px); white-space: nowrap; }
