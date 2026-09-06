@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Entwicklungsfassung: Indexierung erst nach Vorstandsfreigabe erlauben. -->
+  <meta name="robots" content="noindex,nofollow">
   <title>Themen und Anträge | CDU in der Verbandsgemeinde Vallendar</title>
   <meta name="description" content="Politische Themen und nach Räten filterbare Anträge der CDU in der Verbandsgemeinde Vallendar.">
   <meta name="theme-color" content="#071f33">
   <link rel="preload" href="../assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="../assets/styles.css?v=17">
+  <link rel="stylesheet" href="../assets/styles.css?v=18">
   <script src="../assets/site.js?v=1" defer></script>
   <script src="../assets/politik.js?v=3" defer></script>
 </head>
@@ -16,12 +18,13 @@
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
   <header class="site-header"><div class="header-inner">
     <a class="brand" href="../" aria-label="CDU in der Verbandsgemeinde Vallendar, Startseite"><img class="brand-logo" src="../assets/images/cdu-gesamtlogo-transparent.png" alt="CDU" width="3907" height="861"><span class="brand-copy"><strong>in der Verbandsgemeinde Vallendar</strong><span>Vallendar · Niederwerth · Urbar · Weitersburg</span></span></a>
-    <nav class="main-nav" aria-label="Hauptnavigation"><a href="../">Startseite</a><a href="#themen">Themen</a><a href="#antraege">Anträge</a><a href="../raete/">Räte</a></nav>
+    <nav class="main-nav" aria-label="Hauptnavigation"><a href="../#orte">Unsere Orte</a><a href="../politik/" aria-current="page">Politik</a><a href="../raete/">Räte</a><a href="../team/">Team</a></nav>
     <a class="header-cta" href="../thema-vorschlagen/">Thema vorschlagen</a>
-    <details class="mobile-menu"><summary><span aria-hidden="true">☰</span><span class="menu-label">Menü</span></summary><nav aria-label="Mobile Navigation"><a href="../">Startseite</a><a href="#themen">Themen</a><a href="#antraege">Anträge</a><a href="../raete/">Räte</a><a href="../thema-vorschlagen/">Thema vorschlagen</a></nav></details>
+    <details class="mobile-menu"><summary><span aria-hidden="true">☰</span><span class="menu-label">Menü</span></summary><nav aria-label="Mobile Navigation"><a href="../">Startseite</a><a href="../#orte">Unsere Orte</a><a href="../politik/" aria-current="page">Politik</a><a href="../raete/">Räte</a><a href="../team/">Team</a><a href="../thema-vorschlagen/">Thema vorschlagen</a><a href="../#kontakt">Kontakt</a></nav></details>
   </div></header>
 
   <main id="inhalt">
+    <nav class="section-nav page-shell" aria-label="Auf dieser Seite"><a href="#themen">Themen</a><a href="#antraege">Anträge und Initiativen</a></nav>
     <section class="local-hero" data-number="02"><div class="page-shell">
       <nav class="breadcrumb" aria-label="Brotkrümelnavigation"><a href="../">Startseite</a><span aria-hidden="true">›</span><span>Themen und Anträge</span></nav>
       <div class="local-hero-grid"><div><p class="eyebrow light">Unsere Politik</p><h1>Themen.<br>Anträge.</h1><p class="local-lead">Wofür wir stehen und was wir in den Räten konkret anstoßen. Mit verständlichen Einordnungen, Beratungsständen und öffentlichen Quellen.</p></div><aside class="local-facts"><strong>Arbeit wird sichtbar</strong><p>Von der ersten Initiative bis zum Beschluss: Die Übersicht zeigt, welche Themen wir auf die Tagesordnung bringen und wie damit umgegangen wurde.</p></aside></div>
@@ -50,13 +53,13 @@
         <button type="button" data-filter="niederwerth" aria-pressed="false">Niederwerth</button>
         <button type="button" data-filter="weitersburg" aria-pressed="false">Weitersburg</button>
       </div>
-      <p class="motion-result" data-result-count role="status" aria-live="polite" aria-atomic="true">Belegte Vorgänge werden angezeigt.</p>
+      <p class="motion-result" data-result-count role="status" aria-live="polite" aria-atomic="true">24 Einträge mit öffentlicher Quelle · 14 ausgearbeitete Initiativen</p>
       <div class="motion-legend" aria-label="Erläuterung der Bearbeitungsstände">
         <span><span class="motion-status motion-status-approved">Beschlossen</span> vom Rat entschieden</span>
         <span><span class="motion-status motion-status-referred">Verwiesen</span> weitere Beratung</span>
         <span><span class="motion-status motion-status-info">Mitteilung</span> ohne eigenen Beschluss</span>
-        <span><span class="motion-status motion-status-withdrawn">Vertagt / zurückgezogen</span> nicht weiter beraten</span>
-        <span><span class="motion-status motion-status-draft">Ausgearbeitet</span> öffentliche Quelle folgt</span>
+        <span><span class="motion-status motion-status-withdrawn">Vertagt / zurückgezogen</span> Beratung verschoben / Antrag zurückgenommen</span>
+        <span><span class="motion-status motion-status-draft">Ausgearbeitet</span> Einreichung öffentlich noch nicht belegt</span>
       </div>
       <div class="motion-grid">
         <!--
@@ -71,14 +74,14 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Sondervermögen mit Augenmaß einsetzen</h3>
           <p>Vor einer festen Verteilung sollen Förderbedingungen, Investitionsbedarfe der VG und Projekte der vier Orte transparent gegenübergestellt werden.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="vg">
           <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2026-07-08">08.07.2026</time></div>
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Digitales Bürgerkonto prüfen</h3>
           <p>Ein Konzept soll klären, wie Bescheide und Verwaltungsdokumente künftig sicher, digital und bürgerfreundlich bereitgestellt werden können.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="vg">
           <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-11-30">30.11.2025</time></div>
@@ -113,7 +116,7 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Gemeinnützige Vereine von Gebühren entlasten</h3>
           <p>Für vorübergehende Schankerlaubnisse soll bei nachgewiesener Gemeinnützigkeit die Gebühr automatisch entfallen und das Verfahren einfacher werden.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="vg">
           <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-09-23">23.09.2025</time></div>
@@ -134,7 +137,7 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Anträge direkt über SessionNet einreichen</h3>
           <p>Geprüft werden sollen eine digitale Einreichung, eine geschützte Übersicht und eine Statusanzeige für Anträge und Anfragen der Ratsmitglieder.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="vg">
           <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-04-08">08.04.2025</time></div>
@@ -183,7 +186,7 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Rechtsmittel zur Schlüsselzuweisung prüfen</h3>
           <p>Die finanziellen Auswirkungen des Zuweisungsbescheids sollten bewertet und ein rechtliches Vorgehen zur Sicherung kommunaler Interessen vorbereitet werden.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="vg">
           <div class="motion-meta"><span>Verbandsgemeinderat</span><time datetime="2025-01-20">20.01.2025</time></div>
@@ -207,10 +210,10 @@
           <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39999">Beratung im Bürgerportal <span aria-hidden="true">→</span></a>
         </article>
         <article class="motion-card" data-council="vallendar">
-          <div class="motion-meta"><span>Stadtrat Vallendar</span><time datetime="2025-09-30">30.09.2025</time></div>
-          <span class="motion-status motion-status-approved">Einstimmig beschlossen</span>
+          <div class="motion-meta"><span>Stadtrat Vallendar</span><time datetime="2025-11-18">Beschluss: 18.11.2025</time></div>
+          <span class="motion-status motion-status-referred">Einstimmig verwiesen</span>
           <h3>Nördliche Rheinstraße planvoll entwickeln</h3>
-          <p>Mit dem Antrag zur Veränderungssperre sollte die Änderung des bestehenden Bebauungsplans vorbereitet und die weitere Entwicklung rechtlich gesichert werden.</p>
+          <p>Mit dem Antrag vom 30.09.2025 sollte eine Veränderungssperre für den Bereich des bestehenden Bebauungsplans vorbereitet werden. Der Stadtrat verwies den Antrag einstimmig in die zuständigen Ausschüsse. Eine Veränderungssperre wurde damit noch nicht beschlossen.</p>
           <a href="https://buergerinfo.vg-vallendar.de/to0050.php?__ktonr=39992">Beschluss im Bürgerportal <span aria-hidden="true">→</span></a>
         </article>
         <article class="motion-card" data-council="vallendar">
@@ -232,7 +235,7 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Dorfentwicklung langfristig planen</h3>
           <p>Ein integriertes Konzept mit Bürgerbeteiligung soll Wohnen, Verkehr, Klima, Infrastruktur und Finanzen für die kommenden zehn bis fünfzehn Jahre zusammenführen.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-05-20">20.05.2026</time></div>
@@ -246,7 +249,7 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Wirtschaftsstandort Urbar stärken</h3>
           <p>Ein befristetes Ansiedlungsmodell soll neue Unternehmenssitze gewinnen, bestehende Betriebe sichern und die Gewerbesteuerbasis langfristig verbreitern.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-01-23">23.01.2026</time></div>
@@ -267,7 +270,7 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Bauhof sicher und wirtschaftlich ausstatten</h3>
           <p>Arbeits- und Verkehrssicherheit müssen gewährleistet sein. Zugleich sollen Kooperation, Miete und andere Alternativen vor teuren Neuanschaffungen geprüft werden.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2026-01-06">06.01.2026</time></div>
@@ -281,35 +284,35 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Geschäftsordnung der Ortsgemeinde modernisieren</h3>
           <p>Verbindliche Sitzungsrhythmen, digitale Unterlagen, klare Fristen und stärkere Rechte des Rates sollen die kommunale Arbeit verbessern.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-12-01">01.12.2025</time></div>
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Hauptsatzung der Ortsgemeinde modernisieren</h3>
           <p>Digitale Bekanntmachungen, zeitgemäße Zuständigkeiten und nachvollziehbare Wertgrenzen sollen die Satzung an die heutige Gemeindearbeit anpassen.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-12-01">01.12.2025</time></div>
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Laufende Kredite und Einheitskasse prüfen</h3>
           <p>Umschuldungs-, Entschuldungs- und Strukturpotenziale sollen sichtbar werden und die finanziellen Wirkungen der Einheitskasse nachvollziehbar machen.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025">Haushalt 2026</time></div>
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Qualifizierte Protokollführung sichern</h3>
           <p>Eine feste Protokollführung soll die Verwaltung entlasten und zeitnahe, vollständige sowie rechtssichere Niederschriften gewährleisten.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025">Haushalt 2026</time></div>
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Schankanlage im Bürgerhaus wieder nutzen</h3>
           <p>Mit geeigneter Ausstattung, geschulten Personen und einem Wartungsplan soll die vorhandene Anlage wirtschaftlich und hygienisch sicher betrieben werden.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-05-21">21.05.2025</time></div>
@@ -330,14 +333,14 @@
           <span class="motion-status motion-status-draft">Ausgearbeitet</span>
           <h3>Verkehr in Urbar sicherer ordnen</h3>
           <p>Ein Maßnahmenpaket sollte Gefahrenstellen, ruhenden Verkehr und sichere Wege gemeinsam betrachten und konkrete Verbesserungen vorbereiten.</p>
-          <span class="motion-source-pending">Öffentliche Quelle wird ergänzt</span>
+          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
       </div>
       <div class="motion-empty" data-empty-state role="status" aria-live="polite" aria-atomic="true" hidden>
         <strong data-empty-title>Noch keine belegten Einträge</strong>
         <p data-empty-copy>Für diesen Rat sind auf der neuen Seite noch keine abschließend geprüften CDU-Anträge veröffentlicht.</p>
       </div>
-      <p class="source-note">Die Übersicht verbindet öffentliche Ratsunterlagen mit ausgearbeiteten Initiativen aus der Fraktionsarbeit. „Beschlossen“, „Verwiesen“ und „Mitteilung“ beruhen auf dem jeweiligen öffentlichen Beratungsstand. Bei als „Ausgearbeitet“ gekennzeichneten Einträgen wird die öffentliche Originalquelle nach abschließender Prüfung ergänzt. Maßgeblich bleiben die Unterlagen im <a href="https://buergerinfo.vg-vallendar.de/">Bürgerinformationssystem</a>.</p>
+      <p class="source-note">Die Übersicht verbindet öffentlich dokumentierte Ratsvorgänge mit ausgearbeiteten Initiativen aus der Fraktionsarbeit. Der angegebene Beratungsstand bezieht sich auf die jeweils verlinkte Ratsunterlage. „Ausgearbeitet“ bedeutet, dass eine Einreichung oder Behandlung im Rat öffentlich noch nicht belegt ist; diese Einträge zählen nicht als nachgewiesen eingereichte oder beschlossene Anträge. Maßgeblich bleiben die Unterlagen im <a href="https://buergerinfo.vg-vallendar.de/">Bürgerinformationssystem</a>.</p>
       <aside class="motion-callout">
         <div><h3>Ein Thema fehlt?</h3><p>Ordnen Sie Ihre Beobachtung der richtigen Ebene zu und bereiten Sie daraus einen klaren politischen Vorschlag vor.</p></div>
         <a class="button button-primary" href="../thema-vorschlagen/">Eigenes Thema vorschlagen <span aria-hidden="true">→</span></a>

@@ -38,6 +38,10 @@ Die gemeinsame Gestaltung liegt in `assets/styles.css`. Das Verhalten des mobile
 
 Die Themenwerkstatt versendet und speichert derzeit keine Eingaben. Sie ordnet ein Anliegen im Browser einer voraussichtlichen kommunalen Ebene zu und erzeugt einen kopierbaren Textentwurf. Ein späterer Übermittlungsweg darf erst ergänzt werden, wenn Funktionsadresse, Empfänger, Datenschutzhinweise und organisatorische Bearbeitung feststehen.
 
+Die Hauptnavigation ist auf allen Seiten gleich: Unsere Orte, Politik, Räte und Team. Abschnittslinks der jeweiligen Seite stehen getrennt unter dem Kopf. Der bisherige Abschnitt `#aktuelles` enthält weiterhin allgemeine Themen und wird als „Unser Anspruch“ verlinkt; ein Nachrichten- oder Veranstaltungskalender ist noch nicht vorhanden.
+
+Die Entwicklungsfassung ist mit `noindex,nofollow` gekennzeichnet. Diese Suchmaschinenanweisung erst nach Vorstandsfreigabe und zusammen mit den endgültigen Domain-/SEO-Angaben entfernen. Sie ist kein Zugangsschutz; die Vorschau bleibt über ihre URL öffentlich erreichbar.
+
 ## Inhalte pflegen
 
 ### Meldung oder Startseitenthema ändern
@@ -64,6 +68,8 @@ Das Attribut `data-council` bestimmt den Filter:
 - `weitersburg` für den Ortsgemeinderat Weitersburg
 
 Zu jedem Vorgang gehören Rat, Datum, verständlicher Titel, kurze Einordnung und ein Link zur öffentlichen Originalquelle. Wenn vorhanden, sollten zusätzlich Beratungsstand, Ergebnis und der öffentliche Beschluss verlinkt werden. Filter und Trefferzahl werden automatisch aus den Karten erzeugt; eine Zahl muss nicht von Hand geändert werden.
+
+Der Zähler unterscheidet Einträge mit öffentlicher Quelle von ausgearbeiteten Initiativen, deren Einreichung öffentlich noch nicht belegt ist. Eine einstimmige Abstimmung kann auch nur eine Ausschussverweisung betreffen: Immer den tatsächlich beschlossenen Text lesen, nicht allein die Ergebnisüberschrift. Antragsdatum und Beratungs-/Beschlussdatum nur mit belegter Zuordnung benennen.
 
 Ein bestimmter Rat kann direkt verlinkt werden, beispielsweise:
 
@@ -118,6 +124,14 @@ Nach jeder Veröffentlichung:
 5. Bei Personen, Rechtstexten und Kontaktdaten die Live-Fassung nochmals lesen.
 
 ## Lokale Vorschau
+
+Die Regressionstests laufen ohne Installation und ohne Netzwerkzugriff:
+
+```bash
+node scripts/check.mjs
+```
+
+Sie prüfen interne Links und Sprungmarken, gemeinsame CSS-Versionen sowie die echte Formular- und Filterlogik. Darstellung, native Formularvalidierung und das mobile Menü zusätzlich im Browser prüfen.
 
 Im Projektverzeichnis einen einfachen lokalen Webserver starten:
 

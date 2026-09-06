@@ -4,7 +4,6 @@ const routeResult = document.querySelector('[data-route-result]');
 const proposalForm = document.querySelector('[data-proposal-form]');
 const proposalPlace = document.querySelector('#proposal-place');
 const proposalCategory = document.querySelector('#proposal-category');
-const prepareProposal = document.querySelector('[data-prepare-proposal]');
 const proposalOutput = document.querySelector('[data-proposal-output]');
 const proposalText = document.querySelector('[data-proposal-text]');
 const copyProposal = document.querySelector('[data-copy-proposal]');
@@ -58,7 +57,7 @@ function localRoute(place) {
   };
 }
 
-function getRoute(place = routePlace?.value, topic = routeTopic?.value) {
+function getRoute(place, topic) {
   if (!topic || topic === 'unknown') {
     return {
       level: 'open',
@@ -110,7 +109,7 @@ function getRoute(place = routePlace?.value, topic = routeTopic?.value) {
 
 function updateRoute() {
   if (!routeResult) return;
-  const route = getRoute();
+  const route = getRoute(routePlace?.value, routeTopic?.value);
   routeResult.dataset.level = route.level;
   routeResult.querySelector('h3').textContent = route.title;
   routeResult.querySelector('p').textContent = route.copy;
@@ -130,9 +129,17 @@ proposalCategory?.addEventListener('change', () => {
   updateRoute();
 });
 
-proposalForm?.addEventListener('submit', (event) => event.preventDefault());
+function invalidateProposal() {
+  proposalOutput.hidden = true;
+  proposalText.value = '';
+  copyStatus.textContent = '';
+}
 
-prepareProposal?.addEventListener('click', () => {
+proposalForm?.addEventListener('input', invalidateProposal);
+proposalForm?.addEventListener('change', invalidateProposal);
+
+proposalForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
   if (!proposalForm.reportValidity()) return;
 
   const place = proposalPlace.options[proposalPlace.selectedIndex].text;
@@ -141,7 +148,9 @@ prepareProposal?.addEventListener('click', () => {
   const situation = document.querySelector('#proposal-situation').value.trim();
   const goal = document.querySelector('#proposal-goal').value.trim();
   const urgency = document.querySelector('#proposal-urgency').value;
-  const route = getRoute();
+  // Der Finder darf unabhängig benutzt werden. Der Entwurf gehört stets
+  // zu den Orts- und Themenangaben im Formular selbst.
+  const route = getRoute(proposalPlace.value, proposalCategory.value);
 
   proposalText.value = [
     'THEMENVORSCHLAG FÜR DIE CDU IN DER VERBANDSGEMEINDE VALLENDAR',

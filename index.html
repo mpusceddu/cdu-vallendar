@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Entwicklungsfassung: Indexierung erst nach Vorstandsfreigabe erlauben. -->
+  <meta name="robots" content="noindex,nofollow">
   <title>CDU in der Verbandsgemeinde Vallendar</title>
   <meta name="description" content="Für Vallendar, Niederwerth, Urbar und Weitersburg. Kommunalpolitik klar, nah und verlässlich.">
   <meta name="theme-color" content="#071f33">
@@ -11,7 +13,7 @@
   <meta property="og:description" content="Für Vallendar, Niederwerth, Urbar und Weitersburg.">
   <link rel="preload" href="assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="assets/styles.css?v=17">
+  <link rel="stylesheet" href="assets/styles.css?v=18">
   <script src="assets/site.js?v=1" defer></script>
 </head>
 <body>
@@ -25,27 +27,17 @@
           <span>Vallendar · Niederwerth · Urbar · Weitersburg</span>
         </span>
       </a>
-      <nav class="main-nav" aria-label="Hauptnavigation">
-        <a href="#aktuelles">Aktuelles</a>
-        <a href="#orte">Unsere Orte</a>
-        <a href="#politik">Politik</a>
-        <a href="team/">Team</a>
-      </nav>
+      <nav class="main-nav" aria-label="Hauptnavigation"><a href="#orte">Unsere Orte</a><a href="politik/">Politik</a><a href="raete/">Räte</a><a href="team/">Team</a></nav>
       <a class="header-cta" href="thema-vorschlagen/">Thema vorschlagen</a>
       <details class="mobile-menu">
         <summary><span aria-hidden="true">☰</span><span class="menu-label">Menü</span></summary>
-        <nav aria-label="Mobile Navigation">
-          <a href="#aktuelles">Aktuelles</a>
-          <a href="#orte">Unsere Orte</a>
-          <a href="#politik">Politik</a>
-          <a href="team/">Team</a>
-          <a href="thema-vorschlagen/">Thema vorschlagen</a>
-        </nav>
+        <nav aria-label="Mobile Navigation"><a href="./">Startseite</a><a href="#orte">Unsere Orte</a><a href="politik/">Politik</a><a href="raete/">Räte</a><a href="team/">Team</a><a href="thema-vorschlagen/">Thema vorschlagen</a><a href="#kontakt">Kontakt</a></nav>
       </details>
     </div>
   </header>
 
   <main id="inhalt">
+    <nav class="section-nav page-shell" aria-label="Auf dieser Seite"><a href="#aktuelles">Unser Anspruch</a><a href="#orte">Unsere Orte</a><a href="#politik">Politik im Rat</a><a href="#kontakt">Kontakt</a></nav>
     <section class="hero" id="start">
       <div class="hero-pattern" aria-hidden="true"></div>
       <div class="hero-grid page-shell">
@@ -61,8 +53,8 @@
         <aside class="hero-card" aria-label="Direkteinstieg">
           <span class="card-kicker">Direkt informiert</span>
           <h2>Kommunalpolitik, die man versteht.</h2>
-          <p>Aktuelle Entscheidungen, Termine und Ansprechpartner aus Ihrer Verbandsgemeinde.</p>
-          <a href="#aktuelles">Zu den aktuellen Themen <span aria-hidden="true">›</span></a>
+          <p>Themen, Initiativen und Ansprechpartner aus Ihrer Verbandsgemeinde.</p>
+          <a href="politik/">Themen und Anträge ansehen <span aria-hidden="true">›</span></a>
         </aside>
       </div>
     </section>
@@ -86,13 +78,13 @@
           <span class="topic-number">02</span><p class="topic-label">Kommunalpolitik</p>
           <h3>Entscheidungen verständlich machen</h3>
           <p>Wir erklären, was in den Räten beraten wird, welche Haltung wir vertreten und was das konkret für die Menschen bedeutet.</p>
-          <a href="#kontakt">Mehr erfahren <span aria-hidden="true">→</span></a>
+          <a href="politik/#antraege">Politische Arbeit ansehen <span aria-hidden="true">→</span></a>
         </article>
         <article class="topic-card">
           <span class="topic-number">03</span><p class="topic-label">Mitmachen</p>
           <h3>Ihre Idee zählt</h3>
           <p>Gute Politik entsteht im Gespräch. Sagen Sie uns, wo der Schuh drückt und was wir gemeinsam besser machen können.</p>
-          <a href="#kontakt">Mehr erfahren <span aria-hidden="true">→</span></a>
+          <a href="thema-vorschlagen/">Thema vorbereiten <span aria-hidden="true">→</span></a>
         </article>
       </div>
     </section>
@@ -139,7 +131,7 @@
       <div class="contact-options">
         <a href="mailto:info@cdu-vallendar.de"><span class="contact-icon" aria-hidden="true">@</span><span><strong>info@cdu-vallendar.de</strong><small>Zentrale E-Mail des Gemeindeverbandes</small></span><span aria-hidden="true">›</span></a>
         <a href="https://whatsapp.com/channel/0029VbBNMxSEQIafUT13xE0h"><span class="contact-icon" aria-hidden="true">W</span><span><strong>WhatsApp-Kanal</strong><small>Neuigkeiten bequem aufs Handy</small></span><span aria-hidden="true">›</span></a>
-        <a href="#aktuelles"><span class="contact-icon" aria-hidden="true">T</span><span><strong>Termine</strong><small>Treffen und Veranstaltungen</small></span><span aria-hidden="true">›</span></a>
+        <a href="raete/"><span class="contact-icon" aria-hidden="true">R</span><span><strong>Räte und Sitzungen</strong><small>Zu den fünf Räten und ihren Sitzungsinformationen</small></span><span aria-hidden="true">›</span></a>
       </div>
     </section>
   </main>

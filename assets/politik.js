@@ -50,10 +50,13 @@ function updateFilterUrl(filter) {
   }
 }
 
-function formatResultCount(count) {
-  return count === 1
-    ? '1 Eintrag wird angezeigt.'
-    : `${count} Einträge werden angezeigt.`;
+function formatResultCount(visibleMotions) {
+  const sourced = visibleMotions.filter((motion) => motion.querySelector('a[href]')).length;
+  const drafts = visibleMotions.length - sourced;
+  const parts = [];
+  if (sourced) parts.push(`${sourced} ${sourced === 1 ? 'Eintrag' : 'Einträge'} mit öffentlicher Quelle`);
+  if (drafts) parts.push(`${drafts} ${drafts === 1 ? 'ausgearbeitete Initiative' : 'ausgearbeitete Initiativen'} (Einreichung öffentlich noch nicht belegt)`);
+  return parts.length ? parts.join(' · ') : 'Keine Einträge für diesen Rat.';
 }
 
 function applyFilter(filter, { updateUrl = false } = {}) {
@@ -68,8 +71,9 @@ function applyFilter(filter, { updateUrl = false } = {}) {
     button.setAttribute('aria-pressed', String(button.dataset.filter === activeFilter));
   });
 
-  const visible = document.querySelectorAll('[data-council]:not([hidden])').length;
-  resultCount.textContent = formatResultCount(visible);
+  const visibleMotions = Array.from(motions).filter((motion) => !motion.hidden);
+  const visible = visibleMotions.length;
+  resultCount.textContent = formatResultCount(visibleMotions);
   emptyState.hidden = visible !== 0;
 
   if (visible === 0) {

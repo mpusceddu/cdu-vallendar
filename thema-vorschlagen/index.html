@@ -3,25 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Entwicklungsfassung: Indexierung erst nach Vorstandsfreigabe erlauben. -->
+  <meta name="robots" content="noindex,nofollow">
   <title>Thema vorschlagen | CDU in der Verbandsgemeinde Vallendar</title>
   <meta name="description" content="Kommunales Thema einordnen und als Vorschlag für Vallendar, Niederwerth, Urbar, Weitersburg oder die Verbandsgemeinde vorbereiten.">
   <meta name="theme-color" content="#071f33">
   <link rel="preload" href="../assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="../assets/styles.css?v=17">
+  <link rel="stylesheet" href="../assets/styles.css?v=18">
   <script src="../assets/site.js?v=1" defer></script>
-  <script src="../assets/thema-vorschlagen.js?v=1" defer></script>
+  <script src="../assets/thema-vorschlagen.js?v=2" defer></script>
 </head>
 <body class="proposal-page">
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
   <header class="site-header"><div class="header-inner">
     <a class="brand" href="../" aria-label="CDU in der Verbandsgemeinde Vallendar, Startseite"><img class="brand-logo" src="../assets/images/cdu-gesamtlogo-transparent.png" alt="CDU" width="3907" height="861"><span class="brand-copy"><strong>in der Verbandsgemeinde Vallendar</strong><span>Vallendar · Niederwerth · Urbar · Weitersburg</span></span></a>
-    <nav class="main-nav" aria-label="Hauptnavigation"><a href="../">Startseite</a><a href="#zustaendigkeit">Zuständigkeit</a><a href="#formular">Vorschlag</a><a href="../politik/">Themen und Anträge</a></nav>
-    <a class="header-cta" href="#formular">Thema einbringen</a>
-    <details class="mobile-menu"><summary><span aria-hidden="true">☰</span><span class="menu-label">Menü</span></summary><nav aria-label="Mobile Navigation"><a href="../">Startseite</a><a href="#zustaendigkeit">Zuständigkeit</a><a href="#formular">Vorschlag</a><a href="../politik/">Themen und Anträge</a></nav></details>
+    <nav class="main-nav" aria-label="Hauptnavigation"><a href="../#orte">Unsere Orte</a><a href="../politik/">Politik</a><a href="../raete/">Räte</a><a href="../team/">Team</a></nav>
+    <a class="header-cta" href="#formular">Thema vorschlagen</a>
+    <details class="mobile-menu"><summary><span aria-hidden="true">☰</span><span class="menu-label">Menü</span></summary><nav aria-label="Mobile Navigation"><a href="../">Startseite</a><a href="../#orte">Unsere Orte</a><a href="../politik/">Politik</a><a href="../raete/">Räte</a><a href="../team/">Team</a><a href="#formular">Thema vorschlagen</a><a href="../#kontakt">Kontakt</a></nav></details>
   </div></header>
 
   <main id="inhalt">
+    <nav class="section-nav page-shell" aria-label="Auf dieser Seite"><a href="#zustaendigkeit">Zuständigkeit</a><a href="#formular">Textentwurf vorbereiten</a></nav>
     <section class="local-hero proposal-hero" data-number="03"><div class="page-shell">
       <nav class="breadcrumb" aria-label="Brotkrümelnavigation"><a href="../">Startseite</a><span aria-hidden="true">›</span><span>Thema vorschlagen</span></nav>
       <div class="local-hero-grid"><div><p class="eyebrow light">Ihre Idee für unsere Heimat</p><h1>Thema.<br>Vorschlagen.</h1><p class="local-lead">Sie sehen ein Problem, haben eine Idee oder möchten etwas verbessern? Wir helfen dabei, das Thema der richtigen kommunalen Ebene zuzuordnen und politisch auf den Weg zu bringen.</p></div><aside class="local-facts"><strong>Kein Amtsformular</strong><p>Ihre Eingabe ist zunächst ein Vorschlag an die CDU vor Ort. Sie ist noch kein förmlicher Antrag an einen Rat, keine Petition und kein Einwohnerantrag.</p></aside></div>
@@ -138,7 +141,7 @@
             <small>Bei akuter Gefahr bitte nicht dieses Angebot nutzen, sondern Feuerwehr und Rettungsdienst unter 112 oder die Polizei unter 110 verständigen.</small>
           </div>
           <label class="form-confirmation"><input id="proposal-confirmation" type="checkbox" required><span>Ich habe keine vertraulichen Daten oder persönlichen Angaben über unbeteiligte Dritte eingetragen. <span aria-hidden="true">*</span></span></label>
-          <button class="button button-primary proposal-prepare" type="button" data-prepare-proposal>Textentwurf vorbereiten <span aria-hidden="true">→</span></button>
+          <button class="button button-primary proposal-prepare" type="submit" data-prepare-proposal>Textentwurf vorbereiten <span aria-hidden="true">→</span></button>
 
           <div class="proposal-output" id="entwurf" data-proposal-output hidden>
             <span class="jurisdiction-label">Ihr vorbereiteter Text</span>
