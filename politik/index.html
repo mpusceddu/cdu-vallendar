@@ -12,7 +12,7 @@
   <link rel="preload" href="../assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="../assets/styles.css?v=18">
   <script src="../assets/site.js?v=1" defer></script>
-  <script src="../assets/politik.js?v=3" defer></script>
+  <script src="../assets/politik.js?v=4" defer></script>
 </head>
 <body class="policy-page">
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
@@ -44,7 +44,7 @@
     </section>
 
     <section class="policy-motions" id="antraege"><div class="page-shell">
-      <div class="local-section-heading"><div><p class="eyebrow light">Aus den Räten</p><h2>Politische Arbeit im Überblick.</h2></div><p>Wählen Sie die kommunale Ebene. Der angegebene Stand unterscheidet zwischen Beschluss, Verweisung, Mitteilung, Rückzug und ausgearbeiteter Initiative.</p></div>
+      <div class="local-section-heading"><div><p class="eyebrow light">Aus den Räten</p><h2>Politische Arbeit im Überblick.</h2></div><p>Wählen Sie die kommunale Ebene. Der angegebene Stand unterscheidet zwischen Umsetzung, Beschluss, Verweisung, Mitteilung, Rückzug und ausgearbeiteter Initiative.</p></div>
       <div class="motion-filters" role="group" aria-label="Anträge nach Rat filtern">
         <button type="button" data-filter="all" aria-pressed="true">Alle</button>
         <button type="button" data-filter="vg" aria-pressed="false">VG-Rat</button>
@@ -53,8 +53,9 @@
         <button type="button" data-filter="niederwerth" aria-pressed="false">Niederwerth</button>
         <button type="button" data-filter="weitersburg" aria-pressed="false">Weitersburg</button>
       </div>
-      <p class="motion-result" data-result-count role="status" aria-live="polite" aria-atomic="true">24 Einträge mit öffentlicher Quelle · 14 ausgearbeitete Initiativen</p>
+      <p class="motion-result" data-result-count role="status" aria-live="polite" aria-atomic="true">24 Einträge mit öffentlicher Quelle · 1 Eintrag mit Bestätigung aus der Fraktion · 13 ausgearbeitete Initiativen (Einreichung öffentlich noch nicht belegt)</p>
       <div class="motion-legend" aria-label="Erläuterung der Bearbeitungsstände">
+        <span><span class="motion-status motion-status-approved motion-status-completed">Umgesetzt</span> Maßnahme verwirklicht</span>
         <span><span class="motion-status motion-status-approved">Beschlossen</span> vom Rat entschieden</span>
         <span><span class="motion-status motion-status-referred">Verwiesen</span> weitere Beratung</span>
         <span><span class="motion-status motion-status-info">Mitteilung</span> ohne eigenen Beschluss</span>
@@ -307,12 +308,12 @@
           <p>Eine feste Protokollführung soll die Verwaltung entlasten und zeitnahe, vollständige sowie rechtssichere Niederschriften gewährleisten.</p>
           <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
         </article>
-        <article class="motion-card" data-council="urbar">
-          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025">Haushalt 2026</time></div>
-          <span class="motion-status motion-status-draft">Ausgearbeitet</span>
+        <article class="motion-card" data-council="urbar" data-confirmation="fraktion" id="schankanlage-buergerhaus">
+          <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><span>Haushalt 2026</span></div>
+          <span class="motion-status motion-status-approved motion-status-completed">Umgesetzt</span>
           <h3>Schankanlage im Bürgerhaus wieder nutzen</h3>
-          <p>Mit geeigneter Ausstattung, geschulten Personen und einem Wartungsplan soll die vorhandene Anlage wirtschaftlich und hygienisch sicher betrieben werden.</p>
-          <span class="motion-source-pending">Einreichung öffentlich noch nicht belegt</span>
+          <p>Der Antrag wurde eingebracht und ist umgesetzt. Acht Personen haben erfolgreich eine Schulung absolviert und können die Schankanlage reinigen. Damit ist die Anlage im Bürgerhaus wieder nutzbar.</p>
+          <span class="motion-source-pending">Umsetzung von der Fraktion bestätigt · Stand: 07.09.2026</span>
         </article>
         <article class="motion-card" data-council="urbar">
           <div class="motion-meta"><span>Ortsgemeinderat Urbar</span><time datetime="2025-05-21">21.05.2025</time></div>
@@ -340,7 +341,7 @@
         <strong data-empty-title>Noch keine belegten Einträge</strong>
         <p data-empty-copy>Für diesen Rat sind auf der neuen Seite noch keine abschließend geprüften CDU-Anträge veröffentlicht.</p>
       </div>
-      <p class="source-note">Die Übersicht verbindet öffentlich dokumentierte Ratsvorgänge mit ausgearbeiteten Initiativen aus der Fraktionsarbeit. Der angegebene Beratungsstand bezieht sich auf die jeweils verlinkte Ratsunterlage. „Ausgearbeitet“ bedeutet, dass eine Einreichung oder Behandlung im Rat öffentlich noch nicht belegt ist; diese Einträge zählen nicht als nachgewiesen eingereichte oder beschlossene Anträge. Maßgeblich bleiben die Unterlagen im <a href="https://buergerinfo.vg-vallendar.de/">Bürgerinformationssystem</a>.</p>
+      <p class="source-note">Die Übersicht verbindet öffentlich dokumentierte Ratsvorgänge, bestätigte Rückmeldungen aus der Fraktion und ausgearbeitete Initiativen. Bei Einträgen mit Quellenlink bezieht sich der angegebene Beratungsstand auf die verlinkte Ratsunterlage. Ergänzende Umsetzungsstände aus der Fraktion sind mit Bestätigung und Standdatum gekennzeichnet; sie sind kein verlinkter öffentlicher Beschlussnachweis. „Ausgearbeitet“ bedeutet, dass eine Einreichung oder Behandlung im Rat öffentlich noch nicht belegt ist; diese Einträge zählen nicht als nachgewiesen eingereichte oder beschlossene Anträge. Maßgeblich für Ratsbeschlüsse bleiben die Unterlagen im <a href="https://buergerinfo.vg-vallendar.de/">Bürgerinformationssystem</a>.</p>
       <aside class="motion-callout">
         <div><h3>Ein Thema fehlt?</h3><p>Ordnen Sie Ihre Beobachtung der richtigen Ebene zu und bereiten Sie daraus einen klaren politischen Vorschlag vor.</p></div>
         <a class="button button-primary" href="../thema-vorschlagen/">Eigenes Thema vorschlagen <span aria-hidden="true">→</span></a>

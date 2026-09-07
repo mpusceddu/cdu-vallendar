@@ -270,40 +270,94 @@ await check('Clipboard copies exactly the draft; denied access selects the manua
 });
 
 const motionMetadata = documents.get('politik/index.html').querySelectorAll('[data-council]').map(card => ({
+  id: card.attrs.id,
   council: card.dataset.council,
   source: card.querySelector('a[href]')?.attrs.href,
+  confirmation: card.dataset.confirmation,
   draft: Boolean(card.querySelector('.motion-status-draft'))
 }));
+
+function motionCounts(cards) {
+  return {
+    sourced: cards.filter(card => card.source).length,
+    confirmed: cards.filter(card => !card.source && card.confirmation === 'fraktion').length,
+    drafts: cards.filter(card => !card.source && card.confirmation !== 'fraktion').length
+  };
+}
+
+function assertMotionCounts(text, cards, { staticFallback = false } = {}) {
+  const { sourced, confirmed, drafts } = motionCounts(cards);
+  if (sourced) assert.match(text, new RegExp(`\\b${sourced} Eintr(?:ag|äge) mit öffentlicher Quelle`));
+  else assert.doesNotMatch(text, /mit öffentlicher Quelle/);
+  if (confirmed) assert(text.includes(`${confirmed} ${confirmed === 1 ? 'Eintrag' : 'Einträge'} mit Bestätigung aus der Fraktion`));
+  else assert.doesNotMatch(text, /mit Bestätigung aus der Fraktion/);
+  if (drafts) {
+    const suffix = staticFallback ? '' : ' \\(Einreichung öffentlich noch nicht belegt\\)';
+    assert.match(text, new RegExp(`\\b${drafts} ausgearbeitete Initiativ(?:e|en)${suffix}`));
+  } else assert.doesNotMatch(text, /ausgearbeitete Initiativ/);
+  if (!cards.length) assert.match(text, /Keine Einträge/);
+}
 
 function assertFilter(page, council) {
   const actual = page.document.querySelectorAll('[data-council]').filter(card => !card.hidden);
   const expected = motionMetadata.filter(card => council === 'all' || card.council === council);
   assert.equal(actual.length, expected.length);
   if (council !== 'all') assert(actual.every(card => card.dataset.council === council));
-  const sourced = expected.filter(card => card.source).length;
-  const drafts = expected.length - sourced;
-  const count = page.select('[data-result-count]').textContent;
-  if (sourced) assert.match(count, new RegExp(`\\b${sourced} Eintr(?:ag|äge) mit öffentlicher Quelle`));
-  if (drafts) assert.match(count, new RegExp(`\\b${drafts} ausgearbeitete Initiativ(?:e|en) \\(Einreichung öffentlich noch nicht belegt\\)`));
-  if (!expected.length) assert.match(count, /Keine Einträge/);
+  assertMotionCounts(page.select('[data-result-count]').textContent, expected);
   assert.equal(page.select('[data-empty-state]').hidden, expected.length > 0);
   const pressed = page.document.querySelectorAll('[data-filter]').filter(button => button.attrs['aria-pressed'] === 'true');
   assert.equal(pressed.length, 1);
   assert.equal(pressed[0].dataset.filter, council);
 }
 
-await check('Real archive metadata distinguishes public sources from unverified drafts', () => {
+await check('Real archive metadata separates public sources, faction confirmations and unverified drafts', () => {
   assert(motionMetadata.length > 0, 'The archive is unexpectedly empty');
   assert(motionMetadata.some(card => card.source), 'Expected at least one publicly sourced entry');
+  assert(motionMetadata.some(card => card.confirmation === 'fraktion'), 'Expected at least one faction-confirmed entry');
   assert(motionMetadata.some(card => card.draft), 'Expected at least one clearly marked draft');
   for (const card of motionMetadata) {
-    assert(card.source || card.draft, 'An entry without a public source must be labelled as a draft');
+    const categories = [Boolean(card.source), card.confirmation === 'fraktion', card.draft];
+    assert.equal(categories.filter(Boolean).length, 1, `${card.id ?? card.council}: each entry must have exactly one evidence category`);
+    if (card.confirmation) assert.equal(card.confirmation, 'fraktion', 'Unknown confirmation type');
     if (card.source) assert.equal(new URL(card.source).protocol, 'https:');
   }
-  console.log(`  ${motionMetadata.length} entries: ${motionMetadata.filter(card => card.source).length} sourced, ${motionMetadata.filter(card => !card.source).length} unverified`);
+  const { sourced, confirmed, drafts } = motionCounts(motionMetadata);
+  console.log(`  ${motionMetadata.length} entries: ${sourced} sourced, ${confirmed} faction-confirmed, ${drafts} unverified`);
 });
 
-await check('Every council filter shows the real cards and distinguishes draft counts', async () => {
+await check('Schankanlage remains implemented and faction-confirmed, with no invented public source', () => {
+  const matches = documents.get('politik/index.html').querySelectorAll('#schankanlage-buergerhaus');
+  assert.equal(matches.length, 1, 'The implemented Schankanlage entry must have one stable deep-link target');
+  const card = matches[0];
+  assert.equal(card.tagName, 'article');
+  assert.equal(card.dataset.council, 'urbar');
+  assert.equal(card.dataset.confirmation, 'fraktion');
+  assert(!card.querySelector('a[href]'), 'Do not substitute a fabricated public-source URL for the confirmation');
+  assert(!card.querySelector('.motion-status-draft'), 'An implemented entry must not retain the draft badge');
+  const badge = card.querySelector('.motion-status-completed');
+  assert(badge, 'The completed status must be explicit');
+  assert(badge.matches('.motion-status') && badge.matches('.motion-status-approved'));
+  assert.equal(badge.textContent.trim(), 'Umgesetzt');
+  assert.match(card.textContent, /Acht Personen/);
+  assert.match(card.textContent, /Schulung/);
+  assert.match(card.textContent, /wieder nutzbar/);
+  assert(card.textContent.includes('Umsetzung von der Fraktion bestätigt · Stand: 07.09.2026'));
+  assert.doesNotMatch(card.textContent, /Ausgearbeitet|Einreichung öffentlich noch nicht belegt/);
+});
+
+await check('Confirmed implementation is counted separately in all, Urbar and VG views, including without JavaScript', () => {
+  for (const [council, expected] of [
+    ['all', { sourced: 24, confirmed: 1, drafts: 13 }],
+    ['urbar', { sourced: 7, confirmed: 1, drafts: 8 }],
+    ['vg', { sourced: 15, confirmed: 0, drafts: 5 }]
+  ]) {
+    const cards = motionMetadata.filter(card => council === 'all' || card.council === council);
+    assert.deepEqual(motionCounts(cards), expected, `${council}: evidence-category totals changed`);
+  }
+  assertMotionCounts(documents.get('politik/index.html').querySelector('[data-result-count]').textContent, motionMetadata, { staticFallback: true });
+});
+
+await check('Every council filter shows the real cards and distinguishes all three evidence counts', async () => {
   const page = runPage('politik/index.html', 'assets/politik.js');
   assertFilter(page, 'all');
   for (const button of page.document.querySelectorAll('[data-filter]')) {

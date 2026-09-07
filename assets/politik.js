@@ -52,9 +52,11 @@ function updateFilterUrl(filter) {
 
 function formatResultCount(visibleMotions) {
   const sourced = visibleMotions.filter((motion) => motion.querySelector('a[href]')).length;
-  const drafts = visibleMotions.length - sourced;
+  const confirmed = visibleMotions.filter((motion) => !motion.querySelector('a[href]') && motion.dataset.confirmation === 'fraktion').length;
+  const drafts = visibleMotions.length - sourced - confirmed;
   const parts = [];
   if (sourced) parts.push(`${sourced} ${sourced === 1 ? 'Eintrag' : 'Einträge'} mit öffentlicher Quelle`);
+  if (confirmed) parts.push(`${confirmed} ${confirmed === 1 ? 'Eintrag' : 'Einträge'} mit Bestätigung aus der Fraktion`);
   if (drafts) parts.push(`${drafts} ${drafts === 1 ? 'ausgearbeitete Initiative' : 'ausgearbeitete Initiativen'} (Einreichung öffentlich noch nicht belegt)`);
   return parts.length ? parts.join(' · ') : 'Keine Einträge für diesen Rat.';
 }

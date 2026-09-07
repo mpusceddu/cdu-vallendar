@@ -69,7 +69,11 @@ Das Attribut `data-council` bestimmt den Filter:
 
 Zu jedem Vorgang gehören Rat, Datum, verständlicher Titel, kurze Einordnung und ein Link zur öffentlichen Originalquelle. Wenn vorhanden, sollten zusätzlich Beratungsstand, Ergebnis und der öffentliche Beschluss verlinkt werden. Filter und Trefferzahl werden automatisch aus den Karten erzeugt; eine Zahl muss nicht von Hand geändert werden.
 
-Der Zähler unterscheidet Einträge mit öffentlicher Quelle von ausgearbeiteten Initiativen, deren Einreichung öffentlich noch nicht belegt ist. Eine einstimmige Abstimmung kann auch nur eine Ausschussverweisung betreffen: Immer den tatsächlich beschlossenen Text lesen, nicht allein die Ergebnisüberschrift. Antragsdatum und Beratungs-/Beschlussdatum nur mit belegter Zuordnung benennen.
+Der Zähler unterscheidet Einträge mit öffentlicher Quelle, bestätigte Rückmeldungen aus der Fraktion und ausgearbeitete Initiativen, deren Einreichung öffentlich noch nicht belegt ist. Bestätigte Umsetzungsstände ohne öffentlichen Quellenlink erhalten `data-confirmation="fraktion"` sowie eine sichtbare Herkunftsangabe mit Standdatum. Sie sind keine Entwürfe, aber auch keine verlinkten öffentlichen Beschlussnachweise. Bei einem später ergänzten öffentlichen Quellenlink zählt der Eintrag zur Quellenkategorie und wird nicht doppelt gezählt.
+
+Am 7. September 2026 wurde die Schankanlage im Bürgerhaus Urbar als eingebracht und umgesetzt bestätigt: Acht Personen haben eine Schulung erfolgreich absolviert und können die Anlage reinigen, sodass sie wieder nutzbar ist. Die Karte trägt deshalb den Status „Umgesetzt“; die Bestätigung ersetzt kein erfundenes Beschluss- oder Schulungsdatum.
+
+Eine einstimmige Abstimmung kann auch nur eine Ausschussverweisung betreffen: Immer den tatsächlich beschlossenen Text lesen, nicht allein die Ergebnisüberschrift. Antragsdatum und Beratungs-/Beschlussdatum nur mit belegter Zuordnung benennen.
 
 Ein bestimmter Rat kann direkt verlinkt werden, beispielsweise:
 
