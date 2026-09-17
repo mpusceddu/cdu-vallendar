@@ -10,9 +10,9 @@
   <meta name="theme-color" content="#071f33">
   <link rel="preload" href="../assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="../assets/styles.css?v=18">
+  <link rel="stylesheet" href="../assets/styles.css?v=19">
   <script src="../assets/site.js?v=1" defer></script>
-  <script src="../assets/thema-vorschlagen.js?v=2" defer></script>
+  <script src="../assets/thema-vorschlagen.js?v=3" defer></script>
 </head>
 <body class="proposal-page">
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
@@ -40,7 +40,7 @@
     </section>
 
     <section class="jurisdiction-section" id="zustaendigkeit"><div class="page-shell">
-      <div class="local-section-heading"><div><p class="eyebrow dark">Erst richtig zuordnen</p><h2>Welcher Rat ist zuständig?</h2></div><p>Nicht alles, was im Rathaus bearbeitet wird, ist automatisch Sache des Verbandsgemeinderates. Der Finder gibt eine erste belastbare Einordnung.</p></div>
+      <div class="local-section-heading"><div><p class="eyebrow dark">Erst richtig zuordnen</p><h2>Wer ist zuständig?</h2></div><p>Nicht alles, was im Rathaus bearbeitet wird, ist automatisch Sache des Verbandsgemeinderates. Der Finder gibt eine erste Orientierung. Ihre Auswahl wird im Formular vorausgefüllt.</p></div>
       <div class="jurisdiction-tool">
         <div class="jurisdiction-controls">
           <div class="field-group">
@@ -87,6 +87,7 @@
       <div class="local-section-heading"><div><p class="eyebrow light">Themenwerkstatt</p><h2>Aus Ihrer Beobachtung wird ein klarer Vorschlag.</h2></div><p>Die Angaben werden derzeit ausschließlich in Ihrem Browser zu einem Textentwurf zusammengesetzt. Es erfolgt noch keine Übermittlung und keine Speicherung.</p></div>
       <div class="proposal-form-grid">
         <form class="proposal-form" data-proposal-form novalidate>
+          <p class="jurisdiction-note" data-proposal-selection-status role="status" aria-live="polite">Ort und Themenfeld aus dem Finder werden vorausgefüllt. Sie können beide Angaben hier ändern; eigene Änderungen bleiben erhalten.</p>
           <div class="form-row">
             <div class="field-group">
               <label for="proposal-place">Ort oder räumlicher Bezug <span aria-hidden="true">*</span></label>
@@ -141,11 +142,13 @@
             <small>Bei akuter Gefahr bitte nicht dieses Angebot nutzen, sondern Feuerwehr und Rettungsdienst unter 112 oder die Polizei unter 110 verständigen.</small>
           </div>
           <label class="form-confirmation"><input id="proposal-confirmation" type="checkbox" required><span>Ich habe keine vertraulichen Daten oder persönlichen Angaben über unbeteiligte Dritte eingetragen. <span aria-hidden="true">*</span></span></label>
+          <p class="jurisdiction-note">Ihre Eingaben bleiben auf dieser Seite in Ihrem Browser und werden von der Website weder gespeichert noch versendet. Mit „Text kopieren“ übernehmen Sie den Entwurf in Ihre Zwischenablage. <a href="../datenschutz/#themenwerkstatt">Datenschutz zur Themenwerkstatt</a></p>
           <button class="button button-primary proposal-prepare" type="submit" data-prepare-proposal>Textentwurf vorbereiten <span aria-hidden="true">→</span></button>
 
           <div class="proposal-output" id="entwurf" data-proposal-output hidden>
             <span class="jurisdiction-label">Ihr vorbereiteter Text</span>
             <h3>Zum Prüfen und Kopieren</h3>
+            <p>Ihr Vorschlag wurde noch nicht versendet. Prüfen Sie den Text und kopieren Sie ihn bei Bedarf in eine eigene E-Mail. Ein automatischer Versand, eine Eingangsbestätigung oder eine Kopie per E-Mail sind hier noch nicht eingerichtet.</p>
             <textarea data-proposal-text rows="15" readonly aria-label="Vorbereiteter Themenvorschlag"></textarea>
             <div class="proposal-output-actions"><button class="button button-primary" type="button" data-copy-proposal>Text kopieren</button><a class="button button-secondary" href="../#kontakt">Kontaktmöglichkeiten</a></div>
             <p class="copy-status" data-copy-status role="status" aria-live="polite"></p>
@@ -153,9 +156,9 @@
         </form>
 
         <aside class="proposal-form-note">
-          <span class="card-kicker">Was anschließend geschieht</span>
+          <span class="card-kicker">So ist die Bearbeitung vorgesehen</span>
           <ol>
-            <li><strong>Zuständigkeit prüfen</strong><span>Wir klären Rat, Verwaltung oder eine andere politische Ebene.</span></li>
+            <li><strong>Zuständigkeit prüfen</strong><span>Wir prüfen, welcher Rat, welche Behörde oder welche andere Stelle für Ihr Anliegen zuständig ist.</span></li>
             <li><strong>Sachverhalt klären</strong><span>Bei offenen Punkten fragen wir nach und prüfen öffentlich verfügbare Unterlagen.</span></li>
             <li><strong>Politisch bewerten</strong><span>Ein Vorschlag wird nicht automatisch CDU-Antrag. Die zuständige Fraktion oder das örtliche Team entscheidet nach Beratung.</span></li>
             <li><strong>Rückmeldung geben</strong><span>Nach Aktivierung des Versands soll der Absender eine nachvollziehbare Antwort zum weiteren Weg erhalten.</span></li>

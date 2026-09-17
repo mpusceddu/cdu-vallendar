@@ -324,12 +324,14 @@ footer { padding-block: 34px; background: #051827; color: white; }
 .form-confirmation { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; color: var(--muted); font-size: 12px; line-height: 1.55; cursor: pointer; }
 .form-confirmation input { width: 20px; height: 20px; margin: 0; accent-color: var(--cdu-teal-dark); }
 .proposal-prepare { justify-self: start; border: 0; cursor: pointer; }
-.proposal-output { margin-top: 10px; padding: 30px; background: #e4edeb; color: var(--cdu-navy); }
+.proposal-output { scroll-margin-top: 104px; margin-top: 10px; padding: 30px; background: #e4edeb; color: var(--cdu-navy); }
+.proposal-output > p { font-size: 14px; line-height: 1.65; }
 .proposal-output[hidden] { display: none; }
 .proposal-output .jurisdiction-label { margin-bottom: 16px; color: var(--cdu-teal-dark); }
 .proposal-output textarea { width: 100%; margin-top: 10px; padding: 16px; border: 1px solid #aebcc0; background: white; color: var(--ink); font: inherit; font-size: 13px; line-height: 1.6; resize: vertical; }
 .proposal-output-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .proposal-output-actions .button { border: 0; cursor: pointer; }
+.proposal-output-actions .button-secondary { background: #0d3c4e; color: white; }
 .copy-status { min-height: 1.5em; margin: 10px 0 0; color: var(--cdu-teal-dark); font-size: 12px; font-weight: 800; }
 .proposal-form-note { padding: 38px; background: #0d3c4e; }
 .proposal-form-note .card-kicker { color: #75e1dc; }

@@ -38,6 +38,8 @@ Die gemeinsame Gestaltung liegt in `assets/styles.css`. Das Verhalten des mobile
 
 Die Themenwerkstatt versendet und speichert derzeit keine Eingaben. Sie ordnet ein Anliegen im Browser einer voraussichtlichen kommunalen Ebene zu und erzeugt einen kopierbaren Textentwurf. Ein späterer Übermittlungsweg darf erst ergänzt werden, wenn Funktionsadresse, Empfänger, Datenschutzhinweise und organisatorische Bearbeitung feststehen.
 
+Der Zuständigkeitsfinder füllt Ort und Themenfeld im Formular voraus. Sobald jemand eine dieser Auswahlen im Formular selbst ändert, wird dieses Feld nicht mehr vom Finder überschrieben. Jede Änderung übernommener Werte verwirft einen veralteten Textentwurf. Maßgeblich für den erzeugten Text bleiben immer die Angaben im Formular. Die Seite erklärt ausdrücklich, dass noch kein Versand, keine automatische Eingangsbestätigung und keine E-Mail-Kopie eingerichtet sind, und verlinkt den passenden Datenschutzabschnitt.
+
 Die Hauptnavigation ist auf allen Seiten gleich: Unsere Orte, Politik, Räte und Team. Abschnittslinks der jeweiligen Seite stehen getrennt unter dem Kopf. Der bisherige Abschnitt `#aktuelles` enthält weiterhin allgemeine Themen und wird als „Unser Anspruch“ verlinkt; ein Nachrichten- oder Veranstaltungskalender ist noch nicht vorhanden.
 
 Die Entwicklungsfassung ist mit `noindex,nofollow` gekennzeichnet. Diese Suchmaschinenanweisung erst nach Vorstandsfreigabe und zusammen mit den endgültigen Domain-/SEO-Angaben entfernen. Sie ist kein Zugangsschutz; die Vorschau bleibt über ihre URL öffentlich erreichbar.

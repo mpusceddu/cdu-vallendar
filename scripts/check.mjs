@@ -215,6 +215,109 @@ async function validProposal() {
   return page;
 }
 
+async function changeValue(page, selector, value) {
+  page.select(selector).value = value;
+  await page.select(selector).dispatch('change');
+}
+
+async function proposalFromFinder() {
+  const page = runPage('thema-vorschlagen/index.html', 'assets/thema-vorschlagen.js');
+  await changeValue(page, '#route-place', 'urbar');
+  await changeValue(page, '#route-topic', 'local');
+  // Leave both form selects untouched: their ownership must remain with the finder.
+  for (const [selector, value] of Object.entries({
+    '#proposal-location': 'Bürgerhaus',
+    '#proposal-topic': 'Beleuchtung prüfen',
+    '#proposal-situation': 'Der öffentliche Weg ist abends schlecht beleuchtet.',
+    '#proposal-goal': 'Die zuständige Stelle soll die Beleuchtung prüfen.'
+  })) await changeValue(page, selector, value);
+  page.select('#proposal-confirmation').checked = true;
+  await page.select('#proposal-confirmation').dispatch('change');
+  return page;
+}
+
+await check('Finder prefills and updates untouched form fields for every available choice', async () => {
+  const page = runPage('thema-vorschlagen/index.html', 'assets/thema-vorschlagen.js');
+  assert.equal(page.select('#proposal-place').value, '');
+  assert.equal(page.select('#proposal-category').value, '');
+  for (const [finder, field, other] of [
+    ['#route-place', '#proposal-place', '#proposal-category'],
+    ['#route-topic', '#proposal-category', '#proposal-place']
+  ]) {
+    const otherValue = page.select(other).value;
+    const choices = page.select(finder).options.map(option => option.value).filter(value => value !== 'unknown');
+    assert(choices.length > 0, `${finder}: expected selectable choices`);
+    for (const value of [...choices, 'unknown']) {
+      await changeValue(page, finder, value);
+      assert.equal(page.select(field).value, value === 'unknown' ? '' : value, `${field}: finder selection was not transferred`);
+      assert.equal(page.select(other).value, otherValue, `${finder} must not change the other form field`);
+    }
+  }
+});
+
+await check('Manual place choices, including clearing and county, survive later finder changes', async () => {
+  for (const selected of ['urbar', 'vallendar', 'county', '']) {
+    const page = await proposalFromFinder();
+    await changeValue(page, '#proposal-place', selected);
+    for (const nextPlace of ['weitersburg', 'unknown', 'niederwerth']) {
+      await changeValue(page, '#route-place', nextPlace);
+      assert.equal(page.select('#proposal-place').value, selected, `Manual place ${JSON.stringify(selected)} was overwritten`);
+    }
+    await changeValue(page, '#route-topic', 'county');
+    assert.equal(page.select('#proposal-category').value, 'county', 'Editing the place must not disable category autofill');
+    assert.equal(page.select('#proposal-place').value, selected);
+  }
+});
+
+await check('Manual topic choices survive finder changes without disabling place autofill', async () => {
+  for (const selected of ['local', 'county', 'higher', '']) {
+    const page = await proposalFromFinder();
+    await changeValue(page, '#proposal-category', selected);
+    for (const nextTopic of ['vg', 'unknown', 'admin']) {
+      await changeValue(page, '#route-topic', nextTopic);
+      assert.equal(page.select('#proposal-category').value, selected, `Manual topic ${JSON.stringify(selected)} was overwritten`);
+    }
+    await changeValue(page, '#route-place', 'vallendar');
+    assert.equal(page.select('#proposal-place').value, 'vallendar', 'Editing the category must not disable place autofill');
+    assert.equal(page.select('#proposal-category').value, selected);
+  }
+});
+
+await check('Finder-prefilled form produces a valid local-only draft with its own jurisdiction', async () => {
+  const page = await proposalFromFinder();
+  const submit = await page.select('[data-proposal-form]').dispatch('submit');
+  assert(submit.defaultPrevented, 'The form must remain a local text workshop, not a sending action');
+  assert.equal(page.select('[data-proposal-output]').hidden, false);
+  const text = page.select('[data-proposal-text]').value;
+  assert.match(text, /Ort \/ räumlicher Bezug: Urbar/);
+  assert.match(text, /Erste Zuständigkeitseinordnung: Ortsgemeinderat Urbar/);
+  assert.match(text, /THEMA: Beleuchtung prüfen/);
+});
+
+await check('Finder autofill changes invalidate a prepared draft and its copy status', async () => {
+  for (const [finder, value, field] of [
+    ['#route-place', 'vallendar', '#proposal-place'],
+    ['#route-topic', 'vg', '#proposal-category'],
+    ['#route-place', 'unknown', '#proposal-place'],
+    ['#route-topic', 'unknown', '#proposal-category']
+  ]) {
+    const page = await proposalFromFinder();
+    await page.select('[data-proposal-form]').dispatch('submit');
+    assert.equal(page.select('[data-proposal-output]').hidden, false);
+    await page.select('[data-copy-proposal]').dispatch('click');
+    assert(page.select('[data-copy-status]').textContent.length > 0);
+    await changeValue(page, finder, value);
+    assert.equal(page.select(field).value, value === 'unknown' ? '' : value);
+    assert.equal(page.select('[data-proposal-output]').hidden, true, `${finder}: outdated draft remains visible`);
+    assert.equal(page.select('[data-proposal-text]').value, '');
+    assert.equal(page.select('[data-copy-status]').textContent, '');
+    if (value === 'unknown') {
+      await page.select('[data-proposal-form]').dispatch('submit');
+      assert.equal(page.select('[data-proposal-output]').hidden, true, 'An unknown finder selection must require a new valid form choice');
+    }
+  }
+});
+
 await check('Proposal keeps Urbar jurisdiction when the independent finder changes', async () => {
   const page = await validProposal();
   page.select('#route-place').value = 'weitersburg';

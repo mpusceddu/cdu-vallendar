@@ -8,6 +8,10 @@ const proposalOutput = document.querySelector('[data-proposal-output]');
 const proposalText = document.querySelector('[data-proposal-text]');
 const copyProposal = document.querySelector('[data-copy-proposal]');
 const copyStatus = document.querySelector('[data-copy-status]');
+const selectionStatus = document.querySelector('[data-proposal-selection-status]');
+// Der Finder darf nur Angaben vorfüllen, die im Formular noch nicht selbst
+// geändert wurden. Ort und Themenfeld werden unabhängig voneinander geschützt.
+const editedSelections = new Set();
 
 const placeNames = {
   vallendar: 'Stadt Vallendar',
@@ -115,16 +119,38 @@ function updateRoute() {
   routeResult.querySelector('p').textContent = route.copy;
 }
 
-routePlace?.addEventListener('change', updateRoute);
-routeTopic?.addEventListener('change', updateRoute);
+function prefillSelection(source, target) {
+  if (!source || !target) return;
+  if (editedSelections.has(target)) {
+    if (selectionStatus) selectionStatus.textContent = 'Ihre im Formular selbst gewählten Angaben bleiben erhalten. Für den Textentwurf gilt die Auswahl hier im Formular.';
+    return;
+  }
+  const value = source.value === 'unknown' ? '' : source.value;
+  if (target.value !== value) {
+    target.value = value;
+    invalidateProposal();
+  }
+  if (selectionStatus) selectionStatus.textContent = 'Die Auswahl aus dem Zuständigkeitsfinder wurde übernommen. Sie können die Angaben hier prüfen und ändern.';
+}
+
+routePlace?.addEventListener('change', () => {
+  prefillSelection(routePlace, proposalPlace);
+  updateRoute();
+});
+routeTopic?.addEventListener('change', () => {
+  prefillSelection(routeTopic, proposalCategory);
+  updateRoute();
+});
 
 proposalPlace?.addEventListener('change', () => {
+  editedSelections.add(proposalPlace);
   if (routePlace && proposalPlace.value !== 'county') routePlace.value = proposalPlace.value;
   if (routePlace && proposalPlace.value === 'county') routePlace.value = 'all';
   updateRoute();
 });
 
 proposalCategory?.addEventListener('change', () => {
+  editedSelections.add(proposalCategory);
   if (routeTopic) routeTopic.value = proposalCategory.value;
   updateRoute();
 });
