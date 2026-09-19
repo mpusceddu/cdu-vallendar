@@ -27,6 +27,7 @@ Vor dem offiziellen Start bleiben insbesondere diese Punkte offen:
 | Räte und Fraktionen | `raete/index.html` |
 | Funktionsträgerportal: öffentliche Vorschau | `funktionstraeger/index.html` |
 | Gremien und Zuständigkeiten | `funktionstraeger/gremien.html` |
+| Eigener CI-Guide mit Farben, Schriften und Downloads | `funktionstraeger/ci-guide.html` |
 | VG-Fraktion | `vg/index.html` |
 | Stadt Vallendar | `vallendar/index.html` |
 | Niederwerth | `niederwerth/index.html` |
@@ -46,14 +47,14 @@ Die Hauptnavigation der Website umfasst Unsere Orte, Politik, Räte, Team und Po
 
 ## Öffentliche Portal-Vorschau
 
-Seit dem Veröffentlichungsauftrag vom 19.09.2026 ist eine bewusst öffentliche Konzeptvorschau unter `funktionstraeger/` vorbereitet. Sie enthält allgemeine Arbeitshilfen, eine ausprobierbare Onboarding-Checkliste, die Gremienseite und einen als **geplant** gekennzeichneten CI-Guide. Sie ist kein geschützter Arbeitsbereich und richtet keine Konten oder Zugänge ein.
+Seit dem Veröffentlichungsauftrag vom 19.09.2026 steht eine bewusst öffentliche Konzeptvorschau unter `funktionstraeger/` bereit. Sie enthält allgemeine Arbeitshilfen, eine ausprobierbare Onboarding-Checkliste, die Gremienseite und den eigenen lokalen CI-Guide. Sie ist kein geschützter Arbeitsbereich und richtet keine Konten oder Zugänge ein.
 
 - Nur geprüfte öffentliche Inhalte werden in dieser Kopie gepflegt. Keine vertraulichen Unterlagen, Mitgliederlisten, Passwörter oder internen Planungsdateien übernehmen.
 - Checkliste und Suchfunktionen arbeiten flüchtig im Browser. Kein Local Storage, Session Storage, Backend oder Formularversand. Nach Neuladen beginnt die Demonstration wieder bei null.
 - Die Gremienseite behält den Recherche-/Quellenstand 17.09.2026. Offene Abgleiche der Hauptsatzungen von Stadt Vallendar und Weitersburg bleiben sichtbar; eine Tagesordnung ist kein Beschlussnachweis.
-- CI-Guide und Vorlagen sind noch nicht fertig. Offizielles CDU-CI-Portal ist verlinkt; keine ungeprüfte CI-Konformität behaupten.
+- Der eigene CI-Guide beschreibt die tatsächlichen Website-Farben, Inter und IBM Plex Serif, den unveränderten Logo-Einsatz und lokale Gestaltungsempfehlungen. Die bestehenden Logo-/Schriftdateien einschließlich Schriftlizenzen sind verlinkt. Keine Behauptung einer offiziellen CDU-CI-Freigabe; weitere Dokument- und Social-Media-Vorlagen bleiben offen.
 - Die separate Entwicklung des späteren geschützten Portals bleibt getrennt. Eine Freigabe dieser öffentlichen Vorschau ist keine Freigabe vertraulicher Inhalte oder eines ungeschützten produktiven Portals.
-- Gestaltung und Verhalten der Vorschau liegen ausschließlich in `funktionstraeger/styles.css`, `app.js`, `gremien.css` und `gremien.js`. Änderungen dieser Dateien mit eigener Versionskennung veröffentlichen.
+- Gestaltung und Verhalten der Vorschau liegen in `funktionstraeger/styles.css`, `app.js`, `gremien.css`, `gremien.js` und `ci-guide.css`. Der Guide nutzt für sein mobiles Menü das vorhandene `assets/site.js`. Änderungen dieser Dateien mit eigener Versionskennung veröffentlichen.
 
 Weitere Ideen und Abläufe werden nach Sichtung dieser Vorschau gesammelt, nicht ungefragt als produktive Funktionen umgesetzt.
 

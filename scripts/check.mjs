@@ -64,6 +64,17 @@ class Element {
   get open() { return 'open' in this.attrs; }
   set open(value) { if (value) this.attrs.open = ''; else delete this.attrs.open; }
   matches(selector) {
+    selector = selector.trim();
+    if (selector.includes(',')) return selector.split(',').some(part => this.matches(part));
+    if (selector.includes('>')) {
+      const parts = selector.split(/\s*>\s*/);
+      const child = parts.pop();
+      return this.matches(child) && !!this.parent?.matches(parts.join(' > '));
+    }
+    if (selector.endsWith(':last-child')) {
+      const siblings = this.parent?.children.filter(child => child instanceof Element) ?? [];
+      return siblings.at(-1) === this && this.matches(selector.slice(0, -':last-child'.length));
+    }
     if (selector.includes(' ')) {
       const parts = selector.trim().split(/\s+/);
       if (!this.matches(parts.pop())) return false;
@@ -180,7 +191,7 @@ await check('Internal links and fragments resolve under /cdu-vallendar/', () => 
 
 await check('Public site and portal preview use separate, consistently versioned design families', () => {
   const versions = new Map([['website', new Set()], ['portal', new Set()]]);
-  const portalPaths = new Set(['funktionstraeger/index.html', 'funktionstraeger/gremien.html']);
+  const portalPaths = new Set(['funktionstraeger/index.html', 'funktionstraeger/gremien.html', 'funktionstraeger/ci-guide.html']);
   for (const [path, doc] of documents) {
     const portal = portalPaths.has(path);
     const expectedPath = new URL(portal ? 'funktionstraeger/styles.css' : 'assets/styles.css', base).pathname;
@@ -196,6 +207,7 @@ await check('Public site and portal preview use separate, consistently versioned
   assert.deepEqual([...versions.get('website')], ['20'], 'The website must consistently use stylesheet version 20');
   assert.deepEqual([...versions.get('portal')], ['1'], 'Portal preview must consistently use its own stylesheet version 1');
   assert.equal(documents.get('funktionstraeger/gremien.html')?.querySelectorAll('link[href]').filter(link => new URL(link.attrs.href, new URL('funktionstraeger/gremien.html', base)).pathname === new URL('funktionstraeger/gremien.css', base).pathname && new URL(link.attrs.href, base).searchParams.get('v') === '1').length, 1, 'The responsibilities page needs its own versioned supplementary stylesheet');
+  assert.equal(documents.get('funktionstraeger/ci-guide.html')?.querySelectorAll('link[href]').filter(link => new URL(link.attrs.href, new URL('funktionstraeger/ci-guide.html', base)).pathname === new URL('funktionstraeger/ci-guide.css', base).pathname && new URL(link.attrs.href, base).searchParams.get('v') === '1').length, 1, 'The local CI guide needs its own versioned supplementary stylesheet');
 });
 
 function runPage(path, script, url = new URL(path.replace(/index\.html$/, ''), base).href) {
@@ -531,9 +543,9 @@ await check('Invalid URL filter falls back to all; valid mixed-case filter is no
   }
 });
 
-const portalPaths = ['funktionstraeger/index.html', 'funktionstraeger/gremien.html'];
+const portalPaths = ['funktionstraeger/index.html', 'funktionstraeger/gremien.html', 'funktionstraeger/ci-guide.html'];
 
-await check('Both portal pages disclose their public preview status, discourage indexing and retain legal links', () => {
+await check('All portal pages disclose their public preview status, discourage indexing and retain legal links', () => {
   for (const path of portalPaths) {
     const doc = documents.get(path);
     assert(doc, `${path}: public preview page is missing`);
@@ -573,7 +585,7 @@ await check('Portal assets resolve locally below the Pages base, without borrowi
 });
 
 await check('Portal scripts have no persistence, transmission, account or tracking integration', () => {
-  for (const script of ['funktionstraeger/app.js', 'funktionstraeger/gremien.js']) {
+  for (const script of ['funktionstraeger/app.js', 'funktionstraeger/gremien.js', 'assets/site.js']) {
     const code = readFileSync(join(root, script), 'utf8');
     assert.doesNotMatch(code, /\b(?:localStorage|sessionStorage|indexedDB|XMLHttpRequest|WebSocket|EventSource)\b|\bfetch\s*\(|\.sendBeacon\s*\(|document\s*\.\s*cookie|window\s*\.\s*confirm\s*\(/, `${script}: the public preview must remain a non-persistent, non-sending demonstration`);
     assert.doesNotMatch(code, /\b(?:access_token|api_key|client_secret|authorization)\s*[:=]|(?:gh[pousr]_[A-Za-z0-9]{20,})/i, `${script}: possible credential material`);
@@ -581,7 +593,7 @@ await check('Portal scripts have no persistence, transmission, account or tracki
   }
 });
 
-await check('The CI guide is visibly planned, while seven portal modules and eight onboarding steps remain available without JavaScript', () => {
+await check('The portal links to its own CI guide, while seven modules and eight onboarding steps remain available without JavaScript', () => {
   const doc = documents.get('funktionstraeger/index.html');
   assert(doc, 'Portal index missing');
   assert.equal(doc.querySelectorAll('[data-module-card]').length, 7);
@@ -589,8 +601,60 @@ await check('The CI guide is visibly planned, while seven portal modules and eig
   assert(doc.querySelectorAll('[data-module-card]').every(card => !card.hidden));
   const ci = doc.getElementById('ci-guide');
   assert(ci, 'CI guide needs a stable anchor');
-  assert.match(ci.textContent, /geplant|vorgemerkt|in Vorbereitung/i, 'The CI guide must not claim to be finished');
+  assert(ci.querySelectorAll('a[href]').some(link => new URL(link.attrs.href, new URL('funktionstraeger/index.html', base)).pathname === new URL('funktionstraeger/ci-guide.html', base).pathname), 'The CI card must lead directly to the local guide');
   assert.match(doc.textContent, /nicht gespeichert|nicht dauerhaft gespeichert|nur.*(?:Seite|Vorschau|Aufruf)/i, 'The temporary nature of the demo progress must be explained');
+});
+
+await check('The local CI guide provides five navigable sections and does not send readers to the external CI portal', () => {
+  const path = 'funktionstraeger/ci-guide.html';
+  const doc = documents.get(path);
+  assert(doc, 'The local CI guide is missing');
+  const links = doc.querySelectorAll('a[href]').map(link => new URL(link.attrs.href, new URL(path, base)));
+  for (const id of ['farben', 'schriften', 'logo', 'gestaltung', 'downloads']) {
+    assert(doc.getElementById(id), `The CI guide section #${id} is missing`);
+    assert(links.some(link => link.pathname === new URL(path, base).pathname && link.hash === `#${id}`), `The CI guide section #${id} needs an in-page navigation link`);
+  }
+  assert(links.some(link => link.pathname === new URL('funktionstraeger/', base).pathname || link.pathname === new URL('funktionstraeger/index.html', base).pathname), 'The CI guide needs a link back to the portal');
+  for (const sourcePath of ['funktionstraeger/index.html', path]) {
+    assert(!documents.get(sourcePath).querySelectorAll('a[href]').some(link => new URL(link.attrs.href, new URL(sourcePath, base)).hostname === 'ci.cdu.de'), `${sourcePath}: the external CI-portal link should be replaced by our own guide`);
+  }
+});
+
+await check('CI guide palette and locally loaded fonts match the existing website identity', () => {
+  const doc = documents.get('funktionstraeger/ci-guide.html');
+  assert(doc, 'The local CI guide is missing');
+  const websiteCss = readFileSync(join(root, 'assets/styles.css'), 'utf8');
+  for (const token of ['cdu-navy', 'cdu-teal', 'cdu-teal-dark', 'cdu-gold', 'paper', 'ink', 'muted', 'line']) {
+    const hex = websiteCss.match(new RegExp(`--${token}\\s*:\\s*(#[a-f\\d]{6})`, 'i'))?.[1];
+    assert(hex, `The website token --${token} is missing`);
+    assert(doc.textContent.toLowerCase().includes(hex.toLowerCase()), `The CI guide must document the actual website color ${token}: ${hex}`);
+  }
+  const cssPath = 'funktionstraeger/ci-guide.css';
+  const css = readFileSync(join(root, cssPath), 'utf8');
+  const faces = [...css.matchAll(/@font-face\s*\{([^}]+)\}/gi)].map(match => match[1]);
+  for (const [family, weight, font] of [['Inter', 400, 'inter-regular.ttf'], ['Inter', 800, 'inter-extrabold.ttf'], ['IBM Plex Serif', 400, 'ibm-plex-serif-regular.ttf']]) {
+    const face = faces.find(block => new RegExp(`font-family\\s*:\\s*['"]?${family}['"]?\\s*;`, 'i').test(block) && new RegExp(`font-weight\\s*:\\s*${weight}\\s*;`, 'i').test(block));
+    assert(face, `${family} ${weight} must be explicitly available to the CI examples`);
+    assert.match(face, /font-display\s*:\s*swap\s*;/i, `${family} ${weight} must not block text rendering`);
+    const sources = [...face.matchAll(/url\(\s*['"]?([^'"\s)]+)['"]?\s*\)/gi)].map(match => new URL(match[1], new URL(cssPath, base)));
+    assert(sources.some(url => url.href === new URL(`assets/fonts/${font}`, base).href), `${family} ${weight} must load the actual local font file`);
+    assert(sources.every(url => url.origin === base.origin && url.pathname.startsWith(base.pathname)), `${family} ${weight} must not fetch third-party fonts`);
+  }
+});
+
+await check('CI guide provides real local logo and font downloads with their existing font licenses', () => {
+  const path = 'funktionstraeger/ci-guide.html';
+  const doc = documents.get(path);
+  assert(doc, 'The local CI guide is missing');
+  const downloads = doc.querySelectorAll('a[download]').map(link => new URL(link.attrs.href, new URL(path, base)).pathname);
+  for (const asset of ['assets/images/cdu-gesamtlogo-transparent.png', 'assets/fonts/inter-regular.ttf', 'assets/fonts/inter-extrabold.ttf', 'assets/fonts/ibm-plex-serif-regular.ttf']) {
+    assert(downloads.includes(new URL(asset, base).pathname), `The real local download is missing: ${asset}`);
+    assert(existsSync(join(root, asset)) && statSync(join(root, asset)).size > 0, `Download file is missing or empty: ${asset}`);
+  }
+  const links = doc.querySelectorAll('a[href]').map(link => new URL(link.attrs.href, new URL(path, base)).pathname);
+  for (const license of ['assets/fonts/LICENSE-Inter.txt', 'assets/fonts/LICENSE-IBM-Plex-Serif.txt']) {
+    assert(links.includes(new URL(license, base).pathname), `The font license must remain accessible: ${license}`);
+  }
 });
 
 await check('Public onboarding counts eight demo steps, resets immediately and does not survive a reload', async () => {
@@ -694,6 +758,35 @@ await check('Portal mobile links close their menus and responsibilities Escape r
       assert(menu.querySelector('summary').focused);
     }
   }
+});
+
+await check('CI guide uses the real shared menu script for labels, links, Escape and outside clicks', async () => {
+  const path = 'funktionstraeger/ci-guide.html';
+  assert.match(sourceByPath.get(path), /<script\b[^>]*\bsrc="\.\.\/assets\/site\.js\?v=1"/, 'The guide must actually load the tested shared navigation script');
+  const page = runPage(path, 'assets/site.js');
+  const menu = page.select('.mobile-menu');
+  const summary = menu?.querySelector('summary');
+  assert(menu && summary, 'The CI guide needs a native mobile menu');
+  assert.equal(summary.attrs['aria-label'], 'Menü öffnen');
+  for (const link of menu.querySelectorAll('a')) {
+    menu.open = true;
+    await menu.dispatch('toggle');
+    assert.equal(summary.attrs['aria-label'], 'Menü schließen');
+    await link.dispatch('click');
+    assert.equal(menu.open, false, `The guide menu must close after activating ${link.attrs.href}`);
+    await menu.dispatch('toggle');
+    assert.equal(summary.attrs['aria-label'], 'Menü öffnen');
+  }
+  menu.open = true;
+  await menu.dispatch('keydown', { key: 'Enter' });
+  assert.equal(menu.open, true, 'Unrelated keys must not close the guide menu');
+  await menu.dispatch('keydown', { key: 'Escape' });
+  assert.equal(menu.open, false, 'Escape must close the guide menu');
+  menu.open = true;
+  await summary.dispatch('click');
+  assert.equal(menu.open, true, 'The outside-click handler must not treat clicks inside the menu as outside clicks');
+  await page.select('#farben').dispatch('click');
+  assert.equal(menu.open, false, 'Clicking outside the guide menu must close it');
 });
 
 console.log(`\n${passed} passed, ${failed} failed.`);
