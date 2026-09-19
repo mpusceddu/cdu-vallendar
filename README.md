@@ -43,7 +43,7 @@ Die Themenwerkstatt versendet und speichert derzeit keine Eingaben. Sie ordnet e
 
 Der Zuständigkeitsfinder füllt Ort und Themenfeld im Formular voraus. Sobald jemand eine dieser Auswahlen im Formular selbst ändert, wird dieses Feld nicht mehr vom Finder überschrieben. Jede Änderung übernommener Werte verwirft einen veralteten Textentwurf. Maßgeblich für den erzeugten Text bleiben immer die Angaben im Formular. Die Seite erklärt ausdrücklich, dass noch kein Versand, keine automatische Eingangsbestätigung und keine E-Mail-Kopie eingerichtet sind, und verlinkt den passenden Datenschutzabschnitt.
 
-Die Hauptnavigation der Website umfasst Unsere Orte, Politik, Räte, Team und Portal-Vorschau. Die Portal-Vorschau hat eine eigene Bereichsnavigation mit Rückweg zur Website. Abschnittslinks der jeweiligen Seite stehen getrennt unter dem Kopf. Der bisherige Abschnitt `#aktuelles` enthält weiterhin allgemeine Themen und wird als „Unser Anspruch“ verlinkt; ein Nachrichten- oder Veranstaltungskalender ist noch nicht vorhanden.
+Die Hauptnavigation der Website umfasst Unsere Orte, Politik, Räte, Team und Funktionsträgerportal. Das Funktionsträgerportal hat eine eigene Bereichsnavigation mit Rückweg zur Website. Abschnittslinks der jeweiligen Seite stehen getrennt unter dem Kopf. Der bisherige Abschnitt `#aktuelles` enthält weiterhin allgemeine Themen und wird als „Unser Anspruch“ verlinkt; ein Nachrichten- oder Veranstaltungskalender ist noch nicht vorhanden.
 
 ## Öffentliche Portal-Vorschau
 

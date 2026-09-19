@@ -545,6 +545,45 @@ await check('Invalid URL filter falls back to all; valid mixed-case filter is no
 
 const portalPaths = ['funktionstraeger/index.html', 'funktionstraeger/gremien.html', 'funktionstraeger/ci-guide.html'];
 
+await check('Desktop, mobile and footer entries consistently say Funktionsträgerportal and keep their original destinations', () => {
+  const websitePaths = [
+    'index.html', '404.html', 'politik/index.html', 'thema-vorschlagen/index.html',
+    'team/index.html', 'raete/index.html', 'vg/index.html', 'vallendar/index.html',
+    'niederwerth/index.html', 'urbar/index.html', 'weitersburg/index.html',
+    'impressum/index.html', 'datenschutz/index.html'
+  ];
+  let entryCount = 0;
+  for (const path of websitePaths) {
+    const doc = documents.get(path);
+    assert(doc, `${path}: expected website page is missing`);
+    const expectedHref = path === 'index.html' ? 'funktionstraeger/'
+      : path === '404.html' ? '/cdu-vallendar/funktionstraeger/' : '../funktionstraeger/';
+    for (const label of ['Hauptnavigation', 'Mobile Navigation', 'Service und Rechtliches']) {
+      const navs = doc.querySelectorAll('nav').filter(nav => nav.attrs['aria-label'] === label);
+      assert.equal(navs.length, 1, `${path}: expected exactly one ${label}`);
+      const entries = navs[0].querySelectorAll('a[href]').filter(link => link.attrs.href === expectedHref);
+      assert.equal(entries.length, 1, `${path}: ${label} must retain its portal destination ${expectedHref}`);
+      assert.equal(entries[0].textContent.trim(), 'Funktionsträgerportal', `${path}: ${label} uses the wrong portal label`);
+      entryCount++;
+    }
+  }
+  const guide = documents.get('funktionstraeger/ci-guide.html');
+  const guideFooter = guide?.querySelector('footer');
+  assert(guideFooter, 'The CI guide footer must remain available');
+  const returnLinks = guideFooter.querySelectorAll('a[href]').filter(link => link.attrs.href === './index.html');
+  assert.equal(returnLinks.length, 1, 'The CI guide footer must retain its local portal destination');
+  assert.equal(returnLinks[0].textContent.trim(), 'Funktionsträgerportal');
+  entryCount++;
+  assert.equal(entryCount, 40, 'All 39 website navigation links and the CI guide footer link must be checked');
+  for (const [path, doc] of documents) {
+    const robots = doc.querySelectorAll('meta').find(meta => meta.attrs.name === 'robots')?.attrs.content;
+    assert.match(robots ?? '', /(?:^|[,\s])noindex(?:$|[,\s])/i, `${path}: renaming the portal must not remove noindex`);
+    for (const nav of doc.querySelectorAll('nav')) {
+      assert.doesNotMatch(nav.textContent, /Portal-Vorschau/, `${path}: obsolete portal name remains in a navigation`);
+    }
+  }
+});
+
 await check('All portal pages disclose their public preview status, discourage indexing and retain legal links', () => {
   for (const path of portalPaths) {
     const doc = documents.get(path);
