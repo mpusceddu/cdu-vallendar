@@ -38,6 +38,7 @@ class Element {
     this.children = [];
     this.parent = null;
     this.listeners = new Map();
+    this.style = {};
     this.hidden = 'hidden' in attrs;
     this.checked = 'checked' in attrs;
     this.dataset = Object.fromEntries(Object.entries(attrs)
@@ -58,8 +59,23 @@ class Element {
   set value(value) { this._value = String(value); }
   get selectedIndex() { return this.options.findIndex(option => option.value === this.value); }
   setAttribute(name, value) { this.attrs[name] = String(value); }
+  removeAttribute(name) { delete this.attrs[name]; }
   getAttribute(name) { return this.attrs[name] ?? null; }
+  get open() { return 'open' in this.attrs; }
+  set open(value) { if (value) this.attrs.open = ''; else delete this.attrs.open; }
   matches(selector) {
+    if (selector.includes(' ')) {
+      const parts = selector.trim().split(/\s+/);
+      if (!this.matches(parts.pop())) return false;
+      let ancestor = this.parent;
+      while (parts.length) {
+        const part = parts.pop();
+        while (ancestor && !ancestor.matches(part)) ancestor = ancestor.parent;
+        if (!ancestor) return false;
+        ancestor = ancestor.parent;
+      }
+      return true;
+    }
     if (selector.startsWith('#')) return this.attrs.id === selector.slice(1);
     if (selector.startsWith('.')) return (this.attrs.class ?? '').split(/\s+/).includes(selector.slice(1));
     const match = selector.match(/^([a-z][\w-]*)?(?:\[([^\]=]+)(?:="([^"]*)")?\])?$/i);
@@ -70,12 +86,17 @@ class Element {
     return this.children.flatMap(child => child instanceof Element ? [...(child.matches(selector) ? [child] : []), ...child.querySelectorAll(selector)] : []);
   }
   querySelector(selector) { return this.querySelectorAll(selector)[0] ?? null; }
+  getElementById(id) { return this.querySelectorAll('[id]').find(element => element.attrs.id === id) ?? null; }
+  closest(selector) {
+    for (let current = this; current; current = current.parent) if (current.matches(selector)) return current;
+    return null;
+  }
   addEventListener(type, listener) {
     if (!this.listeners.has(type)) this.listeners.set(type, []);
     this.listeners.get(type).push(listener);
   }
-  async dispatch(type) {
-    const event = { type, target: this, defaultPrevented: false, preventDefault() { this.defaultPrevented = true; } };
+  async dispatch(type, properties = {}) {
+    const event = { type, target: this, defaultPrevented: false, preventDefault() { this.defaultPrevented = true; }, ...properties };
     for (let current = this; current; current = current.parent) {
       event.currentTarget = current;
       for (const listener of current.listeners.get(type) ?? []) await listener(event);
@@ -157,16 +178,24 @@ await check('Internal links and fragments resolve under /cdu-vallendar/', () => 
   console.log(`  ${count} internal links, ${documents.size} HTML pages`);
 });
 
-await check('Every page uses the same non-empty stylesheet version', () => {
-  const versions = new Set();
+await check('Public site and portal preview use separate, consistently versioned design families', () => {
+  const versions = new Map([['website', new Set()], ['portal', new Set()]]);
+  const portalPaths = new Set(['funktionstraeger/index.html', 'funktionstraeger/gremien.html']);
   for (const [path, doc] of documents) {
-    const stylesheet = doc.querySelectorAll('link[href]').find(link => /(?:^|\/)assets\/styles\.css(?:\?|$)/.test(link.attrs.href));
-    assert(stylesheet, `${path}: shared stylesheet is missing`);
-    const version = new URL(stylesheet.attrs.href, new URL(path, base)).searchParams.get('v');
+    const portal = portalPaths.has(path);
+    const expectedPath = new URL(portal ? 'funktionstraeger/styles.css' : 'assets/styles.css', base).pathname;
+    const stylesheets = doc.querySelectorAll('link[href]').filter(link => link.attrs.rel === 'stylesheet');
+    const urls = stylesheets.map(link => new URL(link.attrs.href, new URL(path, base)));
+    const stylesheet = urls.find(url => url.pathname === expectedPath);
+    assert(stylesheet, `${path}: expected ${expectedPath} stylesheet is missing`);
+    assert(!urls.some(url => url.pathname === new URL(portal ? 'assets/styles.css' : 'funktionstraeger/styles.css', base).pathname), `${path}: website and portal styles must not be mixed`);
+    const version = stylesheet.searchParams.get('v');
     assert(version && /^[\w.-]+$/.test(version), `${path}: stylesheet version is missing or malformed`);
-    versions.add(version);
+    versions.get(portal ? 'portal' : 'website').add(version);
   }
-  assert.equal(versions.size, 1, `Mixed stylesheet versions: ${[...versions].join(', ')}`);
+  assert.deepEqual([...versions.get('website')], ['20'], 'The website must consistently use stylesheet version 20');
+  assert.deepEqual([...versions.get('portal')], ['1'], 'Portal preview must consistently use its own stylesheet version 1');
+  assert.equal(documents.get('funktionstraeger/gremien.html')?.querySelectorAll('link[href]').filter(link => new URL(link.attrs.href, new URL('funktionstraeger/gremien.html', base)).pathname === new URL('funktionstraeger/gremien.css', base).pathname && new URL(link.attrs.href, base).searchParams.get('v') === '1').length, 1, 'The responsibilities page needs its own versioned supplementary stylesheet');
 });
 
 function runPage(path, script, url = new URL(path.replace(/index\.html$/, ''), base).href) {
@@ -499,6 +528,171 @@ await check('Invalid URL filter falls back to all; valid mixed-case filter is no
   for (const [input, expected] of [['nonexistent', 'all'], ['%20URBAR%20', 'urbar']]) {
     const page = runPage('politik/index.html', 'assets/politik.js', `${base}politik/?rat=${input}`);
     assertFilter(page, expected);
+  }
+});
+
+const portalPaths = ['funktionstraeger/index.html', 'funktionstraeger/gremien.html'];
+
+await check('Both portal pages disclose their public preview status, discourage indexing and retain legal links', () => {
+  for (const path of portalPaths) {
+    const doc = documents.get(path);
+    assert(doc, `${path}: public preview page is missing`);
+    assert.match(doc.textContent, /Öffentliche Vorschau/, `${path}: visible public-preview notice is missing`);
+    assert.match(doc.textContent, /nicht passwortgeschützt|kein geschützter|ohne Anmeldung|öffentlich zugänglich/i, `${path}: actual access state must be clear`);
+    const robots = doc.querySelectorAll('meta').find(meta => meta.attrs.name === 'robots')?.attrs.content;
+    assert.match(robots ?? '', /(?:^|[,\s])noindex(?:$|[,\s])/i, `${path}: noindex is missing`);
+    assert.match(robots ?? '', /(?:^|[,\s])nofollow(?:$|[,\s])/i, `${path}: nofollow is missing`);
+    const hrefs = doc.querySelectorAll('a[href]').map(link => new URL(link.attrs.href, new URL(path, base)).pathname);
+    for (const legal of ['impressum/', 'datenschutz/']) assert(hrefs.includes(new URL(legal, base).pathname), `${path}: ${legal} link is missing`);
+    assert.equal(doc.querySelectorAll('input[type="password"]').length, 0, `${path}: public preview must not show a fake password gate`);
+    assert.doesNotMatch(sourceByPath.get(path), /(?:https?:\/\/(?:localhost|127\.0\.0\.1)(?:[:/])|file:\/\/)/i, `${path}: local-only URL leaked into the public preview`);
+  }
+});
+
+await check('Portal assets resolve locally below the Pages base, without borrowing website styles or remote images', () => {
+  for (const path of portalPaths) {
+    const source = sourceByPath.get(path);
+    assert(source, `${path}: missing source`);
+    const doc = documents.get(path);
+    const assets = [
+      ...doc.querySelectorAll('img[src]').map(node => node.attrs.src),
+      ...doc.querySelectorAll('link[href]').filter(node => ['stylesheet', 'icon'].includes(node.attrs.rel)).map(node => node.attrs.href),
+      ...[...source.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map(match => decode(match[1]))
+    ];
+    assert(assets.length >= 3, `${path}: expected image, styles and script references`);
+    for (const asset of assets) {
+      const url = new URL(asset, new URL(path, base));
+      assert.equal(url.origin, base.origin, `${path}: remote asset ${asset}`);
+      assert(url.pathname.startsWith(base.pathname), `${path}: asset leaves Pages base: ${asset}`);
+      const diskPath = resolve(root, decodeURIComponent(url.pathname.slice(base.pathname.length)));
+      assert(diskPath.startsWith(`${root}/`) && existsSync(diskPath) && statSync(diskPath).isFile(), `${path}: missing local asset ${asset}`);
+    }
+    const logo = doc.querySelectorAll('img[src]').find(node => /^\.\.\/assets\/images\//.test(node.attrs.src));
+    assert(logo, `${path}: the preview should use the same local logo as the website`);
+  }
+});
+
+await check('Portal scripts have no persistence, transmission, account or tracking integration', () => {
+  for (const script of ['funktionstraeger/app.js', 'funktionstraeger/gremien.js']) {
+    const code = readFileSync(join(root, script), 'utf8');
+    assert.doesNotMatch(code, /\b(?:localStorage|sessionStorage|indexedDB|XMLHttpRequest|WebSocket|EventSource)\b|\bfetch\s*\(|\.sendBeacon\s*\(|document\s*\.\s*cookie|window\s*\.\s*confirm\s*\(/, `${script}: the public preview must remain a non-persistent, non-sending demonstration`);
+    assert.doesNotMatch(code, /\b(?:access_token|api_key|client_secret|authorization)\s*[:=]|(?:gh[pousr]_[A-Za-z0-9]{20,})/i, `${script}: possible credential material`);
+    assert.doesNotMatch(code, /(?:https?:\/\/(?:localhost|127\.0\.0\.1)(?:[:/])|file:\/\/)/i, `${script}: local-only URL leaked`);
+  }
+});
+
+await check('The CI guide is visibly planned, while seven portal modules and eight onboarding steps remain available without JavaScript', () => {
+  const doc = documents.get('funktionstraeger/index.html');
+  assert(doc, 'Portal index missing');
+  assert.equal(doc.querySelectorAll('[data-module-card]').length, 7);
+  assert.equal(doc.querySelectorAll('[data-onboarding-step]').length, 8);
+  assert(doc.querySelectorAll('[data-module-card]').every(card => !card.hidden));
+  const ci = doc.getElementById('ci-guide');
+  assert(ci, 'CI guide needs a stable anchor');
+  assert.match(ci.textContent, /geplant|vorgemerkt|in Vorbereitung/i, 'The CI guide must not claim to be finished');
+  assert.match(doc.textContent, /nicht gespeichert|nicht dauerhaft gespeichert|nur.*(?:Seite|Vorschau|Aufruf)/i, 'The temporary nature of the demo progress must be explained');
+});
+
+await check('Public onboarding counts eight demo steps, resets immediately and does not survive a reload', async () => {
+  const page = runPage('funktionstraeger/index.html', 'funktionstraeger/app.js');
+  const steps = page.document.querySelectorAll('[data-onboarding-step]');
+  const bar = page.select('[data-progress-bar]');
+  assert.equal(page.select('[data-progress-count]').textContent, '0');
+  assert(page.document.querySelectorAll('[data-total-steps]').every(node => node.textContent === '8'));
+  for (const step of steps.slice(0, 4)) { step.checked = true; await step.dispatch('change'); }
+  assert.equal(page.select('[data-progress-count]').textContent, '4');
+  assert.equal(bar.attrs['aria-valuenow'], '4');
+  assert.equal(bar.querySelector('span').style.width, '50%');
+  for (const step of steps.slice(4)) { step.checked = true; await step.dispatch('change'); }
+  assert.equal(page.select('[data-progress-count]').textContent, '8');
+  assert.equal(bar.querySelector('span').style.width, '100%');
+  assert.match(page.select('[data-progress-copy]').textContent, /Vorschau/);
+  assert.match(page.select('[data-progress-copy]').textContent, /keine Zugänge/i, 'Completion must not imply actual permissions or onboarding');
+  const reloaded = runPage('funktionstraeger/index.html', 'funktionstraeger/app.js');
+  assert.equal(reloaded.select('[data-progress-count]').textContent, '0');
+  assert(reloaded.document.querySelectorAll('[data-onboarding-step]').every(step => !step.checked));
+  await page.select('[data-reset-progress]').dispatch('click');
+  assert.equal(page.select('[data-progress-count]').textContent, '0');
+  assert.equal(bar.querySelector('span').style.width, '0%');
+  assert(steps.every(step => !step.checked));
+});
+
+await check('Portal module search includes section text and keywords, tolerates accents, and restores all seven modules', async () => {
+  const page = runPage('funktionstraeger/index.html', 'funktionstraeger/app.js');
+  const cards = page.document.querySelectorAll('[data-module-card]');
+  const search = page.select('[data-module-search]');
+  async function find(query) {
+    search.value = query;
+    await search.dispatch('input');
+    const visible = cards.filter(card => !card.hidden);
+    assert.equal(page.select('[data-search-status]').textContent, visible.length === 1 ? '1 Bereich gefunden' : `${visible.length} Bereiche gefunden`);
+    assert.equal(page.select('[data-empty-search]').hidden, visible.length !== 0);
+    return visible.map(card => card.attrs.href);
+  }
+  assert((await find('Logo')).includes('#arbeitsmittel'));
+  assert((await find('  LOGO   SCHRIFTEN ')).includes('#arbeitsmittel'));
+  assert((await find('Zustandigkeiten')).includes('#rollen'));
+  assert((await find('Ausschuss')).includes('./gremien.html'));
+  assert((await find('Mitgliederlisten')).includes('#sicherheit'));
+  assert.equal((await find('KeinTreffer123')).length, 0);
+  assert.equal((await find('   ')).length, 7);
+});
+
+await check('Responsibilities page offers ten real search examples and all five native local-council disclosures', () => {
+  const doc = documents.get('funktionstraeger/gremien.html');
+  assert(doc, 'Responsibilities page missing');
+  const examples = doc.querySelectorAll('[data-example]');
+  assert.equal(examples.length, 10);
+  assert(examples.every(card => !card.hidden), 'All examples must be available without JavaScript');
+  const details = doc.querySelectorAll('.local-details');
+  assert.equal(details.length, 5);
+  assert.deepEqual(details.map(node => node.attrs.id).sort(), ['ort-niederwerth', 'ort-stadt', 'ort-urbar', 'ort-vg', 'ort-weitersburg'].sort());
+  assert(details.every(node => node.tagName === 'details' && node.querySelector('summary')));
+});
+
+await check('Responsibilities search filters real content with AND terms, handles umlauts and sharp S, and resets with focus', async () => {
+  const page = runPage('funktionstraeger/gremien.html', 'funktionstraeger/gremien.js');
+  const search = page.select('[data-example-search]');
+  const examples = page.document.querySelectorAll('[data-example]');
+  async function find(query) {
+    search.value = query;
+    await search.dispatch('input');
+    const visible = examples.filter(card => !card.hidden);
+    assert.equal(page.select('[data-example-status]').textContent, `${visible.length} von 10 Beispielen angezeigt`);
+    assert.equal(page.select('[data-example-empty]').hidden, visible.length > 0);
+    return visible;
+  }
+  assert.equal(page.select('[data-example-status]').textContent, '10 von 10 Beispielen angezeigt');
+  assert.equal((await find('BURGERHAUS'))[0]?.querySelector('h3')?.textContent, 'Bürgerhaus und eigene Einrichtungen');
+  assert.equal((await find('STRASSE'))[0]?.querySelector('h3')?.textContent, 'Straße sanieren oder Tempo ändern?');
+  assert.equal((await find('  URBAR   REINIGUNG ')).length, 1);
+  assert.equal((await find('Urbar Brandschutz')).length, 0);
+  assert.equal((await find('   ')).length, 10);
+  await find('KeinTreffer123');
+  await page.select('[data-example-reset]').dispatch('click');
+  assert.equal(search.value, '');
+  assert(search.focused);
+  assert(examples.every(card => !card.hidden));
+  assert(page.select('[data-example-empty]').hidden);
+  assert((await page.select('[data-example-form]').dispatch('submit')).defaultPrevented, 'Search Enter must never submit or navigate');
+});
+
+await check('Portal mobile links close their menus and responsibilities Escape returns focus to the menu button', async () => {
+  for (const [path, script] of [['funktionstraeger/index.html', 'funktionstraeger/app.js'], ['funktionstraeger/gremien.html', 'funktionstraeger/gremien.js']]) {
+    const page = runPage(path, script);
+    const menu = page.select('.mobile-menu');
+    assert(menu, `${path}: mobile menu missing`);
+    menu.open = true;
+    await menu.querySelector('a').dispatch('click');
+    assert.equal(menu.open, false, `${path}: menu did not close after link activation`);
+    if (path.endsWith('gremien.html')) {
+      menu.open = true;
+      await menu.dispatch('keydown', { key: 'Enter' });
+      assert.equal(menu.open, true, 'Unrelated keys must not close the menu');
+      await menu.dispatch('keydown', { key: 'Escape' });
+      assert.equal(menu.open, false);
+      assert(menu.querySelector('summary').focused);
+    }
   }
 });
 

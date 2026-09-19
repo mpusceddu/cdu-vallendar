@@ -1,0 +1,113 @@
+.gremien-page { font-size: 16px; line-height: 1.65; }
+.gremien-page [hidden] { display: none !important; }
+.gremien-page main a:not(.button) { text-decoration: underline; text-underline-offset: 3px; }
+.gremien-page main a:not(.button):hover { color: var(--teal-dark); }
+.gremien-page .hero a:not(.button):hover { color: var(--mint); }
+.gremien-page .hero-grid { min-height: 560px; grid-template-columns: minmax(0,1.25fr) minmax(0,.75fr); gap: 60px; padding-block: 72px; }
+.gremien-page .hero::after { content: 'KLARHEIT'; }
+.gremien-page .hero h1 { font-size: clamp(52px,6.8vw,86px); }
+.gremien-page .hero h1 em { font-style: normal; color: var(--mint); }
+.gremien-page .hero-lead { font-size: 18px; }
+.gremien-page .content-section { padding-block: 80px; }
+.gremien-page .section-heading h2 { font-size: clamp(35px,4.2vw,54px); }
+.gremien-page .section-heading > p { font-size: 15px; }
+.gremien-page h3 { color: var(--navy); font-family: Georgia, 'Times New Roman', serif; font-weight: 400; line-height: 1.15; }
+.gremien-page .status-card { align-self: center; box-shadow: none; }
+.gremien-page .status-card h2 { margin-bottom: 16px; }
+.gremien-page .status-card p { font-size: 14px; }
+.gremien-page .status-card ol { padding-left: 22px; font-size: 14px; }
+.gremien-page .status-card li { padding: 6px 0; }
+.page-breadcrumb { margin: 0 0 26px; font-size: 12px; color: #c4d4da; }
+.page-breadcrumb a { display: inline-block; padding-block: 5px; }
+.gremien-page .notice-inner { padding-block: 18px; }
+.level-grid, .body-grid { display: grid; gap: 18px; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.level-card, .body-card { min-width: 0; padding: 30px; background: white; border-top: 4px solid var(--teal); }
+.level-card h3 { font-size: 32px; margin: 18px 0 12px; }
+.level-card p, .level-card li, .body-card p { color: var(--muted); font-size: 15px; }
+.level-card ul { margin: 20px 0; padding-left: 19px; }
+.level-card li { margin-bottom: 8px; }
+.level-card .level-caption { color: var(--teal-dark); font-weight: 700; font-size: 13px; }
+.level-card .card-kicker, .body-card .card-kicker { color: var(--teal-dark); }
+.key-message { display: grid; grid-template-columns: .8fr 1.2fr; gap: 30px; margin-top: 26px; padding: 28px 32px; background: #e4edeb; border-left: 4px solid var(--teal-dark); }
+.key-message h3 { margin: 0; font-size: 29px; }
+.key-message p { margin: 0; color: #40545d; }
+.source-note { font-size: 12px; color: var(--muted); }
+.source-note a { color: var(--teal-dark); }
+.bodies-section { background: #e4edeb; }
+.body-card { border-top-width: 0; }
+.body-card h3 { font-size: 27px; margin: 16px 0; }
+.body-card p { margin: 0; }
+.body-card .decision { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: #334a55; }
+.decision strong { color: var(--teal-dark); }
+.example-search { padding: 24px; margin-bottom: 26px; background: var(--navy); color: white; }
+.example-search label { display: block; margin-bottom: 10px; font-size: 14px; font-weight: 700; }
+.example-search-row { display: flex; gap: 12px; }
+.example-search input { min-width: 0; flex: 1; min-height: 50px; padding: 12px 15px; border: 1px solid white; border-radius: 0; background: white; color: var(--navy); }
+.example-search button { flex: 0 0 auto; padding: 12px 20px; border: 1px solid var(--mint); background: transparent; color: var(--mint); cursor: pointer; font-weight: 700; }
+.example-search p { margin: 10px 0 0; font-size: 12px; color: #c4d4da; }
+.example-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.example-card { min-width: 0; padding: 30px; border: 1px solid var(--line); background: white; }
+.example-card h3 { margin: 16px 0 20px; font-size: 29px; }
+.level-tag { display: inline-block; max-width: 100%; padding: 5px 9px; background: #e4edeb; color: var(--teal-dark); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.level-tag.vg { background: var(--navy); color: var(--mint); }
+.level-tag.check { background: #fff0d5; color: #754c00; }
+.example-card dl { margin: 0; font-size: 14px; }
+.example-card dt { margin-top: 17px; font-weight: 700; color: var(--navy); }
+.example-card dd { margin: 4px 0 0; color: var(--muted); }
+.example-card .source-note { margin: 20px 0 0; }
+.empty-examples { padding: 24px; border-left: 4px solid var(--gold); background: white; }
+.local-section { background: #e4edeb; }
+.local-list { display: grid; gap: 12px; }
+.local-details { background: white; border: 1px solid var(--line); scroll-margin-top: 104px; }
+.local-details > summary { cursor: pointer; padding: 24px 28px; color: var(--navy); font-weight: 800; }
+.local-details > summary small { display: block; margin: 4px 0 0 19px; font-weight: 400; font-size: 13px; color: var(--muted); }
+.local-details[open] > summary { border-bottom: 1px solid var(--line); }
+.local-content { padding: 10px 28px 28px; font-size: 15px; }
+.local-content h3 { font-size: 24px; margin: 22px 0 12px; }
+.local-content ul { padding-left: 22px; }
+.local-content li { padding-block: 3px; }
+.local-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.review-note { padding: 16px 20px; background: #fff5e2; border-left: 3px solid var(--gold); color: #624916; font-size: 14px; }
+.reading-note { padding: 20px 24px; border: 1px solid var(--line); background: white; font-size: 14px; }
+.preflight { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; padding: 0; list-style: none; counter-reset: step; }
+.preflight li { position: relative; padding: 23px 24px 23px 65px; background: white; counter-increment: step; }
+.preflight li::before { content: '0' counter(step); position: absolute; left: 23px; top: 23px; color: var(--teal-dark); font-weight: 800; font-size: 13px; }
+.preflight strong { display: block; margin-bottom: 5px; color: var(--navy); }
+.preflight p { margin: 0; font-size: 14px; color: var(--muted); }
+.sources-section { border-top: 1px solid var(--line); }
+.source-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 36px; padding-left: 24px; font-size: 14px; }
+.source-list li { padding: 8px 0 14px; scroll-margin-top: 104px; }
+.source-list span { display: block; margin-top: 6px; font-size: 12px; color: var(--muted); }
+.gremien-page footer a { color: var(--mint); text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
+@media (max-width: 900px) {
+  .gremien-page .hero-grid { grid-template-columns: 1fr; gap: 38px; }
+  .gremien-page .status-card { max-width: none; }
+  .level-grid { grid-template-columns: 1fr; }
+  .body-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .key-message { grid-template-columns: 1fr; gap: 15px; }
+}
+@media (max-width: 680px) {
+  .gremien-page .content-section { padding-block: 60px; }
+  .gremien-page .hero-grid { padding-block: 46px 56px; }
+  .gremien-page .hero h1 { font-size: clamp(44px,12.5vw,68px); }
+  .gremien-page .hero-lead { font-size: 16px; }
+  .body-grid, .example-grid, .local-columns, .preflight, .source-list { grid-template-columns: 1fr; }
+  .local-columns { gap: 0; }
+  .level-card, .body-card, .example-card, .key-message { padding: 24px; }
+  .local-details > summary { padding: 20px; }
+  .local-content { padding: 4px 20px 20px; }
+  .example-search { padding: 20px; }
+  .example-search-row { flex-direction: column; }
+  .example-search button { min-height: 46px; }
+  .gremien-page h3, .gremien-page a { overflow-wrap: anywhere; hyphens: auto; }
+}
+@media print {
+  .gremien-page { background: white; font-size: 11pt; }
+  .gremien-page .site-header, .gremien-page .skip-link, .hero-actions, .example-search, .gremien-page footer { display: none; }
+  .gremien-page .hero { background: white; color: var(--navy); }
+  .gremien-page .hero::before, .gremien-page .hero::after { display: none; }
+  .gremien-page .hero h1 em, .gremien-page .hero-lead, .gremien-page .eyebrow, .page-breadcrumb { color: var(--navy); }
+  .gremien-page .hero-grid, .gremien-page .content-section { padding-block: 25px; min-height: 0; }
+  .level-card, .body-card, .example-card, .preflight li { break-inside: avoid; }
+  .gremien-page [data-example][hidden] { display: block !important; }
+}

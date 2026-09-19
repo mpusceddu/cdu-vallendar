@@ -25,6 +25,8 @@ Vor dem offiziellen Start bleiben insbesondere diese Punkte offen:
 | Thema vorschlagen | `thema-vorschlagen/index.html` |
 | Vorstand und VG-Fraktionsführung | `team/index.html` |
 | Räte und Fraktionen | `raete/index.html` |
+| Funktionsträgerportal: öffentliche Vorschau | `funktionstraeger/index.html` |
+| Gremien und Zuständigkeiten | `funktionstraeger/gremien.html` |
 | VG-Fraktion | `vg/index.html` |
 | Stadt Vallendar | `vallendar/index.html` |
 | Niederwerth | `niederwerth/index.html` |
@@ -40,7 +42,20 @@ Die Themenwerkstatt versendet und speichert derzeit keine Eingaben. Sie ordnet e
 
 Der Zuständigkeitsfinder füllt Ort und Themenfeld im Formular voraus. Sobald jemand eine dieser Auswahlen im Formular selbst ändert, wird dieses Feld nicht mehr vom Finder überschrieben. Jede Änderung übernommener Werte verwirft einen veralteten Textentwurf. Maßgeblich für den erzeugten Text bleiben immer die Angaben im Formular. Die Seite erklärt ausdrücklich, dass noch kein Versand, keine automatische Eingangsbestätigung und keine E-Mail-Kopie eingerichtet sind, und verlinkt den passenden Datenschutzabschnitt.
 
-Die Hauptnavigation ist auf allen Seiten gleich: Unsere Orte, Politik, Räte und Team. Abschnittslinks der jeweiligen Seite stehen getrennt unter dem Kopf. Der bisherige Abschnitt `#aktuelles` enthält weiterhin allgemeine Themen und wird als „Unser Anspruch“ verlinkt; ein Nachrichten- oder Veranstaltungskalender ist noch nicht vorhanden.
+Die Hauptnavigation der Website umfasst Unsere Orte, Politik, Räte, Team und Portal-Vorschau. Die Portal-Vorschau hat eine eigene Bereichsnavigation mit Rückweg zur Website. Abschnittslinks der jeweiligen Seite stehen getrennt unter dem Kopf. Der bisherige Abschnitt `#aktuelles` enthält weiterhin allgemeine Themen und wird als „Unser Anspruch“ verlinkt; ein Nachrichten- oder Veranstaltungskalender ist noch nicht vorhanden.
+
+## Öffentliche Portal-Vorschau
+
+Seit dem Veröffentlichungsauftrag vom 19.09.2026 ist eine bewusst öffentliche Konzeptvorschau unter `funktionstraeger/` vorbereitet. Sie enthält allgemeine Arbeitshilfen, eine ausprobierbare Onboarding-Checkliste, die Gremienseite und einen als **geplant** gekennzeichneten CI-Guide. Sie ist kein geschützter Arbeitsbereich und richtet keine Konten oder Zugänge ein.
+
+- Nur geprüfte öffentliche Inhalte werden in dieser Kopie gepflegt. Keine vertraulichen Unterlagen, Mitgliederlisten, Passwörter oder internen Planungsdateien übernehmen.
+- Checkliste und Suchfunktionen arbeiten flüchtig im Browser. Kein Local Storage, Session Storage, Backend oder Formularversand. Nach Neuladen beginnt die Demonstration wieder bei null.
+- Die Gremienseite behält den Recherche-/Quellenstand 17.09.2026. Offene Abgleiche der Hauptsatzungen von Stadt Vallendar und Weitersburg bleiben sichtbar; eine Tagesordnung ist kein Beschlussnachweis.
+- CI-Guide und Vorlagen sind noch nicht fertig. Offizielles CDU-CI-Portal ist verlinkt; keine ungeprüfte CI-Konformität behaupten.
+- Die separate Entwicklung des späteren geschützten Portals bleibt getrennt. Eine Freigabe dieser öffentlichen Vorschau ist keine Freigabe vertraulicher Inhalte oder eines ungeschützten produktiven Portals.
+- Gestaltung und Verhalten der Vorschau liegen ausschließlich in `funktionstraeger/styles.css`, `app.js`, `gremien.css` und `gremien.js`. Änderungen dieser Dateien mit eigener Versionskennung veröffentlichen.
+
+Weitere Ideen und Abläufe werden nach Sichtung dieser Vorschau gesammelt, nicht ungefragt als produktive Funktionen umgesetzt.
 
 Die Entwicklungsfassung ist mit `noindex,nofollow` gekennzeichnet. Diese Suchmaschinenanweisung erst nach Vorstandsfreigabe und zusammen mit den endgültigen Domain-/SEO-Angaben entfernen. Sie ist kein Zugangsschutz; die Vorschau bleibt über ihre URL öffentlich erreichbar.
 
