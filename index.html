@@ -13,8 +13,9 @@
   <meta property="og:description" content="Für Vallendar, Niederwerth, Urbar und Weitersburg.">
   <link rel="preload" href="assets/fonts/inter-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="assets/styles.css?v=23">
+  <link rel="stylesheet" href="assets/styles.css?v=24">
   <script src="assets/site.js?v=1" defer></script>
+  <link rel="stylesheet" href="assets/news.css?v=1">
 </head>
 <body>
   <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
@@ -27,17 +28,17 @@
           <span>Vallendar · Niederwerth · Urbar · Weitersburg</span>
         </span>
       </a>
-      <nav class="main-nav" aria-label="Hauptnavigation"><a href="#orte">Unsere Orte</a><a href="politik/">Politik</a><a href="raete/">Räte</a><a href="team/">Team</a><a href="funktionstraeger/">Funktionsträgerportal</a></nav>
+      <nav class="main-nav" aria-label="Hauptnavigation"><a href="aktuelles/">Aktuelles</a><a href="#orte">Unsere Orte</a><a href="politik/">Politik</a><a href="raete/">Räte</a><a href="team/">Team</a><a href="funktionstraeger/">Funktionsträgerportal</a></nav>
       <a class="header-cta" href="thema-vorschlagen/">Thema vorschlagen</a>
       <details class="mobile-menu">
         <summary><span aria-hidden="true">☰</span><span class="menu-label">Menü</span></summary>
-        <nav aria-label="Mobile Navigation"><a href="./">Startseite</a><a href="#orte">Unsere Orte</a><a href="politik/">Politik</a><a href="raete/">Räte</a><a href="team/">Team</a><a href="thema-vorschlagen/">Thema vorschlagen</a><a href="funktionstraeger/">Funktionsträgerportal</a><a href="#kontakt">Kontakt</a></nav>
+        <nav aria-label="Mobile Navigation"><a href="aktuelles/">Aktuelles</a><a href="./">Startseite</a><a href="#orte">Unsere Orte</a><a href="politik/">Politik</a><a href="raete/">Räte</a><a href="team/">Team</a><a href="thema-vorschlagen/">Thema vorschlagen</a><a href="funktionstraeger/">Funktionsträgerportal</a><a href="#kontakt">Kontakt</a></nav>
       </details>
     </div>
   </header>
 
   <main id="inhalt">
-    <nav class="section-nav page-shell" aria-label="Auf dieser Seite"><a href="#aktuelles">Unser Anspruch</a><a href="#orte">Unsere Orte</a><a href="#politik">Politik im Rat</a><a href="#kontakt">Kontakt</a></nav>
+    <nav class="section-nav page-shell" aria-label="Auf dieser Seite"><a href="#aktuelles">Aktuelles</a><a href="#anspruch">Unser Anspruch</a><a href="#orte">Unsere Orte</a><a href="#politik">Politik im Rat</a><a href="#kontakt">Kontakt</a></nav>
     <section class="hero" id="start">
       <div class="hero-pattern" aria-hidden="true"></div>
       <div class="hero-grid page-shell">
@@ -59,7 +60,11 @@
       </div>
     </section>
 
-    <section class="intro page-shell" id="aktuelles">
+    <section class="news-section page-shell" id="aktuelles" aria-labelledby="latest-heading"><p class="eyebrow dark">Nachrichten &amp; Einblicke</p><h2 id="latest-heading">Aktuelles aus unserer Heimat.</h2><div class="news-grid"><article class="news-card" data-news-area="urbar"><a class="news-art" href="aktuelles/schankanlage-buergerhaus-urbar.html" tabindex="-1" aria-hidden="true"><img src="assets/news-haus.svg" alt="" width="640" height="360" loading="lazy"></a><div class="news-card-body"><p class="news-meta">Urbar · Aus der Ratsarbeit</p><p class="news-date">Veröffentlicht <time datetime="2026-09-28">28.09.2026</time></p><h3><a href="aktuelles/schankanlage-buergerhaus-urbar.html">Schankanlage im Bürgerhaus wieder nutzbar</a></h3><p>Acht geschulte Personen können die Anlage reinigen. Der eingebrachte Antrag ist umgesetzt.</p><a class="news-read" href="aktuelles/schankanlage-buergerhaus-urbar.html" aria-label="Beitrag lesen: Schankanlage im Bürgerhaus wieder nutzbar">Beitrag lesen <span aria-hidden="true">→</span></a></div></article>
+<article class="news-card" data-news-area="vg"><a class="news-art" href="aktuelles/vorstand-gemeindeverband.html" tabindex="-1" aria-hidden="true"><img src="assets/news-team.svg" alt="" width="640" height="360" loading="lazy"></a><div class="news-card-body"><p class="news-meta">VG / Gemeindeverband · Unser Verband</p><p class="news-date">Veröffentlicht <time datetime="2026-09-28">28.09.2026</time></p><h3><a href="aktuelles/vorstand-gemeindeverband.html">Wer im Gemeindeverband Verantwortung übernimmt</a></h3><p>Vorstand und Fraktion haben unterschiedliche Aufgaben. Unsere Teamseite zeigt die Menschen und ihre Funktionen.</p><a class="news-read" href="aktuelles/vorstand-gemeindeverband.html" aria-label="Beitrag lesen: Wer im Gemeindeverband Verantwortung übernimmt">Beitrag lesen <span aria-hidden="true">→</span></a></div></article>
+<article class="news-card" data-news-area="vg"><a class="news-art" href="aktuelles/gremienwegweiser.html" tabindex="-1" aria-hidden="true"><img src="assets/news-weg.svg" alt="" width="640" height="360" loading="lazy"></a><div class="news-card-body"><p class="news-meta">VG / Gemeindeverband · Website & Service</p><p class="news-date">Veröffentlicht <time datetime="2026-09-28">28.09.2026</time></p><h3><a href="aktuelles/gremienwegweiser.html">Welches Gremium ist zuständig?</a></h3><p>Ortsgemeinde, Stadt oder Verbandsgemeinde? Unser Gremienwegweiser hilft bei der ersten Orientierung.</p><a class="news-read" href="aktuelles/gremienwegweiser.html" aria-label="Beitrag lesen: Welches Gremium ist zuständig?">Beitrag lesen <span aria-hidden="true">→</span></a></div></article></div><a class="news-all" href="aktuelles/">Alle Beiträge ansehen →</a></section>
+
+    <section class="intro page-shell" id="anspruch">
       <div class="section-heading">
         <div>
           <p class="eyebrow dark">Was uns antreibt</p>

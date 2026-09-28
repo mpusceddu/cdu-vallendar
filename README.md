@@ -137,6 +137,12 @@ Der Alternativtext beschreibt knapp, wer oder was auf dem Bild zu sehen ist. For
 
 ## Veröffentlichung
 
+### Aktuelles (seit 28.09.2026)
+
+Startseite: drei aktuelle Beitragskacheln. Übersicht: `aktuelles/index.html`, Filter nach Ort via `?ort=urbar` bzw. `vg`, `vallendar`, `niederwerth`, `weitersburg`. Ohne JavaScript bleiben alle Meldungen lesbar. Einzelartikel sind statische HTML-Dateien unter `aktuelles/`. Neue Artikel zuerst dort erstellen, danach Übersicht und drei Startseitenkacheln pflegen. Veröffentlichungsdatum und Ereignisdatum unterscheiden; Quellen und Bestätigungsstände im Beitrag nennen. Gemeinsames Aussehen: `assets/news.css`; Filter: `assets/news.js`. Die drei SVG-Themenillustrationen sind eigene schematische Grafiken, keine Ereignisfotos. Vorhandene Bildfreigaben werden dadurch nicht erweitert. `noindex` bleibt bis zur Vorstandsfreigabe erhalten.
+
+Erstbefüllung: Schankanlage (Bestätigung Marco vom 07.09.2026), Vorstand (bestehende Wahlquelle plus bestätigte Ergänzungen vom 28.09.2026) und Gremienwegweiser (bestehende Website-Funktion). Keine neuen Beschlüsse oder Ereignistermine erfunden.
+
 Die Website wird aus dem Branch `main` über GitHub Pages veröffentlicht. Änderungen sollten mit einer verständlichen Commit-Nachricht dokumentiert werden.
 
 Nach jeder Veröffentlichung:
