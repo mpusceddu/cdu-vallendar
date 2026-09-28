@@ -506,3 +506,4 @@ footer { padding-block: 34px; background: #051827; color: white; }
 .team-portrait { position: relative; overflow: hidden; }
 .team-portrait img { position: absolute; width: 200%; max-width: none; height: auto; left: -44%; top: -20%; }
 .team-card .profile-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 10px; color: var(--cdu-teal-dark); font-size: 13px; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.team-portrait.team-portrait-pascal img { width: 500%; left: -143%; top: 0; }
