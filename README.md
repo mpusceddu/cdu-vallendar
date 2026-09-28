@@ -129,6 +129,8 @@ Die veröffentlichte Mitteilung zur Vorstandswahl sollte als Quelle erhalten ble
 
 ### Fotos ergänzen
 
+Marco Pusceddu: Porträt am 28.09.2026 auf seinen Auftrag von seiner persönlichen Website übernommen: https://marcopusceddu.de/assets/images/marco-pusceddu-portrait.jpg (Quellseite: https://marcopusceddu.de/). Unveränderte lokale Kopie unter `assets/marco-pusceddu-portrait.jpg`; runder Gesichtsausschnitt ausschließlich per CSS. Verwendet in Urbar, VG-Rat und den beiden Team-Einträgen. Persönliche Website bei künftigen Profiländerungen als Quelle heranziehen; ortsabhängige Funktionen getrennt beibehalten.
+
 Nur freigegebene Dateien mit geklärten Bildrechten verwenden. Dateinamen klein, eindeutig und ohne Leerzeichen schreiben, beispielsweise `marco-pusceddu.jpg`. Große Originale vor der Veröffentlichung fürs Web verkleinern.
 
 Der Alternativtext beschreibt knapp, wer oder was auf dem Bild zu sehen ist. Formulierungen wie „Bild“ oder „Foto von“ sind nicht nötig.

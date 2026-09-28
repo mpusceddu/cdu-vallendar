@@ -204,7 +204,7 @@ await check('Public site and portal preview use separate, consistently versioned
     assert(version && /^[\w.-]+$/.test(version), `${path}: stylesheet version is missing or malformed`);
     versions.get(portal ? 'portal' : 'website').add(version);
   }
-  assert.deepEqual([...versions.get('website')], ['20'], 'The website must consistently use stylesheet version 20');
+  assert.deepEqual([...versions.get('website')], ['21'], 'The website must consistently use stylesheet version 21');
   assert.deepEqual([...versions.get('portal')], ['1'], 'Portal preview must consistently use its own stylesheet version 1');
   assert.equal(documents.get('funktionstraeger/gremien.html')?.querySelectorAll('link[href]').filter(link => new URL(link.attrs.href, new URL('funktionstraeger/gremien.html', base)).pathname === new URL('funktionstraeger/gremien.css', base).pathname && new URL(link.attrs.href, base).searchParams.get('v') === '1').length, 1, 'The responsibilities page needs its own versioned supplementary stylesheet');
   assert.equal(documents.get('funktionstraeger/ci-guide.html')?.querySelectorAll('link[href]').filter(link => new URL(link.attrs.href, new URL('funktionstraeger/ci-guide.html', base)).pathname === new URL('funktionstraeger/ci-guide.css', base).pathname && new URL(link.attrs.href, base).searchParams.get('v') === '1').length, 1, 'The local CI guide needs its own versioned supplementary stylesheet');
