@@ -161,6 +161,23 @@ function filesBelow(dir) {
 }
 const htmlFiles = filesBelow(root).filter(file => file.endsWith('.html'));
 const sourceByPath = new Map(htmlFiles.map(file => [relative(root, file), readFileSync(file, 'utf8')]));
+await check('Every page includes resolving SVG, ICO, PNG and Apple favicon links', () => {
+  for (const [path, html] of sourceByPath) {
+    const prefix = path === '404.html' ? '/cdu-vallendar/' : '../'.repeat(path.split('/').length - 1);
+    for (const asset of ['favicon.ico', 'assets/favicon.svg', 'assets/favicon-32.png', 'assets/apple-touch-icon.png']) {
+      assert.ok(html.includes(`href="${prefix}${asset}?v=20260929"`), `${path}: ${asset}`);
+      assert.ok(existsSync(join(root, asset)), asset);
+    }
+  }
+  const ico = readFileSync(join(root, 'favicon.ico'));
+  assert.equal(ico.readUInt16LE(2), 1);
+  assert.equal(ico.readUInt16LE(4), 3);
+  for (const size of [16, 32, 48, 180]) {
+    const png = readFileSync(join(root, size === 180 ? 'assets/apple-touch-icon.png' : `assets/favicon-${size}.png`));
+    assert.equal(png.readUInt32BE(16), size);
+    assert.equal(png.readUInt32BE(20), size);
+  }
+});
 const documents = new Map([...sourceByPath].map(([path, source]) => [path, parseHtml(source)]));
 
 await check('Internal links and fragments resolve under /cdu-vallendar/', () => {
