@@ -222,9 +222,10 @@ await check('Public site and portal preview use separate, consistently versioned
     assert(!urls.some(url => url.pathname === new URL(portal ? 'assets/styles.css' : 'funktionstraeger/styles.css', base).pathname), `${path}: website and portal styles must not be mixed`);
     const version = stylesheet.searchParams.get('v');
     assert(version && /^[\w.-]+$/.test(version), `${path}: stylesheet version is missing or malformed`);
+    assert.equal(version, portal ? '1' : path === 'index.html' ? '20261020-home1' : '24', `${path}: unexpected stylesheet version`);
     versions.get(portal ? 'portal' : 'website').add(version);
   }
-  assert.deepEqual([...versions.get('website')], ['24'], 'The website must consistently use stylesheet version 24');
+  assert.deepEqual([...versions.get('website')].sort(), ['20261020-home1', '24'], 'The website must use the approved homepage and shared stylesheet versions');
   assert.deepEqual([...versions.get('portal')], ['1'], 'Portal preview must consistently use its own stylesheet version 1');
   assert.equal(documents.get('funktionstraeger/gremien.html')?.querySelectorAll('link[href]').filter(link => new URL(link.attrs.href, new URL('funktionstraeger/gremien.html', base)).pathname === new URL('funktionstraeger/gremien.css', base).pathname && new URL(link.attrs.href, base).searchParams.get('v') === '1').length, 1, 'The responsibilities page needs its own versioned supplementary stylesheet');
   assert(!existsSync(join(root, 'funktionstraeger/ci-guide.css')), 'CI-specific styling belongs to the protected portal source');
@@ -624,13 +625,18 @@ await check('Desktop, mobile and footer entries consistently say Funktionsträge
     for (const label of ['Hauptnavigation', 'Mobile Navigation', 'Service und Rechtliches']) {
       const navs = doc.querySelectorAll('nav').filter(nav => nav.attrs['aria-label'] === label);
       assert.equal(navs.length, 1, `${path}: expected exactly one ${label}`);
+      if (path === 'index.html' && label !== 'Service und Rechtliches') {
+        const expected = label === 'Hauptnavigation' ? ['#orte','#arbeit','#menschen','#aktuelles','#mitmachen'] : ['#orte','#arbeit','#menschen','#aktuelles','#mitmachen','#kontakt'];
+        assert.deepEqual(navs[0].querySelectorAll('a[href]').map(link => link.attrs.href), expected, `${path}: ${label} must retain the approved homepage anchors`);
+        continue;
+      }
       const entries = navs[0].querySelectorAll('a[href]').filter(link => link.attrs.href === expectedHref);
       assert.equal(entries.length, 1, `${path}: ${label} must retain its portal destination ${expectedHref}`);
       assert.equal(entries[0].textContent.trim(), 'Funktionsträgerportal', `${path}: ${label} uses the wrong portal label`);
       entryCount++;
     }
   }
-  assert.equal(entryCount, 39);
+  assert.equal(entryCount, 37);
   for (const [path, doc] of documents) {
     const robots = doc.querySelectorAll('meta').find(meta => meta.attrs.name === 'robots')?.attrs.content;
     assert.match(robots ?? '', /(?:^|[,\s])noindex(?:$|[,\s])/i, `${path}: renaming the portal must not remove noindex`);

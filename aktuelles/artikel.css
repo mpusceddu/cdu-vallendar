@@ -1,0 +1,29 @@
+/* Gemeinsame Artikelgestaltung. */
+.article-page .news-article { max-width: 1060px; padding-block: 72px 88px; }
+.article-page .news-article > :is(.breadcrumb,.eyebrow,h1,.news-date,.news-preview-note) { max-width: 860px; margin-inline: auto; }
+.article-page .news-article .breadcrumb { margin-bottom: 36px; flex-wrap: wrap; }
+.article-page .news-article h1 { margin-block: 20px 24px; font-size: clamp(36px,4.7vw,60px); line-height: 1.1; letter-spacing: -.035em; text-wrap: pretty; }
+.article-page .news-date { font-size: 13px; line-height: 1.7; }
+.article-page .news-article-art { margin-block: 40px 48px; width: 100%; height: auto; max-height: none; aspect-ratio: 2.4; object-fit: contain; background: #071f33; }
+.article-page .news-prose { max-width: 740px; font-size: 17px; line-height: 1.8; }
+.article-page .news-prose > p { margin-block: 0 24px; }
+.article-page .news-prose .news-lead { font-size: 23px; line-height: 1.55; margin-bottom: 32px; color: #071f33; }
+.article-page .news-prose h2 { font-size: 32px; line-height: 1.2; margin: 40px 0 18px; }
+.article-page .news-evidence { padding: 24px 0; margin-block: 36px; border-block: 1px solid #c5d1cf; background: transparent; font-size: 14px; line-height: 1.75; color: #52656c; }
+.article-page .news-evidence > strong { display: block; color: #00777c; font-weight: 600; }
+.article-page .news-evidence h2 { font-size: 24px; margin: 0 0 16px; }
+.article-page .news-evidence ul { margin-block: 0 16px; }
+.article-page .news-evidence p:last-child { margin-bottom: 0; }
+.article-page .news-preview-note { padding: 16px 0; margin-bottom: 28px; border: 0; border-block: 1px solid #c5d1cf; background: transparent; }
+.article-page .news-kind { background: transparent; padding: 0; font-weight: 600; }
+.article-page a:focus-visible { outline: 2px solid #ffa600; outline-offset: 5px; }
+@media (max-width: 720px) {
+  .article-page .news-article { padding-block: 48px 60px; }
+  .article-page .news-article h1 { font-size: 36px; line-height: 1.12; hyphens: auto; }
+  .article-page .news-article .breadcrumb { margin-bottom: 28px; }
+  .article-page .news-article-art { margin-block: 28px 32px; aspect-ratio: 16/9; }
+  .article-page .news-prose { font-size: 16px; line-height: 1.75; }
+  .article-page .news-prose .news-lead { font-size: 20px; }
+  .article-page .news-prose h2 { font-size: 28px; margin-top: 32px; }
+  .article-page .news-evidence h2 { font-size: 23px; }
+}
