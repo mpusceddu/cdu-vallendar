@@ -1,0 +1,41 @@
+/* Lokale Gestaltung der Themenwerkstatt; Finder und Formularlogik unverändert. */
+.proposal-page .local-hero h1 { font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 400; }
+.proposal-page .local-facts { max-width: 660px; margin-top: 32px; padding: 24px 0 0; border: 0; border-top: 1px solid #38515f; background: transparent; color: #dce8eb; }
+.proposal-page .local-facts strong { color: white; font-size: 22px; }
+.proposal-page .local-facts p { color: #c4d1d7; margin-bottom: 0; }
+.proposal-page :is(.proposal-intro,.jurisdiction-section,.proposal-form-section,.formal-paths) { padding-block: 88px; }
+.proposal-page .local-section-heading { gap: 48px; margin-bottom: 40px; }
+.proposal-page .local-section-heading h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.05; }
+.proposal-page :is(.proposal-steps,.formal-path-grid) { border: 0; gap: 0 40px; }
+.proposal-page :is(.proposal-steps article,.formal-path-grid article,.jurisdiction-cards article) { padding: 26px 0; border: 0; border-top: 1px solid #becdca; background: transparent; }
+.proposal-page :is(.proposal-steps h3,.formal-path-grid h3,.jurisdiction-cards h3) { margin: 14px 0 12px; font-size: 26px; line-height: 1.2; }
+.proposal-page .jurisdiction-cards { gap: 0 56px; }
+.proposal-page .jurisdiction-tool { gap: 48px; box-shadow: none; border-top: 1px solid #becdca; padding-top: 28px; }
+.proposal-page .jurisdiction-controls { padding: 0; background: transparent; align-content: start; }
+.proposal-page .jurisdiction-result { padding: 0 0 0 32px; border: 0; border-left: 1px solid #becdca; background: transparent; color: #071f33; }
+.proposal-page .jurisdiction-result .jurisdiction-label { color: #00777c; margin-bottom: 20px; }
+.proposal-page .jurisdiction-result p { color: #52656c; }
+.proposal-page .proposal-form-grid { gap: 56px; }
+.proposal-page .proposal-form { padding: 28px 0 0; border: 0; border-top: 1px solid #38515f; background: transparent; }
+.proposal-page .proposal-form :is(.field-group label,.jurisdiction-note strong) { color: white; }
+.proposal-page .proposal-form :is(.jurisdiction-note,.field-group small,.form-confirmation) { color: #c4d1d7; }
+.proposal-page .proposal-form .jurisdiction-note a { color: #8adbd7; }
+.proposal-page .field-group label { font-weight: 600; }
+.proposal-page .proposal-form-note { padding: 28px 0 0; border-top: 1px solid #38515f; background: transparent; }
+.proposal-page .proposal-pending { padding: 20px 0 0; border: 0; border-top: 1px solid #38515f; background: transparent; }
+.proposal-page .proposal-output { padding: 28px 0 0; border-top: 1px solid #38515f; background: transparent; color: white; }
+.proposal-page .proposal-output :is(.jurisdiction-label,.copy-status) { color: #8adbd7; }
+.proposal-page .formal-note { padding: 24px 0 0; border: 0; border-top: 1px solid #becdca; background: transparent; }
+.proposal-page :is(button,a):focus-visible { outline: 2px solid #ffa600; outline-offset: 5px; }
+@media (max-width: 1100px) {
+  .proposal-page .jurisdiction-tool { gap: 28px; }
+  .proposal-page .jurisdiction-result { padding: 24px 0 0; border: 0; border-top: 1px solid #becdca; }
+  .proposal-page .proposal-form-grid { gap: 40px; }
+}
+@media (max-width: 720px) {
+  .proposal-page :is(.proposal-intro,.jurisdiction-section,.proposal-form-section,.formal-paths) { padding-block: 60px; }
+  .proposal-page .local-section-heading { gap: 24px; margin-bottom: 32px; }
+  .proposal-page .local-section-heading h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+  .proposal-page :is(.proposal-steps,.jurisdiction-cards,.formal-path-grid) { grid-template-columns: 1fr; }
+  .proposal-page :is(.proposal-steps h3,.formal-path-grid h3,.jurisdiction-cards h3) { font-size: 24px; }
+}
