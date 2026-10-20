@@ -1,0 +1,101 @@
+/* Gemeinsamer lokaler Ortsseiten-Entwurf: Header, Einstieg, Menschen, Themen und Kontakt. */
+.local-intro { padding-block: 88px; gap: 64px; }
+.local-intro h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
+.local-intro-copy p:last-child { margin-bottom: 0; }
+@media (max-width: 820px) {
+  .local-intro { gap: 32px; }
+}
+@media (max-width: 720px) {
+  .local-intro { padding-block: 60px; }
+  .local-intro h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+}
+.header-inner { gap: 22px; }
+.main-nav { gap: 18px; }
+.local-hero { padding-block: 85px; }
+.local-hero::after { content: none; }
+.local-hero > .page-shell { position: relative; z-index: 1; }
+.local-hero .breadcrumb { margin-bottom: 36px; }
+.local-hero-grid { grid-template-columns: 1fr; gap: 0; align-items: center; }
+.local-hero h1 { font-size: clamp(42px,5.7vw,78px); line-height: 1.04; letter-spacing: -.055em; }
+.local-lead { max-width: 660px; font-size: 20px; color: #dce8eb; }
+.local-hero .eyebrow::before { background: #ffa600; }
+@media (max-width: 1150px) {
+  .main-nav, .header-cta { display: none; }
+  .mobile-menu { display: block; }
+}
+:is(#team, #engagement) { padding-block: 88px; }
+:is(#team, #engagement) .local-section-heading h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
+:is(#team, #engagement) .team-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 56px; max-width: none; margin-inline: 0; }
+:is(#team, #engagement) .team-grid > .team-card { min-height: 0; padding: 24px 0; flex-direction: row; align-items: flex-start; gap: 18px; border: 0; border-top: 1px solid #38515f; background: transparent; color: white; animation: none; overflow: visible; }
+:is(#team, #engagement) .team-card > div { min-width: 0; }
+:is(#team, #engagement) .team-card:hover { translate: 0 0; box-shadow: none; border-top-color: #38515f; }
+:is(#team, #engagement) .team-card::before { content: none; }
+:is(#team, #engagement) .team-card:hover .team-initials { transform: none; background: #193848; color: #8adbd7; }
+:is(#team, #engagement) .team-initials { width: 40px; height: 40px; background: #193848; color: #8adbd7; font-size: 12px; font-weight: 600; }
+:is(#team, #engagement) .team-card h3 { color: #fff; font-size: 24px; line-height: 1.2; margin: 0 0 8px; }
+:is(#team, #engagement) .team-card p { color: #c4d1d7; font-size: 14px; line-height: 1.6; max-width: 340px; }
+:is(#team, #engagement) .team-card .profile-link { margin-top: 4px; color: #8adbd7; font-weight: 500; }
+:is(#team, #engagement) .team-card .profile-link:focus-visible { outline: 2px solid #ffa600; outline-offset: 4px; }
+#engagement .civic-note { grid-column: auto; padding: 24px 0; border: 0; border-top: 1px solid #38515f; background: transparent; color: #c4d1d7; font-size: 15px; }
+#engagement .civic-note strong { color: #fff; font-size: 24px; }
+@media (max-width: 720px) {
+  :is(#team, #engagement) { padding-block: 60px; }
+  :is(#team, #engagement) .local-section-heading { margin-bottom: 32px; gap: 24px; }
+  :is(#team, #engagement) .local-section-heading h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+  :is(#team, #engagement) .team-grid { grid-template-columns: 1fr; }
+  :is(#team, #engagement) .team-grid > .team-card { padding: 22px 0; gap: 16px; }
+  :is(#team, #engagement) .team-card h3 { font-size: 23px; }
+}
+@media (max-width: 820px) {
+  .local-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 800px) {
+  .local-hero { padding-block: 55px; }
+  .local-hero .breadcrumb { margin-bottom: 28px; }
+}
+@media (max-width: 520px) {
+  .brand { gap: 9px; }
+  .brand-logo { width: 62px; }
+  .brand-copy { display: flex; max-width: 170px; }
+  .brand-copy strong { font-size: 10px; }
+  .brand-copy span { font-size: 8px; line-height: 1.4; }
+  .header-inner { gap: 8px; }
+  .mobile-menu summary { padding: 10px; min-width: 58px; font-size: 11px; }
+  .local-hero h1 { font-size: 44px; hyphens: none; }
+  .local-lead { font-size: 17px; }
+}
+#themen { padding-block: 88px; }
+#themen .local-section-heading { gap: 48px; margin-bottom: 36px; }
+#themen h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
+#themen .topic-list { gap: 0 56px; }
+#themen .local-topic { padding: 26px 0; border: 0; border-top: 1px solid #c5d1cf; background: transparent; }
+#themen .local-topic h3 { margin: 14px 0 10px; font-size: 26px; line-height: 1.2; }
+#themen .local-topic p { line-height: 1.6; }
+#themen .source-note { margin-top: 16px; padding: 20px 0 0; border: 0; border-top: 1px solid #c5d1cf; line-height: 1.65; }
+@media (max-width: 720px) {
+  #themen { padding-block: 60px; }
+  #themen .local-section-heading { gap: 24px; margin-bottom: 32px; }
+  #themen h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+  #themen .topic-list { gap: 0; }
+  #themen .local-topic { padding: 24px 0; }
+  #themen .local-topic h3 { font-size: 24px; }
+}
+#kontakt { padding-block: 88px; }
+#kontakt .local-contact { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 64px; align-items: start; }
+#kontakt h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
+#kontakt .local-contact p:not(.eyebrow) { color: #d4e1e7; }
+#kontakt .local-contact .eyebrow { color: #70dcd7; font-size: 12px; line-height: 1.5; }
+#kontakt .local-contact-actions { gap: 0; border-top: 1px solid #4c6472; }
+#kontakt .local-contact-actions a { min-height: 76px; padding: 22px 4px; border: 0; border-bottom: 1px solid #4c6472; background: transparent; color: white; font-size: 16px; line-height: 1.5; }
+#kontakt .local-contact-actions a > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+#kontakt .local-contact-actions a > span:last-child { color: #75e1dc; flex-shrink: 0; }
+#kontakt .local-contact-actions a:hover { color: #75e1dc; background: rgba(255,255,255,.04); }
+#kontakt a:focus-visible { outline: 3px solid #ffa600; outline-offset: 4px; }
+@media (max-width: 820px) {
+  #kontakt .local-contact { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 720px) {
+  #kontakt { padding-block: 60px; }
+  #kontakt h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+  #kontakt .local-contact-actions a { min-height: 68px; padding-block: 20px; }
+}
