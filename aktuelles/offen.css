@@ -1,0 +1,27 @@
+/* Nur die Aktuelles-Übersicht: vorhandene Artikel und Startseite bleiben unverändert. */
+.news-page .news-section { padding-block: 88px; }
+.news-page .news-section h2 { margin: 0 0 32px; font-size: clamp(40px,4.7vw,64px); line-height: 1.05; letter-spacing: -.035em; }
+.news-page .news-grid { gap: 48px 32px; }
+.news-page .news-card { background: transparent; border: 0; }
+.news-page .news-art { aspect-ratio: 32/17; }
+.news-page .news-art img { height: auto; }
+.news-page .news-card-body { padding: 20px 0 0; }
+.news-page .news-meta { margin: 0 0 6px; font-weight: 600; }
+.news-page .news-date { margin: 0; }
+.news-page .news-card h3 { margin: 16px 0 12px; font-size: 26px; }
+.news-page .news-card-body > p:not(.news-meta):not(.news-date) { margin: 0 0 8px; }
+.news-page .news-read { font-weight: 500; text-decoration: underline; text-underline-offset: 4px; }
+.news-page .news-preview-note { padding: 18px 0; border: 0; border-top: 1px solid #c5d1cf; background: transparent; }
+.news-page .news-filter { padding: 20px 0; margin: 0 0 36px; border-block: 1px solid #c5d1cf; gap: 16px 24px; }
+.news-page .news-filter label { font-weight: 600; }
+.news-page .news-filter select { padding: 12px 44px 12px 14px; appearance: none; background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23071f33' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center; }
+.news-page .news-filter p { margin: 0; }
+.news-page .news-kind { padding: 0; background: transparent; font-weight: 600; }
+.news-page #news-empty { padding: 24px 0; border: 0; border-top: 1px solid #c5d1cf; background: transparent; }
+.news-page :is(a,select):focus-visible { outline: 2px solid #ffa600; outline-offset: 5px; }
+@media (max-width: 720px) {
+  .news-page .news-section { padding-block: 60px; }
+  .news-page .news-section h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+  .news-page .news-grid { gap: 36px 24px; }
+  .news-page .news-card h3 { font-size: 24px; }
+}
