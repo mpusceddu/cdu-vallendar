@@ -55,7 +55,7 @@ function scopedRoute(place, topic, detail) {
     copy: `Erste Anlaufstelle: ${office} Politischer Weg: ${political}${uncertain ? ' Einzelfallprüfung: Träger, Zuständigkeit und Entscheidungsbefugnis müssen vor einer Weitergabe geklärt werden.' : ''}`
   });
   const local = localRoute(place);
-  const localPolitical = `${local.title.replace('Voraussichtlich: ', '')}; zuständiger Ausschuss, Bürgermeister oder Rat je nach Entscheidungsbefugnis.`;
+  const localPolitical = `${local.title}; zuständiger Ausschuss, Bürgermeister oder Rat je nach Entscheidungsbefugnis.`;
   if (topic === 'school') {
     if (detail === 'primary') return result(
       ['vallendar','urbar','niederwerth','weitersburg'].includes(place) ? `Schulträger: ${place === 'vallendar' ? 'Stadt Vallendar' : `Ortsgemeinde ${placeNames[place]}`}` : 'Grundschule: Ort noch eingrenzen',
@@ -101,23 +101,23 @@ function localRoute(place) {
   if (place === 'vallendar') {
     return {
       level: 'local',
-      title: 'Voraussichtlich: Stadtrat Vallendar',
-      copy: 'Örtliche Planungen, Einrichtungen und Angelegenheiten der Stadt gehören grundsätzlich in den Stadtrat. Die Verbandsgemeindeverwaltung bereitet viele Vorgänge lediglich verwaltungsmäßig vor.'
+      title: 'Stadt Vallendar',
+      copy: 'Örtliche Planungen, Einrichtungen und Angelegenheiten der Stadt sind Aufgaben der Stadt. Rat, Ausschuss und Bürgermeister entscheiden im Rahmen ihrer jeweiligen Befugnisse. Die Bearbeitung durch die VG-Verwaltung begründet keine Zuständigkeit des VG-Rates.'
     };
   }
 
   if (place === 'urbar') {
     return {
       level: 'local',
-      title: 'Voraussichtlich: Ortsgemeinderat Urbar',
-      copy: 'Örtliche Planungen, Einrichtungen und Angelegenheiten Urbars gehören grundsätzlich in den Ortsgemeinderat. Die CDU-Fraktion kann das Thema nach Prüfung politisch aufgreifen.'
+      title: 'Ortsgemeinde Urbar',
+      copy: 'Örtliche Planungen, Einrichtungen und Angelegenheiten Urbars sind Aufgaben der Ortsgemeinde. Rat, Ausschuss und Bürgermeister entscheiden im Rahmen ihrer jeweiligen Befugnisse. Die CDU-Fraktion kann das Thema politisch aufgreifen.'
     };
   }
 
   if (place === 'niederwerth') {
     return {
       level: 'special',
-      title: 'Voraussichtlich: Ortsgemeinderat Niederwerth',
+      title: 'Ortsgemeinde Niederwerth',
       copy: 'Auf Niederwerth gibt es keine klassische CDU-Fraktion. Wir können die Zuständigkeit prüfen und einen sinnvollen örtlichen Kontakt oder Weiterleitungsweg benennen.'
     };
   }
@@ -125,7 +125,7 @@ function localRoute(place) {
   if (place === 'weitersburg') {
     return {
       level: 'special',
-      title: 'Voraussichtlich: Ortsgemeinderat Weitersburg',
+      title: 'Ortsgemeinde Weitersburg',
       copy: 'In Weitersburg besteht derzeit keine CDU-Ratsfraktion. Wir können das Anliegen einordnen und an eine geeignete Stelle oder einen örtlichen Ansprechpartner weitergeben.'
     };
   }
@@ -142,7 +142,7 @@ function getRoute(place, topic, detail = '') {
     return {
       level: 'open',
       title: 'Themenfeld noch auswählen',
-      copy: 'Danach zeigen wir, wo das Anliegen voraussichtlich hingehört und welchen politischen Weg wir empfehlen.'
+      copy: 'Danach zeigen wir die zuständige Ebene und den passenden Weg. Fehlen entscheidende Angaben, kennzeichnen wir die Einzelfallprüfung.'
     };
   }
 
@@ -157,7 +157,7 @@ function getRoute(place, topic, detail = '') {
   if (topic === 'higher') {
     return {
       level: 'higher',
-      title: 'Voraussichtlich: Land oder Bund',
+      title: 'Land oder Bund: konkrete Zuständigkeit prüfen',
       copy: 'Der örtliche Rat kann hier meist nicht selbst entscheiden. Bei einem konkreten Bezug zu unserer Verbandsgemeinde prüfen wir, ob eine Weitergabe an Landtags- oder Bundestagsabgeordnete sinnvoll ist.'
     };
   }
@@ -248,7 +248,7 @@ proposalForm?.addEventListener('submit', (event) => {
     '',
     `Ort / räumlicher Bezug: ${place}`,
     `Genaue Stelle oder Einrichtung: ${location || 'nicht angegeben'}`,
-    `Erste Zuständigkeitseinordnung: ${route.title.replace('Voraussichtlich: ', '')}`,
+    `Erste Zuständigkeitseinordnung: ${route.title}`,
     `Themenfeld: ${topics[proposalCategory.value]?.[0] || 'offen'}`,
     `Konkretisierung: ${proposalDetail.value ? proposalDetail.options[proposalDetail.selectedIndex].text : 'noch unklar / nicht erforderlich'}`,
     route.copy,

@@ -394,7 +394,7 @@ await check('Finder-prefilled form produces a valid local-only draft with its ow
   assert.equal(page.select('[data-proposal-output]').hidden, false);
   const text = page.select('[data-proposal-text]').value;
   assert.match(text, /Ort \/ räumlicher Bezug: Urbar/);
-  assert.match(text, /Erste Zuständigkeitseinordnung: Ortsgemeinderat Urbar/);
+  assert.match(text, /Erste Zuständigkeitseinordnung: Ortsgemeinde Urbar/);
   assert.match(text, /THEMA: Beleuchtung prüfen/);
 });
 
@@ -433,7 +433,7 @@ await check('Proposal keeps Urbar jurisdiction when the independent finder chang
   assert(submit.defaultPrevented, 'Submit must not navigate or send a request');
   const text = page.select('[data-proposal-text]').value;
   assert.match(text, /Ort \/ räumlicher Bezug: Urbar/);
-  assert.match(text, /Erste Zuständigkeitseinordnung: Ortsgemeinderat Urbar/);
+  assert.match(text, /Erste Zuständigkeitseinordnung: Ortsgemeinde Urbar/);
   assert.doesNotMatch(text, /Weitersburg|Einordnung: Verbandsgemeinderat/);
   assert.equal(page.select('[data-proposal-output]').hidden, false);
 });

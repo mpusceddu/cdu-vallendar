@@ -313,6 +313,13 @@ footer { padding-block: 34px; background: #051827; color: white; }
 .jurisdiction-cards p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
 .jurisdiction-note { margin: 22px 0 0; color: #52656c; font-size: 12px; line-height: 1.65; }
 .jurisdiction-note strong { color: var(--cdu-navy); }
+.jurisdiction-tool + .jurisdiction-note { margin-block: 28px; }
+.jurisdiction-cards { gap: 20px; }
+.jurisdiction-cards h3 { min-height: 2.24em; }
+.jurisdiction-cards + .jurisdiction-note { margin-top: 28px; }
+@media (max-width: 700px) {
+  .jurisdiction-cards h3 { min-height: 0; }
+}
 .jurisdiction-note a { color: var(--cdu-teal-dark); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
 
 .proposal-form-section { padding-block: 100px 110px; background: var(--cdu-navy); color: white; }
