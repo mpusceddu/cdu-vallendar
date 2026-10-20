@@ -1,0 +1,76 @@
+/* Gemeinsame Orange-Akzente für die öffentliche Website.
+   Helle Flächen behalten dunkle Schrift; Orange dient als Akzent. */
+.orange-theme {
+  --cdu-teal: #ffa600;
+  --cdu-teal-dark: #071f33;
+  --cdu-gold: #ffa600;
+  --teal: #ffa600;
+  --teal-dark: #071f33;
+  --mint: #ffa600;
+}
+.orange-theme .button-primary,
+.orange-theme .header-cta { background: #ffa600; color: #071f33; }
+.orange-theme .button-primary:hover,
+.orange-theme .header-cta:hover { background: #ffb62f; color: #071f33; }
+.orange-theme .main-nav a:hover,
+.orange-theme .main-nav a:focus-visible { color: #071f33; border-color: #ffa600; }
+.orange-theme .mobile-menu nav a:last-child,
+.orange-theme .section-nav a:hover,
+.orange-theme .section-nav a:focus-visible { background: #fff0d2; color: #071f33; }
+.orange-theme :focus-visible { outline: 3px solid #ffa600; outline-offset: 5px; }
+.orange-theme .eyebrow,
+.orange-theme .eyebrow.light,
+.orange-theme #kontakt .local-contact .eyebrow { color: #ffa600; }
+.orange-theme .eyebrow.dark,
+.orange-theme .small-label,
+.orange-theme .news-meta,
+.orange-theme .local-topic > span { color: #071f33; }
+.orange-theme .eyebrow.dark::before {
+  content: ""; display: inline-block; width: 22px; height: 2px;
+  margin-right: 10px; vertical-align: middle; background: #ffa600;
+}
+.orange-theme .places-grid .place-card-link:hover { border-top-color: #ffa600; }
+.orange-theme .places-grid .place-card-link:hover h3,
+.orange-theme .place-link > span,
+.orange-theme #menschen .people-link,
+.orange-theme #team .team-card .profile-link,
+.orange-theme #kontakt .local-contact-actions a > span:last-child,
+.orange-theme #kontakt .local-contact-actions a:hover { color: #ffa600; }
+.orange-theme #menschen { background: #071f33; }
+.orange-theme #menschen .people-copy p { color: #d4e1e7; }
+.orange-theme #team .team-initials,
+.orange-theme #team .team-card:hover .team-initials { background: #193848; color: #ffa600; }
+.orange-theme .local-section-dark .source-note a { color: #ffa600; }
+.orange-theme .local-section-dark .back-link { color: #ffa600; }
+.orange-theme .hero-pattern {
+  background: radial-gradient(circle at 77% 48%, rgba(255,166,0,.08), transparent 30%),
+    linear-gradient(124deg, transparent 55%, rgba(255,255,255,.04) 55% 70%, transparent 70%),
+    linear-gradient(90deg, #061b2c, #0a2c43);
+}
+.orange-theme .hero-pattern::after { border-color: rgba(255,166,0,.08); }
+.orange-theme .social-section { background: #f0f1ed; }
+.orange-theme #instagram .social-outlook li { border-top-color: #c5d1cf; }
+.orange-theme .text-link,
+.orange-theme .news-read,
+.orange-theme .people-link { text-decoration-color: #ffa600; }
+.orange-theme #aktuelles .news-read { text-decoration-color: #ffa600; }
+.orange-theme .place-link,
+.orange-theme :is(#fraktion,#engagement) .team-card .profile-link,
+.orange-theme :is(#fraktion,#engagement) .team-initials,
+.orange-theme .motion-meta,
+.orange-theme .motion-card > a,
+.orange-theme .proposal-form .jurisdiction-note a,
+.orange-theme .proposal-output :is(.jurisdiction-label,.copy-status) { color: #ffa600; }
+.orange-theme .council-card-footer a,
+.orange-theme .jurisdiction-result .jurisdiction-label { color: #071f33; }
+.orange-theme .motion-filter[aria-pressed="true"],
+.orange-theme .motion-filter.active { background: #ffa600; color: #071f33; border-color: #ffa600; }
+.orange-theme input[type="checkbox"] { accent-color: #946000; }
+.orange-theme .motion-filters button[aria-pressed="true"],
+.orange-theme .motion-filters button:hover { color: #ffa600; border-bottom-color: #ffa600; }
+.orange-theme .portal-entry a:not(.button) { color: #ffa600; }
+.orange-theme #arbeit .politics-links a:hover,
+.orange-theme #mitmachen .contact-options a:hover strong {
+  color: #071f33; text-decoration: underline; text-decoration-color: #ffa600;
+  text-underline-offset: 5px;
+}
