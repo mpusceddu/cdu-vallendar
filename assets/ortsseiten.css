@@ -23,28 +23,28 @@
   .main-nav, .header-cta { display: none; }
   .mobile-menu { display: block; }
 }
-:is(#team, #engagement) { padding-block: 88px; }
-:is(#team, #engagement) .local-section-heading h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
-:is(#team, #engagement) .team-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 56px; max-width: none; margin-inline: 0; }
-:is(#team, #engagement) .team-grid > .team-card { min-height: 0; padding: 24px 0; flex-direction: row; align-items: flex-start; gap: 18px; border: 0; border-top: 1px solid #38515f; background: transparent; color: white; animation: none; overflow: visible; }
-:is(#team, #engagement) .team-card > div { min-width: 0; }
-:is(#team, #engagement) .team-card:hover { translate: 0 0; box-shadow: none; border-top-color: #38515f; }
-:is(#team, #engagement) .team-card::before { content: none; }
-:is(#team, #engagement) .team-card:hover .team-initials { transform: none; background: #193848; color: #8adbd7; }
-:is(#team, #engagement) .team-initials { width: 40px; height: 40px; background: #193848; color: #8adbd7; font-size: 12px; font-weight: 600; }
-:is(#team, #engagement) .team-card h3 { color: #fff; font-size: 24px; line-height: 1.2; margin: 0 0 8px; }
-:is(#team, #engagement) .team-card p { color: #c4d1d7; font-size: 14px; line-height: 1.6; max-width: 340px; }
-:is(#team, #engagement) .team-card .profile-link { margin-top: 4px; color: #8adbd7; font-weight: 500; }
-:is(#team, #engagement) .team-card .profile-link:focus-visible { outline: 2px solid #ffa600; outline-offset: 4px; }
+:is(#team, #engagement, #fraktion) { padding-block: 88px; }
+:is(#team, #engagement, #fraktion) .local-section-heading h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
+:is(#team, #engagement, #fraktion) .team-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 56px; max-width: none; margin-inline: 0; }
+:is(#team, #engagement, #fraktion) .team-grid > .team-card { min-height: 0; padding: 24px 0; flex-direction: row; align-items: flex-start; gap: 18px; border: 0; border-top: 1px solid #38515f; background: transparent; color: white; animation: none; overflow: visible; }
+:is(#team, #engagement, #fraktion) .team-card > div { min-width: 0; }
+:is(#team, #engagement, #fraktion) .team-card:hover { translate: 0 0; box-shadow: none; border-top-color: #38515f; }
+:is(#team, #engagement, #fraktion) .team-card::before { content: none; }
+:is(#team, #engagement, #fraktion) .team-card:hover .team-initials { transform: none; background: #193848; color: #8adbd7; }
+:is(#team, #engagement, #fraktion) .team-initials { width: 40px; height: 40px; background: #193848; color: #8adbd7; font-size: 12px; font-weight: 600; }
+:is(#team, #engagement, #fraktion) .team-card h3 { color: #fff; font-size: 24px; line-height: 1.2; margin: 0 0 8px; }
+:is(#team, #engagement, #fraktion) .team-card p { color: #c4d1d7; font-size: 14px; line-height: 1.6; max-width: 340px; }
+:is(#team, #engagement, #fraktion) .team-card .profile-link { margin-top: 4px; color: #8adbd7; font-weight: 500; }
+:is(#team, #engagement, #fraktion) .team-card .profile-link:focus-visible { outline: 2px solid #ffa600; outline-offset: 4px; }
 #engagement .civic-note { grid-column: auto; padding: 24px 0; border: 0; border-top: 1px solid #38515f; background: transparent; color: #c4d1d7; font-size: 15px; }
 #engagement .civic-note strong { color: #fff; font-size: 24px; }
 @media (max-width: 720px) {
-  :is(#team, #engagement) { padding-block: 60px; }
-  :is(#team, #engagement) .local-section-heading { margin-bottom: 32px; gap: 24px; }
-  :is(#team, #engagement) .local-section-heading h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
-  :is(#team, #engagement) .team-grid { grid-template-columns: 1fr; }
-  :is(#team, #engagement) .team-grid > .team-card { padding: 22px 0; gap: 16px; }
-  :is(#team, #engagement) .team-card h3 { font-size: 23px; }
+  :is(#team, #engagement, #fraktion) { padding-block: 60px; }
+  :is(#team, #engagement, #fraktion) .local-section-heading { margin-bottom: 32px; gap: 24px; }
+  :is(#team, #engagement, #fraktion) .local-section-heading h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+  :is(#team, #engagement, #fraktion) .team-grid { grid-template-columns: 1fr; }
+  :is(#team, #engagement, #fraktion) .team-grid > .team-card { padding: 22px 0; gap: 16px; }
+  :is(#team, #engagement, #fraktion) .team-card h3 { font-size: 23px; }
 }
 @media (max-width: 820px) {
   .local-hero-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -67,6 +67,7 @@
 #themen { padding-block: 88px; }
 #themen .local-section-heading { gap: 48px; margin-bottom: 36px; }
 #themen h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
+.vg-page #themen h2 { hyphens: manual; }
 #themen .topic-list { gap: 0 56px; }
 #themen .local-topic { padding: 26px 0; border: 0; border-top: 1px solid #c5d1cf; background: transparent; }
 #themen .local-topic h3 { margin: 14px 0 10px; font-size: 26px; line-height: 1.2; }
