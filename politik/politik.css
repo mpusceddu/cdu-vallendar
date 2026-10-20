@@ -1,0 +1,83 @@
+/* Offene Gestaltung, ausschließlich für Themen & Anträge. */
+.policy-page :is(.local-hero h1,.local-section-heading h2) { font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 400; }
+.policy-page .local-facts {
+  max-width: 660px;
+  margin-top: 32px;
+  padding: 24px 0 0;
+  border: 0;
+  border-top: 1px solid #38515f;
+  background: transparent;
+  color: #dce8eb;
+}
+.policy-page .local-facts strong { color: white; font-size: 22px; }
+.policy-page .local-facts p { margin-bottom: 0; color: #c4d1d7; }
+.policy-page .local-section-heading { gap: 48px; margin-bottom: 36px; }
+.policy-page .local-section-heading h2 { font-size: clamp(40px,4.7vw,64px); line-height: 1.03; }
+.policy-page .policy-topic-grid { gap: 0 48px; border: 0; }
+.policy-page .policy-topic-grid article {
+  padding: 26px 0;
+  border: 0;
+  border-top: 1px solid #c5d1cf;
+}
+.policy-page .policy-topic-grid span { color: #537177; font-size: 16px; }
+.policy-page .policy-topic-grid h3 { margin: 14px 0 10px; font-size: 26px; line-height: 1.2; }
+.policy-page .policy-motions { padding-block: 88px; }
+.policy-page :is(#themen,#antraege) { scroll-margin-top: 110px; }
+.policy-page .motion-filters { gap: 8px 20px; margin-bottom: 24px; }
+.policy-page .motion-filters button {
+  min-height: 44px;
+  padding: 10px 2px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+}
+.policy-page .motion-filters button[aria-pressed="true"] { color: #75e1dc; border-bottom-color: #ffa600; }
+.policy-page .motion-filters button:hover { color: white; border-bottom-color: #75e1dc; }
+.policy-page :is(button,a):focus-visible { outline: 2px solid #ffa600; outline-offset: 5px; }
+.policy-page .motion-result { color: #c4d1d7; line-height: 1.65; }
+.policy-page .motion-legend { gap: 16px 28px; margin: 0 0 40px; padding-block: 24px; border-block: 1px solid #38515f; }
+.policy-page .motion-legend > span { flex-wrap: wrap; }
+.policy-page .motion-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 56px; }
+.policy-page .motion-card {
+  min-height: 0;
+  padding: 28px 0 36px;
+  border: 0;
+  border-top: 1px solid #38515f;
+  background: transparent;
+  color: white;
+  transition: none;
+}
+.policy-page .motion-card:hover { transform: none; box-shadow: none; border-top-color: #38515f; }
+.policy-page .motion-meta { flex-wrap: wrap; gap: 6px 16px; color: #8adbd7; line-height: 1.6; font-weight: 500; }
+.policy-page .motion-status { max-width: 100%; margin-top: 16px; padding: 5px 8px; line-height: 1.5; font-weight: 600; letter-spacing: .04em; }
+.policy-page .motion-legend .motion-status { margin: 0; }
+.policy-page .motion-card h3 { margin: 16px 0 12px; color: white; font-size: 28px; line-height: 1.2; }
+.policy-page .motion-card p { margin-bottom: 20px; color: #c4d1d7; }
+.policy-page .motion-card > a,
+.policy-page .motion-source-pending { padding-top: 0; border: 0; font-weight: 500; line-height: 1.6; }
+.policy-page .motion-card > a { color: #8adbd7; }
+.policy-page .motion-card > a:hover { color: white; }
+.policy-page .motion-source-pending { color: #b8c7cd; }
+.policy-page .motion-empty { padding: 28px 0; border: 0; border-top: 1px solid #38515f; background: transparent; }
+.policy-page .motion-empty strong { color: white; }
+.policy-page .motion-empty p { color: #c4d1d7; }
+.policy-page .policy-motions .source-note { margin-top: 32px; padding: 24px 0 0; border-top: 1px solid #38515f; line-height: 1.7; }
+.policy-page .motion-callout { margin-top: 40px; padding: 32px 0 0; border: 0; border-top: 1px solid #38515f; background: transparent; }
+@media (max-width: 980px) {
+  .policy-page .policy-topic-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 32px; }
+  .policy-page .motion-grid { gap: 0 32px; }
+  .policy-page .motion-callout { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 720px) {
+  .policy-page .local-section-heading { gap: 24px; margin-bottom: 32px; }
+  .policy-page .local-section-heading h2 { font-size: 36px; line-height: 1.1; hyphens: none; }
+  .policy-page .policy-motions { padding-block: 60px; }
+  .policy-page .policy-topic-grid,
+  .policy-page .motion-grid { grid-template-columns: 1fr; }
+  .policy-page .motion-card { padding: 24px 0 28px; }
+  .policy-page .motion-card h3 { font-size: 25px; }
+  .policy-page .policy-topic-grid h3 { font-size: 24px; }
+  .policy-page .motion-callout .button { max-width: 100%; }
+}
