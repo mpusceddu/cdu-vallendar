@@ -560,7 +560,7 @@ await check('Invalid URL filter falls back to all; valid mixed-case filter is no
   }
 });
 
-const portalPaths = ['funktionstraeger/index.html', 'funktionstraeger/gremien.html', 'funktionstraeger/ci-guide.html'];
+const portalPaths = ['funktionstraeger/gremien.html', 'funktionstraeger/ci-guide.html'];
 
 await check('Desktop, mobile and footer entries consistently say Funktionsträgerportal and keep their original destinations', () => {
   const websitePaths = [
@@ -649,18 +649,6 @@ await check('Portal scripts have no persistence, transmission, account or tracki
   }
 });
 
-await check('The portal links to its own CI guide, while seven modules and eight onboarding steps remain available without JavaScript', () => {
-  const doc = documents.get('funktionstraeger/index.html');
-  assert(doc, 'Portal index missing');
-  assert.equal(doc.querySelectorAll('[data-module-card]').length, 7);
-  assert.equal(doc.querySelectorAll('[data-onboarding-step]').length, 8);
-  assert(doc.querySelectorAll('[data-module-card]').every(card => !card.hidden));
-  const ci = doc.getElementById('ci-guide');
-  assert(ci, 'CI guide needs a stable anchor');
-  assert(ci.querySelectorAll('a[href]').some(link => new URL(link.attrs.href, new URL('funktionstraeger/index.html', base)).pathname === new URL('funktionstraeger/ci-guide.html', base).pathname), 'The CI card must lead directly to the local guide');
-  assert.match(doc.textContent, /nicht gespeichert|nicht dauerhaft gespeichert|nur.*(?:Seite|Vorschau|Aufruf)/i, 'The temporary nature of the demo progress must be explained');
-});
-
 await check('The local CI guide provides five navigable sections and does not send readers to the external CI portal', () => {
   const path = 'funktionstraeger/ci-guide.html';
   const doc = documents.get(path);
@@ -713,51 +701,6 @@ await check('CI guide provides real local logo and font downloads with their exi
   }
 });
 
-await check('Public onboarding counts eight demo steps, resets immediately and does not survive a reload', async () => {
-  const page = runPage('funktionstraeger/index.html', 'funktionstraeger/app.js');
-  const steps = page.document.querySelectorAll('[data-onboarding-step]');
-  const bar = page.select('[data-progress-bar]');
-  assert.equal(page.select('[data-progress-count]').textContent, '0');
-  assert(page.document.querySelectorAll('[data-total-steps]').every(node => node.textContent === '8'));
-  for (const step of steps.slice(0, 4)) { step.checked = true; await step.dispatch('change'); }
-  assert.equal(page.select('[data-progress-count]').textContent, '4');
-  assert.equal(bar.attrs['aria-valuenow'], '4');
-  assert.equal(bar.querySelector('span').style.width, '50%');
-  for (const step of steps.slice(4)) { step.checked = true; await step.dispatch('change'); }
-  assert.equal(page.select('[data-progress-count]').textContent, '8');
-  assert.equal(bar.querySelector('span').style.width, '100%');
-  assert.match(page.select('[data-progress-copy]').textContent, /Vorschau/);
-  assert.match(page.select('[data-progress-copy]').textContent, /keine Zugänge/i, 'Completion must not imply actual permissions or onboarding');
-  const reloaded = runPage('funktionstraeger/index.html', 'funktionstraeger/app.js');
-  assert.equal(reloaded.select('[data-progress-count]').textContent, '0');
-  assert(reloaded.document.querySelectorAll('[data-onboarding-step]').every(step => !step.checked));
-  await page.select('[data-reset-progress]').dispatch('click');
-  assert.equal(page.select('[data-progress-count]').textContent, '0');
-  assert.equal(bar.querySelector('span').style.width, '0%');
-  assert(steps.every(step => !step.checked));
-});
-
-await check('Portal module search includes section text and keywords, tolerates accents, and restores all seven modules', async () => {
-  const page = runPage('funktionstraeger/index.html', 'funktionstraeger/app.js');
-  const cards = page.document.querySelectorAll('[data-module-card]');
-  const search = page.select('[data-module-search]');
-  async function find(query) {
-    search.value = query;
-    await search.dispatch('input');
-    const visible = cards.filter(card => !card.hidden);
-    assert.equal(page.select('[data-search-status]').textContent, visible.length === 1 ? '1 Bereich gefunden' : `${visible.length} Bereiche gefunden`);
-    assert.equal(page.select('[data-empty-search]').hidden, visible.length !== 0);
-    return visible.map(card => card.attrs.href);
-  }
-  assert((await find('Logo')).includes('#arbeitsmittel'));
-  assert((await find('  LOGO   SCHRIFTEN ')).includes('#arbeitsmittel'));
-  assert((await find('Zustandigkeiten')).includes('#rollen'));
-  assert((await find('Ausschuss')).includes('./gremien.html'));
-  assert((await find('Mitgliederlisten')).includes('#sicherheit'));
-  assert.equal((await find('KeinTreffer123')).length, 0);
-  assert.equal((await find('   ')).length, 7);
-});
-
 await check('Responsibilities page offers ten real search examples and all five native local-council disclosures', () => {
   const doc = documents.get('funktionstraeger/gremien.html');
   assert(doc, 'Responsibilities page missing');
@@ -798,7 +741,7 @@ await check('Responsibilities search filters real content with AND terms, handle
 });
 
 await check('Portal mobile links close their menus and responsibilities Escape returns focus to the menu button', async () => {
-  for (const [path, script] of [['funktionstraeger/index.html', 'funktionstraeger/app.js'], ['funktionstraeger/gremien.html', 'funktionstraeger/gremien.js']]) {
+  for (const [path, script] of [['funktionstraeger/gremien.html', 'funktionstraeger/gremien.js']]) {
     const page = runPage(path, script);
     const menu = page.select('.mobile-menu');
     assert(menu, `${path}: mobile menu missing`);
@@ -845,5 +788,12 @@ await check('CI guide uses the real shared menu script for labels, links, Escape
   assert.equal(menu.open, false, 'Clicking outside the guide menu must close it');
 });
 
+await check('Public portal entry contains only an authenticated handoff, not internal modules', () => {
+ const doc=documents.get('funktionstraeger/index.html');
+ assert(doc.querySelectorAll('a[href]').some(a=>a.attrs.href==='https://cdu-vallendar-ideen.marco-05c.workers.dev/portal/'));
+ assert.equal(doc.querySelectorAll('[data-module-card]').length,0);
+ assert.equal(doc.querySelectorAll('[data-onboarding-step]').length,0);
+ assert.match(doc.textContent,/persönlicher Freigabe/);
+});
 console.log(`\n${passed} passed, ${failed} failed.`);
 process.exitCode = failed ? 1 : 0;
