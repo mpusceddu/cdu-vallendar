@@ -43,3 +43,97 @@
 }
 
 .politics{position:relative}.legacy-anchor{position:absolute;top:0;scroll-margin-top:110px}
+
+/* Offene Ortszugänge: lokale Weiterentwicklung der Startseite. */
+.places-grid{gap:0 32px}
+.places-grid .place-card{min-height:0;padding:24px 0;row-gap:22px;border-top:1px solid #38515f;background:transparent;overflow:visible}
+.places-grid .place-card::after{content:none}
+.places-grid .place-topline{font-weight:500;color:#b8cbd3}
+.places-grid .place-card h3{font-size:clamp(26px,2.6vw,34px);line-height:1.2}
+.places-grid .place-card p{margin:12px 0 22px;line-height:1.6}
+.places-grid .place-link{font-weight:500;justify-content:space-between}
+.places-grid .place-card-link:hover{transform:none;box-shadow:none;border-top-color:#75e1dc}
+.places-grid .place-card-link:hover h3{color:#75e1dc}
+.places-grid .place-card-link:focus-visible{outline:2px solid #ffa600;outline-offset:6px}
+@media(max-width:720px){
+  .places-grid{gap:0 24px}
+  .places-grid .place-card{padding:22px 0;row-gap:16px}
+  .places-grid .place-card h3{font-size:30px}
+}
+
+/* Offene Nachrichten auf der Startseite; Artikelseiten bleiben unverändert. */
+#aktuelles .news-card{background:transparent;border:0}
+/* Die vorhandenen SVGs enthalten unten einen 20px-Farbstreifen.
+   Nur hier ausblenden, ohne die gemeinsam verwendeten Bilder zu verändern. */
+#aktuelles .news-art{aspect-ratio:32/17}
+#aktuelles .news-art img{height:auto}
+#aktuelles .news-card-body{padding:20px 0 0}
+#aktuelles .news-meta{margin:0 0 6px;font-weight:600}
+#aktuelles .news-date{margin:0}
+#aktuelles .news-card h3{margin:16px 0 12px}
+#aktuelles .news-card-body>p:not(.news-meta):not(.news-date){margin:0 0 8px}
+#aktuelles .news-read{font-weight:500;text-decoration:underline;text-underline-offset:4px}
+#aktuelles .news-grid{row-gap:36px}
+
+/* Unsere Arbeit: offene Verweise und ein Zitat ohne Hintergrundkasten. */
+#arbeit .politics-links{grid-template-columns:1fr;gap:0}
+#arbeit .politics-links a{padding:18px 0;border:0;border-top:1px solid var(--line);background:transparent;font-size:15px;font-weight:500;min-height:56px}
+#arbeit .politics-links a:last-child{border-bottom:1px solid var(--line)}
+#arbeit .politics-links a span{color:var(--cdu-teal-dark);font-size:22px}
+#arbeit .politics-links a:hover{color:var(--cdu-teal-dark)}
+#arbeit .quote-panel{padding:0;background:transparent}
+#arbeit .quote-mark{margin:0 0 14px;color:#ffa600}
+#arbeit .quote-panel blockquote{font-size:clamp(27px,2.7vw,36px);line-height:1.35;margin-bottom:24px}
+#arbeit .quote-panel p{font-weight:500;line-height:1.6;letter-spacing:.06em}
+@media(max-width:720px){
+  #arbeit{gap:40px}
+  #arbeit .quote-panel{padding-top:8px}
+  #arbeit .quote-panel blockquote{font-size:27px;hyphens:none}
+}
+
+/* Menschen vor Ort: zwei offene Textspalten statt einer zusätzlichen Buttonbox. */
+#menschen{padding-block:88px}
+#menschen .people-inner{grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+#menschen h2{max-width:520px;hyphens:none}
+#menschen .people-copy{padding-top:3px}
+#menschen .people-copy p{margin:0;max-width:570px;color:#d4f0ed;font-size:17px;line-height:1.7}
+#menschen .people-link{display:inline-flex;align-items:center;gap:18px;max-width:100%;min-height:44px;margin-top:20px;padding-block:8px;color:white;font-size:15px;font-weight:500;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+#menschen .people-link span{flex-shrink:0;text-decoration:none}
+#menschen .people-link:hover{color:#d4f0ed}
+@media(max-width:820px){
+  #menschen .people-inner{grid-template-columns:1fr;gap:28px}
+}
+@media(max-width:720px){
+  #menschen{padding-block:60px}
+  #menschen h2{font-size:36px;line-height:1.1}
+  #menschen .people-copy{padding-top:0}
+}
+
+/* Instagram bleibt bis zur Kanalentscheidung ein offener Ausblick, kein Feed. */
+#instagram .section-heading{margin-bottom:36px}
+#instagram .social-outlook{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;list-style:none;margin:0;padding:0}
+#instagram .social-outlook li{padding:20px 0 0;border-top:1px solid #b9cecc;font:400 clamp(24px,2.5vw,32px)/1.3 'IBM Plex Serif',Georgia,serif;color:var(--cdu-navy)}
+#instagram .social-status{max-width:850px;margin:30px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+#instagram .social-status strong{font-weight:600}
+@media(max-width:720px){
+  #instagram .section-heading{margin-bottom:28px}
+  #instagram .social-outlook{grid-template-columns:1fr;gap:0}
+  #instagram .social-outlook li{padding:16px 0;font-size:25px}
+  #instagram .social-status{margin-top:20px}
+}
+
+/* Kontakt: leichte offene Zeilen, ohne umrandete Symbolplaketten. */
+#mitmachen{grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+#mitmachen .contact-copy>p:not(.eyebrow){max-width:520px;margin-bottom:0}
+#mitmachen .contact-options a{padding:22px 0;gap:16px;grid-template-columns:22px minmax(0,1fr) auto}
+#mitmachen .contact-icon{width:22px;height:28px;border:0;border-radius:0;font-size:18px;font-weight:400}
+#mitmachen .contact-options strong{font-weight:500;line-height:1.5}
+#mitmachen .contact-options small{line-height:1.6}
+#mitmachen .contact-options a>span:last-child{color:var(--cdu-teal-dark);font-size:22px}
+#mitmachen .contact-options a:hover strong{color:var(--cdu-teal-dark);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:820px){
+  #mitmachen{grid-template-columns:1fr;gap:32px}
+}
+@media(max-width:520px){
+  #mitmachen .contact-options a{gap:12px;padding-block:20px}
+}
