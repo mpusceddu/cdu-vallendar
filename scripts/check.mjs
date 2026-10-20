@@ -32,6 +32,9 @@ function decode(text) {
 }
 
 class Element {
+  createElement(tag) { return new Element(tag); }
+  append(child) { child.parent = this; this.children.push(child); }
+  replaceChildren() { this.children = []; this._value = undefined; }
   constructor(tag, attrs = {}) {
     this.tagName = tag;
     this.attrs = attrs;
@@ -294,6 +297,49 @@ async function proposalFromFinder() {
   return page;
 }
 
+await check('Local school ownership, special providers and unresolved cases are correctly routed', async () => {
+  const page = runPage('thema-vorschlagen/index.html', 'assets/thema-vorschlagen.js');
+  await changeValue(page, '#route-topic', 'school');
+  for (const [place, label] of [['vallendar', 'Stadt Vallendar'], ['urbar', 'Ortsgemeinde Urbar'], ['niederwerth', 'Ortsgemeinde Niederwerth'], ['weitersburg', 'Ortsgemeinde Weitersburg']]) {
+    await changeValue(page, '#route-place', place);
+    await changeValue(page, '#route-detail', 'primary');
+    assert.match(page.select('[data-route-result]').textContent, new RegExp(label));
+    assert.equal(page.select('#proposal-detail').value, 'primary');
+  }
+  for (const [topic, detail, expected] of [
+    ['school','kas','Schulträger: Verbandsgemeinde Vallendar'],
+    ['school','marienschule','freier Träger'],
+    ['school','other','Einzelfallprüfung'],
+    ['kita','building','Einzelfallprüfung'],
+    ['water','','VWM / evm'],
+    ['wastewater','','Abwasser: Verbandsgemeinde'],
+    ['waste','','Abfallzweckverband Rhein-Mosel-Eifel'],
+    ['building','','Kreisbauaufsicht MYK'],
+    ['road','unknown','Einzelfallprüfung'],
+    ['county','schoolbus','Landkreis Mayen-Koblenz'],
+    ['county','train','Einzelfallprüfung']
+  ]) {
+    await changeValue(page, '#route-topic', topic);
+    await changeValue(page, '#route-detail', detail);
+    assert(page.select('[data-route-result]').textContent.includes(expected), `${topic}/${detail}`);
+  }
+});
+
+await check('Detail selection reaches draft, invalidates stale text and preserves manual form detail', async () => {
+  const page = await proposalFromFinder();
+  await changeValue(page, '#route-topic', 'school');
+  await changeValue(page, '#route-detail', 'kas');
+  await page.select('[data-proposal-form]').dispatch('submit');
+  assert.match(page.select('[data-proposal-text]').value, /Konrad-Adenauer-Schule/);
+  await changeValue(page, '#route-detail', 'primary');
+  assert.equal(page.select('[data-proposal-output]').hidden, true);
+  await changeValue(page, '#proposal-detail', 'other');
+  await changeValue(page, '#route-detail', 'kas');
+  assert.equal(page.select('#proposal-detail').value, 'other');
+  await page.select('[data-proposal-form]').dispatch('submit');
+  assert.match(page.select('[data-proposal-text]').value, /Einzelfallprüfung/);
+});
+
 await check('Finder prefills and updates untouched form fields for every available choice', async () => {
   const page = runPage('thema-vorschlagen/index.html', 'assets/thema-vorschlagen.js');
   assert.equal(page.select('#proposal-place').value, '');
@@ -382,7 +428,7 @@ await check('Proposal keeps Urbar jurisdiction when the independent finder chang
   await page.select('#route-place').dispatch('change');
   page.select('#route-topic').value = 'vg';
   await page.select('#route-topic').dispatch('change');
-  assert.match(page.select('[data-route-result]').textContent, /Voraussichtlich: Verbandsgemeinderat/);
+  assert.match(page.select('[data-route-result]').textContent, /Verbandsgemeinde Vallendar/);
   const submit = await page.select('[data-proposal-form]').dispatch('submit');
   assert(submit.defaultPrevented, 'Submit must not navigate or send a request');
   const text = page.select('[data-proposal-text]').value;

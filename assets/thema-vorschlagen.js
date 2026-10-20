@@ -12,6 +12,82 @@ const selectionStatus = document.querySelector('[data-proposal-selection-status]
 // Der Finder darf nur Angaben vorfüllen, die im Formular noch nicht selbst
 // geändert wurden. Ort und Themenfeld werden unabhängig voneinander geschützt.
 const editedSelections = new Set();
+const routeDetail = document.querySelector('#route-detail');
+const proposalDetail = document.querySelector('#proposal-detail');
+const topics = {
+  local: ['Örtliche Planung, Plätze, Bürgerhaus oder Spielplatz', []],
+  school: ['Schule', [['primary','Grundschule am gewählten Ort'],['kas','Konrad-Adenauer-Schule'],['marienschule','Schönstätter Marienschule'],['teaching','Unterricht oder Lehrkräfte'],['other','Andere Schule / unklar']]],
+  kita: ['Kita und Betreuung', [['place','Betreuungsplatz / Platzbedarf'],['operation','Betrieb, Betreuung oder Personal'],['building','Gebäude, Ausbau oder Finanzierung']]],
+  road: ['Straße oder Verkehrsregelung', [['municipal','Gemeindestraße: Schaden oder Ausbau'],['classified','Kreis-, Landes- oder Bundesstraße'],['traffic','Verkehrszeichen, Tempolimit oder Verkehrsführung'],['unknown','Straßenklasse unklar']]],
+  water: ['Trinkwasser', []],
+  wastewater: ['Abwasser und Kanal', []],
+  waste: ['Abfall und Entsorgung', []],
+  building: ['Baugenehmigung oder konkretes Bauvorhaben', []],
+  vg: ['Feuerwehr oder Flächennutzungsplan', [['fire','Feuerwehr / Brandschutz'],['fnp','Flächennutzungsplan']]],
+  facility: ['Sportanlage, Friedhof oder andere Einrichtung', []],
+  county: ['Bus, Bahn oder Schülerbeförderung', [['bus','Busangebot / Fahrplan'],['schoolbus','Schülerbeförderung / Fahrtkosten'],['train','Bahnverkehr'],['service','Ausfall oder Beschwerde über eine Fahrt']]],
+  admin: ['Ordnungsangelegenheit oder Verwaltungsverfahren', []],
+  social: ['Jugend oder Soziales', []],
+  higher: ['Landes- oder Bundesgesetz', []],
+  unclear: ['Etwas anderes / noch unklar', []]
+};
+function setOptions(select, entries, placeholder) {
+  select.replaceChildren();
+  for (const [value, label] of [['', placeholder], ...entries]) {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = label;
+    select.append(option);
+  }
+}
+for (const select of [routeTopic, proposalCategory]) {
+  setOptions(select, Object.entries(topics).map(([key, item]) => [key, item[0]]), 'Bitte auswählen');
+}
+function detailsFor(topic, select) {
+  const entries = topics[topic]?.[1] || [];
+  setOptions(select, entries, 'Bitte eingrenzen / noch unklar');
+  select.closest('.field-group').hidden = !entries.length;
+}
+function scopedRoute(place, topic, detail) {
+  const result = (title, office, political, uncertain = false) => ({
+    level: uncertain ? 'check' : topic, title,
+    office, political,
+    copy: `Erste Anlaufstelle: ${office} Politischer Weg: ${political}${uncertain ? ' Einzelfallprüfung: Träger, Zuständigkeit und Entscheidungsbefugnis müssen vor einer Weitergabe geklärt werden.' : ''}`
+  });
+  const local = localRoute(place);
+  const localPolitical = `${local.title.replace('Voraussichtlich: ', '')}; zuständiger Ausschuss, Bürgermeister oder Rat je nach Entscheidungsbefugnis.`;
+  if (topic === 'school') {
+    if (detail === 'primary') return result(
+      ['vallendar','urbar','niederwerth','weitersburg'].includes(place) ? `Schulträger: ${place === 'vallendar' ? 'Stadt Vallendar' : `Ortsgemeinde ${placeNames[place]}`}` : 'Grundschule: Ort noch eingrenzen',
+      'Schulträger für Gebäude und Sachausstattung; Schulleitung für schulinterne Fragen.',
+      localPolitical, !['vallendar','urbar','niederwerth','weitersburg'].includes(place));
+    if (detail === 'kas') return result('Schulträger: Verbandsgemeinde Vallendar', 'VG-Verwaltung für Trägerangelegenheiten der Konrad-Adenauer-Schule.', 'Schulträgerausschuss und VG-Rat im Rahmen ihrer Befugnisse.');
+    if (detail === 'marienschule') return result('Schönstätter Marienschule: freier Träger', 'Schule und Provinzialat der Schönstätter Marienschwestern.', 'Kein kommunaler Rat als Schulträger; öffentliche Beteiligung nur anlassbezogen prüfen.');
+    if (detail === 'teaching') return result('Schulleitung / zuständige Schulaufsicht', 'Zunächst Schulleitung; zuständige Schulaufsicht abhängig von Schule und Anliegen.', 'Kommunale Schulträgerschaft bedeutet keine Entscheidung über Unterricht oder Lehrkräfte.', true);
+    return result('Schulträger noch klären', 'Konkrete Schule und Anliegen benennen.', 'Nicht pauschal an den Landkreis oder VG-Rat verweisen.', true);
+  }
+  if (topic === 'kita') return result('Kita: Einrichtung und Anliegen prüfen',
+    detail === 'place' ? 'Einrichtung/Träger für die Anmeldung; Kreisjugendamt MYK bei ungedecktem Platzbedarf und Bedarfsplanung.' : 'Konkrete Kita und Betriebsträger benennen; Gebäudezuständigkeit und Finanzierung getrennt prüfen.',
+    'Kommunale Kita: betreffende Stadt/Ortsgemeinde. Freier oder kirchlicher Träger: dessen Zuständigkeit beachten; kommunale Beteiligung und Kreisjugendamt je nach Anliegen.', true);
+  if (topic === 'road') {
+    if (detail === 'municipal') return result('Gemeindestraße: örtliche Ebene', 'Zuständige Verwaltung für die konkrete Straße und den betroffenen Abschnitt.', localPolitical, !['vallendar','urbar','niederwerth','weitersburg'].includes(place));
+    if (detail === 'traffic') return result('Straßenverkehrsbehörde', 'Straßenverkehrsbehörde der VG Vallendar zur Einordnung der Verkehrsregelung.', 'Verkehrsrechtliche Anordnung ist kein frei verfügbarer Ratsbeschluss; konkrete Zuständigkeit prüfen.', true);
+    return result('Straßenbaulast und Straßenabschnitt prüfen', 'Straßenklasse und Abschnitt benennen; bei Kreis-, Landes- und Bundesstraßen den zuständigen Straßenbaulastträger beziehungsweise LBM ermitteln.', 'Straßenbau und Verkehrsregelung trennen. Nicht automatisch an Abgeordnete weiterleiten.', true);
+  }
+  if (topic === 'water') return result('Trinkwasser: VWM / evm', 'Vereinigte Wasserwerke Mittelrhein; evm als Betriebsführerin für Versorgung, Anschluss und Störungen.', 'Kommunale Grundsatz- und Beteiligungsfragen gesondert prüfen; nicht jede Betriebsfrage gehört in den VG-Rat.');
+  if (topic === 'wastewater') return result('Abwasser: Verbandsgemeinde Vallendar', 'Abwasserbeseitigung der VG für Kanal- und Betriebsfragen.', 'Werkausschuss und VG-Rat entsprechend Betriebssatzung; laufende Verwaltung und Betrieb davon unterscheiden.');
+  if (topic === 'waste') return result('Abfallzweckverband Rhein-Mosel-Eifel', 'Zweckverband für reguläre Abfallentsorgung und Abfuhr; Sonderfälle wie illegale Ablagerung gesondert zuordnen.', 'Verbandsangelegenheiten von örtlichen Maßnahmen unterscheiden.');
+  if (topic === 'building') return result('Baugenehmigung: Kreisbauaufsicht MYK', 'Untere Bauaufsichtsbehörde der Kreisverwaltung; VG-Verwaltung für örtliche Verfahrensfragen.', 'Gemeindliches Einvernehmen und Beteiligung sind von der Baugenehmigung getrennt. Zuständiges örtliches Organ im Einzelfall prüfen.');
+  if (topic === 'vg') return result('Verbandsgemeinde Vallendar', 'VG-Verwaltung für Feuerwehr/Brandschutz beziehungsweise Flächennutzungsplanung.', 'Zuständige VG-Organe; beim Flächennutzungsplan gesetzliche Beteiligung der Stadt und Ortsgemeinden beachten.');
+  if (topic === 'county') {
+    if (detail === 'bus' || detail === 'schoolbus') return result('Landkreis Mayen-Koblenz', 'Kreisverwaltung: ÖPNV beziehungsweise Schülerbeförderung/Fahrtkosten.', 'Kreisgremien bei Grundsatzfragen; einzelne Leistungsanträge an die Verwaltung.');
+    return result('Verkehrsangebot und Betreiber prüfen', 'Bei Bahnverkehr zuständigen SPNV-Aufgabenträger, bei einzelnen Fahrten Verkehrsunternehmen ermitteln.', 'Bus, Bahn, Haltestellenbau und Betriebsbeschwerden haben unterschiedliche Zuständigkeiten.', true);
+  }
+  if (topic === 'facility') return result('Einrichtungsträger prüfen', 'Konkrete Sportanlage, Friedhof oder Einrichtung benennen; Eigentümer und Betreiber können verschieden sein.', 'Nicht allein aus Standort oder überörtlicher Nutzung eine VG-Zuständigkeit ableiten.', true);
+  if (topic === 'social') return result('Jugend / Soziales: konkrete Leistung prüfen', 'Kreisjugendamt, Sozialverwaltung oder örtliche Stelle je nach Anliegen.', 'Örtliche Jugendarbeit und Einrichtungen von gesetzlichen Hilfen unterscheiden.', true);
+  if (topic === 'admin') return result('Verwaltungszuständigkeit prüfen', 'VG-Verwaltung zur ersten Einordnung; Genehmigungsbehörde kann eine andere Stelle sein.', 'Kein automatischer Ratsvorgang.', true);
+  return null;
+}
 
 const placeNames = {
   vallendar: 'Stadt Vallendar',
@@ -61,7 +137,7 @@ function localRoute(place) {
   };
 }
 
-function getRoute(place, topic) {
+function getRoute(place, topic, detail = '') {
   if (!topic || topic === 'unknown') {
     return {
       level: 'open',
@@ -70,30 +146,12 @@ function getRoute(place, topic) {
     };
   }
 
-  if (topic === 'local') return localRoute(place);
-
-  if (topic === 'vg') {
-    return {
-      level: 'vg',
-      title: 'Voraussichtlich: Verbandsgemeinderat',
-      copy: 'Grundschulen, Feuerwehr, Wasser, Abwasser, zentrale Sport- und Freizeitanlagen sowie der Flächennutzungsplan sind typische Aufgaben der Verbandsgemeinde. Hier ist die CDU-Fraktion im VG-Rat der politische Ansprechpartner.'
-    };
-  }
-
-  if (topic === 'admin') {
-    return {
-      level: 'admin',
-      title: 'Voraussichtlich: Verbandsgemeindeverwaltung',
-      copy: 'Das ist häufig ein Verwaltungs- oder Behördenvorgang und nicht automatisch ein Thema für den VG-Rat. Wir prüfen, ob eine direkte Meldung, eine Anfrage oder dennoch ein politischer Antrag sinnvoll ist.'
-    };
-  }
-
-  if (topic === 'county') {
-    return {
-      level: 'county',
-      title: 'Voraussichtlich: Landkreis Mayen-Koblenz',
-      copy: 'Das Thema gehört wahrscheinlich zur Kreisverwaltung oder in den Kreistag. Wir können den Sachverhalt einordnen und bei Bedarf an die zuständige CDU-Kreistagsfraktion weitergeben.'
-    };
+  const scoped = scopedRoute(place, topic, detail);
+  if (scoped) return scoped;
+  if (topic === 'local') {
+    const route = localRoute(place);
+    route.copy += ' Erste Anlaufstelle: zuständige örtliche Verwaltung. Politischer Weg: Bürgermeister, zuständiger Ausschuss oder Rat entsprechend Entscheidungsbefugnis. Bei unklarem Eigentümer oder Träger: Einzelfallprüfung.';
+    return route;
   }
 
   if (topic === 'higher') {
@@ -107,13 +165,13 @@ function getRoute(place, topic) {
   return {
     level: 'check',
     title: 'Zuständigkeit wird im Einzelfall geprüft',
-    copy: `Der Bezug zu ${placeNames[place] || 'unserer Region'} ist klar, die zuständige Ebene aber noch nicht. Genau solche Fälle sollten vor einem Antrag sorgfältig geklärt werden.`
+    copy: `Einzelfallprüfung: Für das Anliegen ${placeNames[place] ? `mit Bezug zu ${placeNames[place]}` : 'mit noch offenem Ortsbezug'} sind zuständige Stelle und politischer Weg noch zu klären. Bitte Ort, Einrichtung und gewünschte Entscheidung möglichst genau benennen.`
   };
 }
 
 function updateRoute() {
   if (!routeResult) return;
-  const route = getRoute(routePlace?.value, routeTopic?.value);
+  const route = getRoute(routePlace?.value, routeTopic?.value, routeDetail?.value);
   routeResult.dataset.level = route.level;
   routeResult.querySelector('h3').textContent = route.title;
   routeResult.querySelector('p').textContent = route.copy;
@@ -139,6 +197,11 @@ routePlace?.addEventListener('change', () => {
 });
 routeTopic?.addEventListener('change', () => {
   prefillSelection(routeTopic, proposalCategory);
+  detailsFor(routeTopic.value, routeDetail);
+    if (!editedSelections.has(proposalCategory)) {
+      detailsFor(proposalCategory.value, proposalDetail);
+      editedSelections.delete(proposalDetail);
+    }
   updateRoute();
 });
 
@@ -152,6 +215,8 @@ proposalPlace?.addEventListener('change', () => {
 proposalCategory?.addEventListener('change', () => {
   editedSelections.add(proposalCategory);
   if (routeTopic) routeTopic.value = proposalCategory.value;
+  detailsFor(proposalCategory.value, proposalDetail);
+  detailsFor(routeTopic.value, routeDetail);
   updateRoute();
 });
 
@@ -176,7 +241,7 @@ proposalForm?.addEventListener('submit', (event) => {
   const urgency = document.querySelector('#proposal-urgency').value;
   // Der Finder darf unabhängig benutzt werden. Der Entwurf gehört stets
   // zu den Orts- und Themenangaben im Formular selbst.
-  const route = getRoute(proposalPlace.value, proposalCategory.value);
+  const route = getRoute(proposalPlace.value, proposalCategory.value, proposalDetail.value);
 
   proposalText.value = [
     'THEMENVORSCHLAG FÜR DIE CDU IN DER VERBANDSGEMEINDE VALLENDAR',
@@ -184,6 +249,9 @@ proposalForm?.addEventListener('submit', (event) => {
     `Ort / räumlicher Bezug: ${place}`,
     `Genaue Stelle oder Einrichtung: ${location || 'nicht angegeben'}`,
     `Erste Zuständigkeitseinordnung: ${route.title.replace('Voraussichtlich: ', '')}`,
+    `Themenfeld: ${topics[proposalCategory.value]?.[0] || 'offen'}`,
+    `Konkretisierung: ${proposalDetail.value ? proposalDetail.options[proposalDetail.selectedIndex].text : 'noch unklar / nicht erforderlich'}`,
+    route.copy,
     '',
     `THEMA: ${topic}`,
     '',
@@ -216,4 +284,18 @@ copyProposal?.addEventListener('click', async () => {
   }
 });
 
+routeDetail.addEventListener('change', () => {
+  if (!editedSelections.has(proposalCategory) && !editedSelections.has(proposalDetail)) {
+    proposalDetail.value = routeDetail.value;
+    invalidateProposal();
+  }
+  updateRoute();
+});
+proposalDetail.addEventListener('change', () => {
+  editedSelections.add(proposalDetail);
+  if (routeTopic.value === proposalCategory.value) routeDetail.value = proposalDetail.value;
+  updateRoute();
+});
+detailsFor('', routeDetail);
+detailsFor('', proposalDetail);
 updateRoute();

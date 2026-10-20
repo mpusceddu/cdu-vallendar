@@ -12,6 +12,7 @@
   <link rel="preload" href="../assets/fonts/ibm-plex-serif-regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="../assets/styles.css?v=24">
   <style>
+    .field-group[hidden] { display: none; }
     /* Keep the native select interaction, with a consistently inset arrow. */
     .field-group select {
       appearance: none;
@@ -27,7 +28,7 @@
     }
   </style>
   <script src="../assets/site.js?v=1" defer></script>
-  <script src="../assets/thema-vorschlagen.js?v=3" defer></script>
+  <script src="../assets/thema-vorschlagen.js?v=20261020-zustaendigkeit" defer></script>
 <link rel="icon" href="../favicon.ico?v=20260929" sizes="16x16 32x32 48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=20260929">
 <link rel="icon" type="image/svg+xml" sizes="any" href="../assets/favicon.svg?v=20260929">
@@ -60,6 +61,7 @@
 
     <section class="jurisdiction-section" id="zustaendigkeit"><div class="page-shell">
       <div class="local-section-heading"><div><p class="eyebrow dark">Erst richtig zuordnen</p><h2>Wer ist zuständig?</h2></div><p>Nicht alles, was im Rathaus bearbeitet wird, ist automatisch Sache des Verbandsgemeinderates. Der Finder gibt eine erste Orientierung. Ihre Auswahl wird im Formular vorausgefüllt.</p></div>
+      <noscript><p>Der interaktive Finder benötigt JavaScript. Die Orientierung und Quellen unterhalb bleiben lesbar. Ohne JavaScript kann kein Textentwurf erstellt werden.</p></noscript>
       <div class="jurisdiction-tool">
         <div class="jurisdiction-controls">
           <div class="field-group">
@@ -78,12 +80,16 @@
             <select id="route-topic">
               <option value="unknown">Bitte auswählen</option>
               <option value="local">Ortsentwicklung, Bebauungsplan, örtliche Straße, Platz, Spielplatz, Friedhof oder Bürgerhaus</option>
-              <option value="vg">Grundschule, Feuerwehr, Wasser, Abwasser, zentrale Sport- und Freizeitanlage oder Flächennutzungsplan</option>
+              <option value="vg">Feuerwehr oder Flächennutzungsplan</option>
               <option value="admin">Verkehrszeichen, Ordnungsangelegenheit, Baugenehmigung oder Verwaltungsverfahren</option>
-              <option value="county">Abfall, ÖPNV, Schülerbeförderung, Kreisstraße, Jugend, Soziales oder weiterführende Schule</option>
+              <option value="county">Bus, Bahn oder Schülerbeförderung</option>
               <option value="higher">Landesstraße, Bundesstraße, Landes- oder Bundesgesetz</option>
               <option value="unclear">Etwas anderes / noch unklar</option>
             </select>
+          </div>
+          <div class="field-group" hidden>
+            <label for="route-detail">Welche Einrichtung oder welches Anliegen?</label>
+            <select id="route-detail"><option value="">Bitte eingrenzen / noch unklar</option></select>
           </div>
         </div>
         <aside class="jurisdiction-result" data-route-result aria-live="polite" aria-atomic="true">
@@ -93,11 +99,12 @@
         </aside>
       </div>
 
+      <p class="jurisdiction-note">Örtlicher Quellenabgleich: 20. Oktober 2026. <a href="../funktionstraeger/gremien.html#quellen">Gremienwegweiser und Quellen</a> · <a href="https://www.vg-vallendar.de/rathaus-und-buergerservice/dienstleistungen-von-a-z/bauamt/bauantraege/">Bauaufsicht</a> · <a href="https://www.vg-vallendar.de/pressemeldungen/sicher-versorgt-in-zeiten-grosser-hitze/">Trinkwasser</a> · <a href="https://www.azv-rme.de/">Abfall</a> · <a href="https://www.kvmyk.de/themen/oepnv-kita-schuelerbefoerderung/">ÖPNV und Schülerbeförderung</a>.</p>
       <div class="jurisdiction-cards">
         <article><span class="jurisdiction-number">01</span><h3>Stadt und Ortsgemeinden</h3><p>Typisch sind örtliche Bebauungspläne, Gemeindestraßen und -plätze, Spielplätze, Friedhöfe, Bürgerhäuser, örtliche Einrichtungen, Kultur, Vereinsförderung sowie die eigenen Finanzen und Satzungen.</p></article>
-        <article><span class="jurisdiction-number">02</span><h3>Verbandsgemeinde</h3><p>Hierzu gehören insbesondere Grundschulen, Brandschutz und technische Hilfe, zentrale Sport- und Freizeitanlagen, Wasserversorgung, Abwasserbeseitigung, Gewässer dritter Ordnung und der Flächennutzungsplan.</p></article>
+        <article><span class="jurisdiction-number">02</span><h3>Verbandsgemeinde</h3><p>Hierzu gehören vor Ort insbesondere die Schulträgerschaft der Konrad-Adenauer-Schule, Brandschutz, Abwasserbeseitigung und Flächennutzungsplanung. Die vier Grundschulen werden dagegen von der jeweiligen Stadt oder Ortsgemeinde getragen. Trinkwasser liefert die VWM mit der evm als Betriebsführerin.</p></article>
         <article><span class="jurisdiction-number">03</span><h3>Verwaltung statt Rat</h3><p>Verkehrszeichen, Gefahrenabwehr, Genehmigungen oder laufende Verwaltungsverfahren können bei der Verbandsgemeindeverwaltung liegen, ohne dass der VG-Rat darüber entscheidet.</p></article>
-        <article><span class="jurisdiction-number">04</span><h3>Kreis, Land oder Bund</h3><p>Abfall, ÖPNV, Schülerbeförderung, Jugend- und Sozialthemen, Kreisstraßen und viele weiterführende Schulen liegen häufig beim Landkreis. Landes- und Bundesstraßen oder Gesetze gehören auf eine höhere Ebene.</p></article>
+        <article><span class="jurisdiction-number">04</span><h3>Kreis und weitere Träger</h3><p>Der Landkreis ist unter anderem für Bauaufsicht, Busangebot und Schülerbeförderung zuständig. Reguläre Abfallentsorgung: Abfallzweckverband Rhein-Mosel-Eifel. Bei Kitas, Schulen, Straßen und Einrichtungen entscheidet der konkrete Träger und das Anliegen. Unklare Fälle kennzeichnen wir als Einzelfallprüfung.</p></article>
       </div>
       <p class="jurisdiction-note"><strong>Wichtig:</strong> Die genaue Zuständigkeit kann vom Einzelfall abhängen, etwa vom Träger einer Straße oder Einrichtung. Wenn die Zuordnung nicht eindeutig ist, prüfen wir sie vor einer politischen Weitergabe. Grundlage der Einordnung sind insbesondere <a href="https://www.kommunalbrevier.de/kommunalbrevier/gemeindeordnung-gemo/3-kapitel-besondere-bestimmungen-fuer-verbandsgemeinden-und-ortsgemeinden/67-eigene-aufgaben/">§ 67 GemO</a>, die <a href="https://www.vg-vallendar.de/buergerservice-views/abteilungen/RLP%3Adepartment%3A346110/fachbereich-5-kommunale-betriebe-und-tiefbau/">Zuständigkeitsübersicht der VG Vallendar</a> und die <a href="https://www.kvmyk.de/">Themenübersicht des Landkreises Mayen-Koblenz</a>.</p>
     </div></section>
@@ -130,12 +137,16 @@
             <select id="proposal-category" required>
               <option value="">Bitte auswählen</option>
               <option value="local">Ortsentwicklung, Bebauungsplan, örtliche Straße, Platz, Spielplatz, Friedhof oder Bürgerhaus</option>
-              <option value="vg">Grundschule, Feuerwehr, Wasser, Abwasser, zentrale Sport- und Freizeitanlage oder Flächennutzungsplan</option>
+              <option value="vg">Feuerwehr oder Flächennutzungsplan</option>
               <option value="admin">Verkehrszeichen, Ordnungsangelegenheit, Baugenehmigung oder Verwaltungsverfahren</option>
-              <option value="county">Abfall, ÖPNV, Schülerbeförderung, Kreisstraße, Jugend, Soziales oder weiterführende Schule</option>
+              <option value="county">Bus, Bahn oder Schülerbeförderung</option>
               <option value="higher">Landesstraße, Bundesstraße, Landes- oder Bundesgesetz</option>
               <option value="unclear">Etwas anderes / noch unklar</option>
             </select>
+          </div>
+          <div class="field-group">
+            <label for="proposal-detail">Welche Einrichtung oder welches Anliegen?</label>
+            <select id="proposal-detail"><option value="">Bitte eingrenzen / noch unklar</option></select>
           </div>
           <div class="field-group">
             <label for="proposal-topic">Thema in einem Satz <span aria-hidden="true">*</span></label>
