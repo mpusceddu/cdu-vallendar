@@ -10,10 +10,19 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=20260929">
 <link rel="icon" type="image/svg+xml" sizes="any" href="../assets/favicon.svg?v=20260929">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png?v=20260929">
+<style>
+.portal-entry { margin-block: 40px; }
+.portal-entry .hero::after { content: 'PORTAL'; pointer-events: none; }
+.portal-entry-content { position: relative; z-index: 1; padding: clamp(24px, 5vw, 64px); }
+.portal-entry h1 { font-size: clamp(36px, 6vw, 76px); overflow-wrap: anywhere; }
+.portal-entry a:not(.button) { color: #87dddd; }
+.portal-entry .button { margin-block: 20px; }
+</style>
 </head>
 <body>
-<main class="page-shell">
+<main class="page-shell portal-entry">
 <section class="hero">
+<div class="portal-entry-content">
 <p class="eyebrow">CDU in der Verbandsgemeinde Vallendar</p>
 <h1>Funktionsträgerportal</h1>
 <p class="hero-lead" id="rollen">Unser Arbeitsbereich ist nur nach persönlicher Freigabe und Anmeldung zugänglich. Ein E-Mail-Code allein begründet keine Zugangsberechtigung.</p>
@@ -21,6 +30,7 @@
 <p id="sitzungen">Die Ideensammlung ist ausschließlich für die freigegebene Arbeitsgruppe zugänglich.</p>
 <p><a href="../">Zur öffentlichen Website</a> · <a href="./ci-guide.html">Öffentlicher CI-Guide</a></p>
 <p><a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></p>
+</div>
 </section>
 </main>
 </body>
